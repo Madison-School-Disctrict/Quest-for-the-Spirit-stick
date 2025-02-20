@@ -21,7 +21,7 @@ public class ObjFireBallWhite extends Projectile{
 		alive = false;
 		getImage();
 		price = 1480;
-		description = "[White FireBall] magical fire flame";
+		description = "[White FireBall] \n magical fire flame";
 		knockBackPower = 5;
 	
 				
