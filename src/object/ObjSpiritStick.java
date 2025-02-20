@@ -12,7 +12,7 @@ public class ObjSpiritStick extends Entity{
 		type = type_spiritStick;
 		stackable = true;
 		name = objName;
-		description = "[" + name + "]" + "\nThe spirit stick increaes all magical powers"; 
+		description = "[" + name + "]" + "\nThe spirit stick increaes \n all magical powers"; 
 		spiritStickPower = 10;
 		price = 999999;
 		value = spiritStickPower;
