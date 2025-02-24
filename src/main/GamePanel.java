@@ -391,7 +391,8 @@ private static final long serialVersionUID = 1L;
 	     g2.drawString("Draw Time: " + passed, x,y);
 	     y += lineHeight;
 	     g2.drawString("Imortal Mode:", x, y);
-	     
+	     y += lineHeight;
+         g2.drawString("Life: " + player.life,x,y);
      }
      
   }
