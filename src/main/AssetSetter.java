@@ -264,7 +264,7 @@ public class AssetSetter {
 			
 			gp.monster[mapNum][i] = new MonGreenSlime(gp);
 			gp.monster[mapNum][i].worldX = gp.tileSize*39;
-			gp.monster[mapNum][i].worldY = gp.tileSize*11;
+			gp.monster[mapNum][i].worldY = gp.tileSize*9;
 	
 			i++;
 			
