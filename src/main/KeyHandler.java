@@ -164,7 +164,9 @@ public class KeyHandler implements KeyListener{
          }
      }
     
-    
+    public boolean getImortalmodeON(){
+			return imortalModeOn;
+	}
     public void playState(int code) {
     	 	if (code == KeyEvent.VK_UP){
 	            upPressed = true;    
@@ -247,7 +249,7 @@ public class KeyHandler implements KeyListener{
 	        	}
 	        }
 	        
-	         //DEBUG
+	         //DEBUG and imortal mode
 	        if(code == KeyEvent.VK_T) {
 	        	if(showDebugText == false) {
 	        		showDebugText = true;
@@ -259,21 +261,7 @@ public class KeyHandler implements KeyListener{
 	        	}
 	        }
 	        
-//	        if(code == KeyEvent.VK_R) {  // i am coding this the way he did but I may want to change it. 
-//	        	switch (gp.currentMap) {
-//	        	case 0: gp.tileM.loadMap("/map/worldV3.txt", 0); break;
-//	        	case 1: gp.tileM.loadMap("/map/interior01.txt", 1); break;
-//	        	}
-//	        }
-	        
-//	        if(code == KeyEvent.VK_G) {
-//	        	if(imortalModeOn == false) {
-//	        		imortalModeOn = true;
-//	        	}
-//	        	else if (imortalModeOn) {
-//	        		imortalModeOn = false;
-//	        	}
-//	        }
+//	        
      }
     public void dialogueState(int code) {
     	 if (code == KeyEvent.VK_ENTER) {
