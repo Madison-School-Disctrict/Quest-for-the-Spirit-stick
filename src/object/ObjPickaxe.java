@@ -9,6 +9,7 @@ public class ObjPickaxe extends Entity {
 	public ObjPickaxe(GamePanel gp) {
 		super(gp);
 		type = type_pickaxe;
+		stackable = true;
 		name = objName;
 		down1 = setup("/objects/pickaxe", gp.tileSize, gp.tileSize);
 		attackValue = 0;
