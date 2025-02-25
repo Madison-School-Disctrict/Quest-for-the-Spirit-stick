@@ -1,8 +1,8 @@
 package main;
 
+import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import entity.Bobcat;
 
 
 //import entity.Bobcat;
@@ -202,9 +202,12 @@ public class KeyHandler implements KeyListener{
 	        		gp.playMusic(0);
 	        	} 
 	        }
-	        if(code == KeyEvent.VK_ENTER) {
+                enterPressed = code == KeyEvent.VK_ENTER; // in place of if else statment 
+				/*
+				 * if(code == KeyEvent.VK_ENTER) {
 	        	enterPressed = true;
-	        }
+	        `````} else {enterPressed = false; }
+				 */
 	        
 	        if(code == KeyEvent.VK_SPACE) {
 	        	spacePressed = true;
@@ -228,14 +231,7 @@ public class KeyHandler implements KeyListener{
 	        }
 	        
 	        if(code == KeyEvent.VK_X) {
-	        	if(gp.map.miniMapOn == false) {
-	        		gp.map.miniMapOn = true;
-	        		
-	        	}
-	        	else {
-	        		gp.map.miniMapOn = false;
-	        	}
-	        	
+                    gp.map.miniMapOn = gp.map.miniMapOn == false;
 	        }
 	        if(code == KeyEvent.VK_B) {
 	        	bPressed = true;

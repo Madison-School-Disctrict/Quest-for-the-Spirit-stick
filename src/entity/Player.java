@@ -1,13 +1,14 @@
 package entity;
 import java.awt.AlphaComposite;
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
-
 import main.GamePanel;
 import main.KeyHandler;
+import object.ObjAxe;
+import object.ObjFireBall;
+import object.ObjFireBallBlue;
+import object.ObjFireBallWhite;
 import object.ObjKey;
 import object.ObjLantern;
 import object.ObjPotionRed;
@@ -15,10 +16,6 @@ import object.ObjShieldWood;
 import object.ObjSpiritStick;
 import object.ObjSwordNormal;
 import object.ObjTent;
-import object.ObjAxe;
-import object.ObjFireBall;
-import object.ObjFireBallBlue;
-import object.ObjFireBallWhite;
 
 public class Player extends Entity{
     
@@ -29,12 +26,13 @@ public class Player extends Entity{
     public boolean attackCanceled = false;
     boolean hasFireBall = false;
     public boolean lightUpdated = false;
-    
+    //public boolean imortal;
+
     public Player(GamePanel gp, KeyHandler keyH){
     	super(gp);
         
         this.keyH = keyH;
-        
+        //imortal = keyH.imortalModeOn;
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2- (gp.tileSize/2);
         
@@ -471,7 +469,10 @@ public class Player extends Entity{
 	    	
 	    	gp.npc[gp.currentMap][i].move(direction);
     	}
-    }    
+    } 
+	public boolean getImoralmode(){
+		return keyH.imortalModeOn;
+	}   
     public void contactMonster(int i) {
 	   if (i != 999) {
 		   if(invincible == false && gp.monster[gp.currentMap][i].dying == false) {
@@ -481,9 +482,12 @@ public class Player extends Entity{
 				  if(damage < 1) {
 					  damage = 1;
 				  }
-			   life -= damage;
-			   invincible = true;
-			   transparent = true;
+				  if(!keyH.imortalModeOn){
+			   		life -= damage;
+			   		invincible = true;
+			  		transparent = true;
+					//System.out.println("Imortal mode:  " + keyH.imortalModeOn);
+				  }//else {System.out.println("The Imortal mode:  " + keyH.imortalModeOn);}
 		   }
 	   }
    }   
@@ -593,7 +597,7 @@ public class Player extends Entity{
     			
     			if(currentMagic.name.equals("White Fireball")) {
     				projectile = new ObjFireBallWhite(gp);
-    				attack = projectile.attack;
+    				//attack = projectile.attack;
     			}
     			
     			hasFireBall = true;
