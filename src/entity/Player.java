@@ -279,13 +279,14 @@ public class Player extends Entity{
     	
     	else if(keyH.upPressed == true || keyH.downPressed == true ||
     			keyH.leftPressed == true || keyH.rightPressed == true || keyH.debug == true || keyH.spacePressed == true) {
-    		 if(keyH.upPressed == true){
+    		 
+				if(keyH.upPressed == true ){
     	            direction = "up";
-    	        }else if( keyH.downPressed == true){
+    	        }else if( keyH.downPressed == true ){
     	            direction = "down";    	            
-    	        }else if( keyH.leftPressed == true){
+    	        }else if( keyH.leftPressed == true ){
     	            direction = "left";    	            
-    	        }else if(keyH.rightPressed == true){
+    	        }else if( keyH.rightPressed == true ){
     	            direction = "right";    	            
     	        }
     		 

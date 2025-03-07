@@ -3,7 +3,6 @@ package entity;
 
 
 import java.util.Random;
-
 import main.GamePanel;
 
 public class NPCOldMAn extends Entity{
@@ -41,6 +40,10 @@ public class NPCOldMAn extends Entity{
     	dialogues[1][3] = "Remember you are great";
     	
     	dialogues[2][0] = " I wonder how to get through that door...";
+		dialogues[2][1] = "Be careful there is a dangerous pit around here";
+
+		dialogues[3][0] = "You again, don't you have \nanything better to do?";
+		dialogues[3][1] = "You can learn some powerful magic \nin the house to the north west ";
     	
     }
     public void setAction() {

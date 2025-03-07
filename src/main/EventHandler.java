@@ -46,6 +46,9 @@ public class EventHandler{
 		
 		eventMaster.dialogues[0][0] = " You have teleported";
 		eventMaster.dialogues[1][0] = " You Fall into a pit";
+		eventMaster.dialogues[1][1] = "It takes you several hours to climb out \n You exerted half of your life \n you may want to go";
+		eventMaster.dialogues[1][2] = "refresh yourself by drinking the water in the pool";
+		eventMaster.dialogues[1][3] = "You may want to stay away from this \narea in the future. ";
 		eventMaster.dialogues[2][0] = "You drink the Water.\nYour life has been Restored.";
 		eventMaster.dialogues[2][1] = "This water is very refreshing";
 		eventMaster.dialogues[3][1] = "You have Been Telelported to a Different Locqtion";
@@ -62,7 +65,9 @@ public class EventHandler{
 		}
 		
 		if(canTouchEvent  == true) {		
-		//if(hit(21,8,"left") == true) {damagePit(21,8,gp.dialogueState);}
+		if (hit(0,27,16,"right") == true && !gp.keyH.getImortalmodeON()) {
+			damagePit(hit(0,27,16,"right"),0,26,16,gp.dialogueState);
+		}
 			for(int i = 21; i < 26; i++ ) {
 				if(hit(0,i,12,"up") == true) {healingPool(gp.dialogueState);}
 			}
@@ -125,11 +130,13 @@ public class EventHandler{
 		}
 	}
 	
-	public void damagePit(int gameState) {
+	public void damagePit(boolean on, int map, int col, int row,int gameState) {
 		gp.gameState = gameState;
-		gp.playSE(6);
+		//gp.player.attackCanceled = true;
+		//gp.playSE(2);
 		eventMaster.startDialogue(eventMaster, 1);
-		gp.player.life -=1;
+		gp.player.life -= gp.player.life/2;
+		//teleport(on,map ,col , row,gp.outside);
 		canTouchEvent = false;
 		
 	}
@@ -143,7 +150,7 @@ public class EventHandler{
 			gp.player.life = gp.player.maxLife;
 			gp.player.mana = gp.player.maxMana;
 			gp.aSetter.setMonster();
-			
+		
 			/*
 			 * I removed the save game when resting at the pool but if you want to add something maybe add an option menu here. 
 			 * I added the save progress to the options menu. 

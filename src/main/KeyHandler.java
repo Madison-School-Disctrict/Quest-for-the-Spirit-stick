@@ -11,6 +11,8 @@ public class KeyHandler implements KeyListener{
 	GamePanel gp;
 	public boolean upPressed, downPressed, leftPressed, rightPressed, debug, axePlus, music = true, enterPressed, 
 			spacePressed, shotKeyPressed, bPressed;
+	// direction test
+	public int dPressed;
     //Debug 
     boolean showDebugText = false;
     public boolean imortalModeOn = false;   
@@ -168,18 +170,43 @@ public class KeyHandler implements KeyListener{
 			return imortalModeOn;
 	}
     public void playState(int code) {
-    	 	if (code == KeyEvent.VK_UP){
-	            upPressed = true;    
+    	 	
+			if (code == KeyEvent.VK_UP){
+	            upPressed = true;
+			    dPressed = 1;      
 	        }
 	        if (code == KeyEvent.VK_LEFT){
-	            leftPressed = true;
+	            leftPressed = true; 
+				   dPressed = 2; 
 	        }
 	        if (code == KeyEvent.VK_DOWN){
 	            downPressed = true;
+			    dPressed = 3;
 	        }
 	        if (code == KeyEvent.VK_RIGHT){
 	            rightPressed = true;
+			    dPressed = 4;
 	        }
+
+
+
+			// if (code == KeyEvent.VK_W){
+	        //     upPressed = true; 
+			// 	dPressed = 1;   
+	        // }
+	        // if (code == KeyEvent.VK_A){
+	        //     leftPressed = true;
+			// 	dPressed = 2; 
+	        // }
+	        // if (code == KeyEvent.VK_S){
+	        //     downPressed = true;
+			// 	dPressed = 3; 
+	        // }
+	        // if (code == KeyEvent.VK_D){
+	        //     rightPressed = true;
+			// 	dPressed = 4; 
+	        // }
+
 //	        if(code == KeyEvent.VK_K) {
 //	        	debug = true;
 //	        }
@@ -491,23 +518,32 @@ public class KeyHandler implements KeyListener{
         int code = e.getKeyCode();
           if (code == KeyEvent.VK_UP){
             upPressed = false;
-            
+			dPressed = -1;
         }
         if (code == KeyEvent.VK_LEFT){
             leftPressed = false;
+			dPressed = -1;
         }
         if (code == KeyEvent.VK_DOWN){
             downPressed = false;
+			dPressed = -1;
         }
         if (code == KeyEvent.VK_RIGHT){
             rightPressed = false;
+			dPressed = -1;
         }
-        if(code == KeyEvent.VK_K) {
-        	debug = false;
-        }
-        if(code == KeyEvent.VK_A) {
-        	axePlus = false;
-        }
+        // if(code == KeyEvent.VK_K) {
+        // 	debug = false;
+        // }
+
+
+
+        // if(code == KeyEvent.VK_A) {
+        // 	axePlus = false;
+        // }
+
+
+
         if(code == KeyEvent.VK_F) {
         	shotKeyPressed = false;	
         	
