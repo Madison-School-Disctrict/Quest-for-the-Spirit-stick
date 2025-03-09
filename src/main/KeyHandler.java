@@ -3,7 +3,7 @@ package main;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import java.util.ArrayList;
 
 //import entity.Bobcat;
 
@@ -15,10 +15,17 @@ public class KeyHandler implements KeyListener{
 	public int dPressed;
     //Debug 
     boolean showDebugText = false;
-    public boolean imortalModeOn = false;   
+    public boolean imortalModeOn = false; 
+	public ArrayList<String> arrowPressed = new ArrayList<>();
+	public String lastPressedKey = "none"; //most recently pressed key
+
+
+
     public KeyHandler(GamePanel gp) {
     	this.gp= gp;
     }
+
+
     @Override
     public void keyTyped(KeyEvent e){
         
@@ -171,21 +178,40 @@ public class KeyHandler implements KeyListener{
 	}
     public void playState(int code) {
     	 	
-			if (code == KeyEvent.VK_UP){
+
+			/// key release about 563
+
+			if (code == KeyEvent.VK_W){
 	            upPressed = true;
-			    dPressed = 1;      
+				if (!arrowPressed.contains("up")) {
+					arrowPressed.add("up");
+					}
+				lastPressedKey = "up";
+				//System.out.println(lastPressedKey);
 	        }
-	        if (code == KeyEvent.VK_LEFT){
+	        if (code == KeyEvent.VK_A){
 	            leftPressed = true; 
-				   dPressed = 2; 
+				if (!arrowPressed.contains("left")) {
+					arrowPressed.add("left");
+					}
+				lastPressedKey = "left"; 
+				//System.out.println(lastPressedKey);
 	        }
-	        if (code == KeyEvent.VK_DOWN){
+	        if (code == KeyEvent.VK_S){
 	            downPressed = true;
-			    dPressed = 3;
+			    if (!arrowPressed.contains("down")) {
+					arrowPressed.add("down");
+					}
+				lastPressedKey = "down";
+				//System.out.println(lastPressedKey);
 	        }
-	        if (code == KeyEvent.VK_RIGHT){
+	        if (code == KeyEvent.VK_D){
 	            rightPressed = true;
-			    dPressed = 4;
+			    if (!arrowPressed.contains("right")) {
+					arrowPressed.add("right");
+					}
+				lastPressedKey = "right";
+				//System.out.println(lastPressedKey);
 	        }
 
 
@@ -513,24 +539,33 @@ public class KeyHandler implements KeyListener{
     	 }
     	
      }
+
+	 ///key pressed 182
     @Override
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
-          if (code == KeyEvent.VK_UP){
+          if (code == KeyEvent.VK_W){
             upPressed = false;
-			dPressed = -1;
+			arrowPressed.remove("up");
+			//System.out.println(arrowPressed);
         }
-        if (code == KeyEvent.VK_LEFT){
+        if (code == KeyEvent.VK_A){
             leftPressed = false;
-			dPressed = -1;
+			arrowPressed.remove("left");
+			//System.out.println(arrowPressed);
+			//System.out.println(code + "Left");
         }
-        if (code == KeyEvent.VK_DOWN){
+        if (code == KeyEvent.VK_S){
             downPressed = false;
-			dPressed = -1;
+			arrowPressed.remove("down");
+			//System.out.println(arrowPressed);
+			//System.out.println(code + "Down");
         }
-        if (code == KeyEvent.VK_RIGHT){
+        if (code == KeyEvent.VK_D){
             rightPressed = false;
-			dPressed = -1;
+			arrowPressed.remove("right");
+			//System.out.println(arrowPressed);
+			//System.out.println(code + "Right");
         }
         // if(code == KeyEvent.VK_K) {
         // 	debug = false;

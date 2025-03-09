@@ -234,6 +234,8 @@ public class Player extends Entity{
 		guardLeft = setup("/player/GuardingSprites/boy_guard_left", gp.tileSize, gp.tileSize);
 		guardRight = setup("/player/GuardingSprites/boy_guard_right", gp.tileSize, gp.tileSize);
     }
+
+    @Override
     public void update(){	
     	
     		if (knockBack) {
@@ -280,15 +282,31 @@ public class Player extends Entity{
     	else if(keyH.upPressed == true || keyH.downPressed == true ||
     			keyH.leftPressed == true || keyH.rightPressed == true || keyH.debug == true || keyH.spacePressed == true) {
     		 
-				if(keyH.upPressed == true ){
-    	            direction = "up";
-    	        }else if( keyH.downPressed == true ){
-    	            direction = "down";    	            
-    	        }else if( keyH.leftPressed == true ){
-    	            direction = "left";    	            
-    	        }else if( keyH.rightPressed == true ){
-    	            direction = "right";    	            
-    	        }
+				// if(keyH.upPressed == true ){
+    	        //     direction = "up";
+    	        // }else if( keyH.downPressed == true ){
+    	        //     direction = "down";    	            
+    	        // }else if( keyH.leftPressed == true ){
+    	        //     direction = "left";    	            
+    	        // }else if( keyH.rightPressed == true ){
+    	        //     direction = "right";    	            
+    	        // }
+
+				
+
+				// System.out.println(keyH.arrowPressed.getLast());
+
+				if(!keyH.arrowPressed.isEmpty()){
+					direction = keyH.arrowPressed.getLast();
+				}
+				// else { System.out.println("This is the last " + keyH.lastPressedKey);
+				// 	direction = keyH.lastPressedKey;
+				// 	System.out.println(direction);
+				// }
+				
+				// if(keyH.spacePressed){
+				// 	System.out.println(direction);
+				// }
     		 
     		 	//Check Tile Collision
     		 	collisionOn = false;
