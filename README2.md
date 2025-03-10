@@ -16,7 +16,7 @@ This year they decided to start with some bug fixes the list of fixes they chose
 
 6. if press enter before talking or opening a chest it skips first dialogue..--- changed key handler to always make enter false expect when pushed.  02.2025 Bryan  -- done 
 
-7. Game Crashes when buying somthing in the shop if select empty space.
+7. Game Crashes when buying somthing in the shop if select empty space.  Added if statement to make sure the arraylist was not out of bounds.  done 03/09/2025
 
 8. Do not allow objects to move through doorway and maybe trees. 
 
