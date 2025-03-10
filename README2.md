@@ -8,7 +8,7 @@ This year they decided to start with some bug fixes the list of fixes they chose
 
 2. walk into a spot on the screen and the screen goes black and crashes. --- In the event handler it was taking us to a location and map that did not exist. --done Rik 02.2025 
 
-3. movement left/right and up/down left takes preference over right. Up takes preference over down and up down take preference over left right.   we need to make the most recent key the preference. 
+3. movement left/right and up/down left takes preference over right. Up takes preference over down and up down take preference over left right.   we need to make the most recent key the preference. FIXED 03/09/2025 see log 
 
 4. path to shop some trees on top of each other. ----- Just needed to adjust creation of tree locations -- 02.2025 done
 
