@@ -214,31 +214,9 @@ public class KeyHandler implements KeyListener{
 				//System.out.println(lastPressedKey);
 	        }
 
+			//System.out.println(arrowPressed);
 
 
-			// if (code == KeyEvent.VK_W){
-	        //     upPressed = true; 
-			// 	dPressed = 1;   
-	        // }
-	        // if (code == KeyEvent.VK_A){
-	        //     leftPressed = true;
-			// 	dPressed = 2; 
-	        // }
-	        // if (code == KeyEvent.VK_S){
-	        //     downPressed = true;
-			// 	dPressed = 3; 
-	        // }
-	        // if (code == KeyEvent.VK_D){
-	        //     rightPressed = true;
-			// 	dPressed = 4; 
-	        // }
-
-//	        if(code == KeyEvent.VK_K) {
-//	        	debug = true;
-//	        }
-//	        if(code == KeyEvent.VK_A) {
-//	        	axePlus = true;
-//	        }
 	        if(code == KeyEvent.VK_P) {
 	        	gp.gameState = gp.pauseState;
 	        }
