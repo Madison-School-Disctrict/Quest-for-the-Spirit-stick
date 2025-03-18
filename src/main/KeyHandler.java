@@ -3,7 +3,6 @@ package main;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 //import entity.Bobcat;
 
@@ -16,8 +15,7 @@ public class KeyHandler implements KeyListener{
     //Debug 
     boolean showDebugText = false;
     public boolean imortalModeOn = false; 
-	public ArrayList<String> arrowPressed = new ArrayList<>();
-	public String lastPressedKey = "none"; //most recently pressed key
+	public int[] lastDirection = new int[4];
 
 
 
@@ -176,45 +174,50 @@ public class KeyHandler implements KeyListener{
     public boolean getImortalmodeON(){
 			return imortalModeOn;
 	}
+
+
+	
     public void playState(int code) {
     	 	
 
 			/// key release about 563
 
-			if (code == KeyEvent.VK_W){
-	            upPressed = true;
-				if (!arrowPressed.contains("up")) {
-					arrowPressed.add("up");
-					}
-				lastPressedKey = "up";
-				//System.out.println(lastPressedKey);
-	        }
-	        if (code == KeyEvent.VK_A){
-	            leftPressed = true; 
-				if (!arrowPressed.contains("left")) {
-					arrowPressed.add("left");
-					}
-				lastPressedKey = "left"; 
-				//System.out.println(lastPressedKey);
-	        }
-	        if (code == KeyEvent.VK_S){
-	            downPressed = true;
-			    if (!arrowPressed.contains("down")) {
-					arrowPressed.add("down");
-					}
-				lastPressedKey = "down";
-				//System.out.println(lastPressedKey);
-	        }
-	        if (code == KeyEvent.VK_D){
-	            rightPressed = true;
-			    if (!arrowPressed.contains("right")) {
-					arrowPressed.add("right");
-					}
-				lastPressedKey = "right";
-				//System.out.println(lastPressedKey);
-	        }
-
-			//System.out.println(arrowPressed);
+			if (code == KeyEvent.VK_UP && upPressed == false){
+                upPressed = true;
+                for (int i = 0; i < 4; i++){ // adds preference to held keys and inserts new key as 1st preference
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[0] = 1;
+            }
+            if (code == KeyEvent.VK_LEFT && leftPressed == false){
+                leftPressed = true;
+                for (int i = 0; i < 4; i++){
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[2] = 1;
+            }
+            if (code == KeyEvent.VK_DOWN && downPressed == false){
+                downPressed = true;
+                for (int i = 0; i < 4; i++){
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[1] = 1;
+            }
+            if (code == KeyEvent.VK_RIGHT && rightPressed == false){
+                rightPressed = true;
+                for (int i = 0; i < 4; i++){
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[3] = 1;
+            }
 
 
 	        if(code == KeyEvent.VK_P) {
@@ -522,39 +525,46 @@ public class KeyHandler implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
-          if (code == KeyEvent.VK_W){
+          
+		if (code == KeyEvent.VK_UP){
             upPressed = false;
-			arrowPressed.remove("up");
-			//System.out.println(arrowPressed);
+            for (int i = 0; i < 4; i++){ // sets key released to 0 and subtracts numbers above to make room for preference
+                if (lastDirection[i] > lastDirection[0]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[0] = 0;
         }
-        if (code == KeyEvent.VK_A){
+        if (code == KeyEvent.VK_LEFT){
             leftPressed = false;
-			arrowPressed.remove("left");
-			//System.out.println(arrowPressed);
-			//System.out.println(code + "Left");
+            for (int i = 0; i < 4; i++){
+                if (lastDirection[i] > lastDirection[2]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[2] = 0;
         }
-        if (code == KeyEvent.VK_S){
+        if (code == KeyEvent.VK_DOWN){
             downPressed = false;
-			arrowPressed.remove("down");
-			//System.out.println(arrowPressed);
-			//System.out.println(code + "Down");
+            for (int i = 0; i < 4; i++){
+                if (lastDirection[i] > lastDirection[1]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[1] = 0;
         }
-        if (code == KeyEvent.VK_D){
+        if (code == KeyEvent.VK_RIGHT){
             rightPressed = false;
-			arrowPressed.remove("right");
-			//System.out.println(arrowPressed);
-			//System.out.println(code + "Right");
+            for (int i = 0; i < 4; i++){
+                if (lastDirection[i] > lastDirection[3]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[3] = 0;
         }
-        // if(code == KeyEvent.VK_K) {
-        // 	debug = false;
-        // }
 
 
-
-        // if(code == KeyEvent.VK_A) {
-        // 	axePlus = false;
-        // }
-
+		
 
 
         if(code == KeyEvent.VK_F) {
