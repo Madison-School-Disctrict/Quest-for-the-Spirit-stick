@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -10,8 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
-import entity.Entity;
 import object.ObjCoinsBronze;
 import object.ObjHeart;
 import object.ObjManaCrystal;
@@ -1132,19 +1131,24 @@ public class UI {
 			g2.drawString(text, x, y + 34);
 		}
 		
-		//Buy Item 
+		//Buy Item  /// 1195 sell item
 		if(gp.keyH.enterPressed) {
-			if(npc.inventory.get(itemIndex).price > gp.player.coin) {
-				subState = 0;
-				npc.startDialogue(npc, 2);
-			}
-			else { 
-				if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
-					gp.player.coin -= npc.inventory.get(itemIndex).price;
-				}
-				else {
+			//System.out.println(itemIndex);
+			if (itemIndex < npc.inventory.size()){
+
+				if(npc.inventory.get(itemIndex).price > gp.player.coin) {
 					subState = 0;
-					npc.startDialogue(npc, 3);
+					npc.startDialogue(npc, 2);
+				}
+				else { 
+					if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+						gp.player.coin -= npc.inventory.get(itemIndex).price;
+					}
+					else {
+						subState = 0;
+						npc.startDialogue(npc, 3);
+						
+					}
 				}
 			}
 		}
@@ -1190,7 +1194,7 @@ public class UI {
 			x = getXforAlignToRightText(text, gp.tileSize * 18 - 20);
 			g2.drawString(text, x, y + 34);
 		
-		
+		///Buy item 1136
 			//Sell Item 
 			if(gp.keyH.enterPressed) {
 				if(gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||

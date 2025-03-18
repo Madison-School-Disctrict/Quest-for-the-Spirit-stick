@@ -234,6 +234,8 @@ public class Player extends Entity{
 		guardLeft = setup("/player/GuardingSprites/boy_guard_left", gp.tileSize, gp.tileSize);
 		guardRight = setup("/player/GuardingSprites/boy_guard_right", gp.tileSize, gp.tileSize);
     }
+
+    @Override
     public void update(){	
     	
     		if (knockBack) {
@@ -277,18 +279,17 @@ public class Player extends Entity{
     	}
     		
     	
-    	else if(keyH.upPressed == true || keyH.downPressed == true ||
-    			keyH.leftPressed == true || keyH.rightPressed == true || keyH.debug == true || keyH.spacePressed == true) {
+    	else if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.debug  || keyH.spacePressed ) {
     		 
-				if(keyH.upPressed == true ){
-    	            direction = "up";
-    	        }else if( keyH.downPressed == true ){
-    	            direction = "down";    	            
-    	        }else if( keyH.leftPressed == true ){
-    	            direction = "left";    	            
-    	        }else if( keyH.rightPressed == true ){
-    	            direction = "right";    	            
-    	        }
+				if(keyH.lastDirection[0] == 1){ // new movement
+					direction = "up";
+				}else if(keyH.lastDirection[1] == 1){
+					direction = "down";
+				}else if(keyH.lastDirection[2] == 1){
+					direction = "left";
+				}else if(keyH.lastDirection[3] == 1){
+					direction = "right";
+				}
     		 
     		 	//Check Tile Collision
     		 	collisionOn = false;

@@ -4,7 +4,6 @@ import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
 //import entity.Bobcat;
 
 public class KeyHandler implements KeyListener{
@@ -15,10 +14,16 @@ public class KeyHandler implements KeyListener{
 	public int dPressed;
     //Debug 
     boolean showDebugText = false;
-    public boolean imortalModeOn = false;   
+    public boolean imortalModeOn = false; 
+	public int[] lastDirection = new int[4];
+
+
+
     public KeyHandler(GamePanel gp) {
     	this.gp= gp;
     }
+
+
     @Override
     public void keyTyped(KeyEvent e){
         
@@ -169,50 +174,52 @@ public class KeyHandler implements KeyListener{
     public boolean getImortalmodeON(){
 			return imortalModeOn;
 	}
+
+
+	
     public void playState(int code) {
     	 	
-			if (code == KeyEvent.VK_UP){
-	            upPressed = true;
-			    dPressed = 1;      
-	        }
-	        if (code == KeyEvent.VK_LEFT){
-	            leftPressed = true; 
-				   dPressed = 2; 
-	        }
-	        if (code == KeyEvent.VK_DOWN){
-	            downPressed = true;
-			    dPressed = 3;
-	        }
-	        if (code == KeyEvent.VK_RIGHT){
-	            rightPressed = true;
-			    dPressed = 4;
-	        }
+
+			/// key release about 563
+
+			if (code == KeyEvent.VK_UP && upPressed == false){
+                upPressed = true;
+                for (int i = 0; i < 4; i++){ // adds preference to held keys and inserts new key as 1st preference
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[0] = 1;
+            }
+            if (code == KeyEvent.VK_LEFT && leftPressed == false){
+                leftPressed = true;
+                for (int i = 0; i < 4; i++){
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[2] = 1;
+            }
+            if (code == KeyEvent.VK_DOWN && downPressed == false){
+                downPressed = true;
+                for (int i = 0; i < 4; i++){
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[1] = 1;
+            }
+            if (code == KeyEvent.VK_RIGHT && rightPressed == false){
+                rightPressed = true;
+                for (int i = 0; i < 4; i++){
+                    if (lastDirection[i] != 0){
+                        lastDirection[i] += 1;
+                    }
+                }
+                lastDirection[3] = 1;
+            }
 
 
-
-			// if (code == KeyEvent.VK_W){
-	        //     upPressed = true; 
-			// 	dPressed = 1;   
-	        // }
-	        // if (code == KeyEvent.VK_A){
-	        //     leftPressed = true;
-			// 	dPressed = 2; 
-	        // }
-	        // if (code == KeyEvent.VK_S){
-	        //     downPressed = true;
-			// 	dPressed = 3; 
-	        // }
-	        // if (code == KeyEvent.VK_D){
-	        //     rightPressed = true;
-			// 	dPressed = 4; 
-	        // }
-
-//	        if(code == KeyEvent.VK_K) {
-//	        	debug = true;
-//	        }
-//	        if(code == KeyEvent.VK_A) {
-//	        	axePlus = true;
-//	        }
 	        if(code == KeyEvent.VK_P) {
 	        	gp.gameState = gp.pauseState;
 	        }
@@ -513,35 +520,51 @@ public class KeyHandler implements KeyListener{
     	 }
     	
      }
+
+	 ///key pressed 182
     @Override
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
-          if (code == KeyEvent.VK_UP){
+          
+		if (code == KeyEvent.VK_UP){
             upPressed = false;
-			dPressed = -1;
+            for (int i = 0; i < 4; i++){ // sets key released to 0 and subtracts numbers above to make room for preference
+                if (lastDirection[i] > lastDirection[0]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[0] = 0;
         }
         if (code == KeyEvent.VK_LEFT){
             leftPressed = false;
-			dPressed = -1;
+            for (int i = 0; i < 4; i++){
+                if (lastDirection[i] > lastDirection[2]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[2] = 0;
         }
         if (code == KeyEvent.VK_DOWN){
             downPressed = false;
-			dPressed = -1;
+            for (int i = 0; i < 4; i++){
+                if (lastDirection[i] > lastDirection[1]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[1] = 0;
         }
         if (code == KeyEvent.VK_RIGHT){
             rightPressed = false;
-			dPressed = -1;
+            for (int i = 0; i < 4; i++){
+                if (lastDirection[i] > lastDirection[3]){
+                    lastDirection[i] -= 1;
+                }
+            }
+            lastDirection[3] = 0;
         }
-        // if(code == KeyEvent.VK_K) {
-        // 	debug = false;
-        // }
 
 
-
-        // if(code == KeyEvent.VK_A) {
-        // 	axePlus = false;
-        // }
-
+		
 
 
         if(code == KeyEvent.VK_F) {
