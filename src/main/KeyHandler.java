@@ -3,6 +3,7 @@ package main;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 //import entity.Bobcat;
 
@@ -15,7 +16,7 @@ public class KeyHandler implements KeyListener{
     //Debug 
     boolean showDebugText = false;
     public boolean imortalModeOn = false; 
-	public int[] lastDirection = new int[4];
+	public ArrayList<String> directionLast = new ArrayList<>(4);
 
 
 
@@ -178,48 +179,30 @@ public class KeyHandler implements KeyListener{
 
 	
     public void playState(int code) {
-    	 	
-
-			/// key release about 563
-
-			if (code == KeyEvent.VK_UP && upPressed == false){
-                upPressed = true;
-                for (int i = 0; i < 4; i++){ // adds preference to held keys and inserts new key as 1st preference
-                    if (lastDirection[i] != 0){
-                        lastDirection[i] += 1;
-                    }
-                }
-                lastDirection[0] = 1;
+    	 	// key release about 509
+			if (code == KeyEvent.VK_UP){
+              if(!directionLast.contains("up")){
+				directionLast.add("up");
+			  }
             }
             if (code == KeyEvent.VK_LEFT && leftPressed == false){
-                leftPressed = true;
-                for (int i = 0; i < 4; i++){
-                    if (lastDirection[i] != 0){
-                        lastDirection[i] += 1;
-                    }
-                }
-                lastDirection[2] = 1;
+                if(!directionLast.contains("left")){
+					directionLast.add("left");
+				  }
+                
             }
             if (code == KeyEvent.VK_DOWN && downPressed == false){
-                downPressed = true;
-                for (int i = 0; i < 4; i++){
-                    if (lastDirection[i] != 0){
-                        lastDirection[i] += 1;
-                    }
-                }
-                lastDirection[1] = 1;
+                if(!directionLast.contains("down")){
+					directionLast.add("down");
+				  }
             }
             if (code == KeyEvent.VK_RIGHT && rightPressed == false){
-                rightPressed = true;
-                for (int i = 0; i < 4; i++){
-                    if (lastDirection[i] != 0){
-                        lastDirection[i] += 1;
-                    }
-                }
-                lastDirection[3] = 1;
+                if(!directionLast.contains("right")){
+					directionLast.add("right");
+				  }
             }
 
-
+			
 	        if(code == KeyEvent.VK_P) {
 	        	gp.gameState = gp.pauseState;
 	        }
@@ -527,40 +510,16 @@ public class KeyHandler implements KeyListener{
         int code = e.getKeyCode();
           
 		if (code == KeyEvent.VK_UP){
-            upPressed = false;
-            for (int i = 0; i < 4; i++){ // sets key released to 0 and subtracts numbers above to make room for preference
-                if (lastDirection[i] > lastDirection[0]){
-                    lastDirection[i] -= 1;
-                }
-            }
-            lastDirection[0] = 0;
+            directionLast.remove("up");
         }
         if (code == KeyEvent.VK_LEFT){
-            leftPressed = false;
-            for (int i = 0; i < 4; i++){
-                if (lastDirection[i] > lastDirection[2]){
-                    lastDirection[i] -= 1;
-                }
-            }
-            lastDirection[2] = 0;
+            directionLast.remove("left");
         }
         if (code == KeyEvent.VK_DOWN){
-            downPressed = false;
-            for (int i = 0; i < 4; i++){
-                if (lastDirection[i] > lastDirection[1]){
-                    lastDirection[i] -= 1;
-                }
-            }
-            lastDirection[1] = 0;
+            directionLast.remove("down");
         }
         if (code == KeyEvent.VK_RIGHT){
-            rightPressed = false;
-            for (int i = 0; i < 4; i++){
-                if (lastDirection[i] > lastDirection[3]){
-                    lastDirection[i] -= 1;
-                }
-            }
-            lastDirection[3] = 0;
+            directionLast.remove("right");
         }
 
 
