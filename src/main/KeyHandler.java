@@ -185,18 +185,18 @@ public class KeyHandler implements KeyListener{
 				directionLast.add("up");
 			  }
             }
-            if (code == KeyEvent.VK_LEFT && leftPressed == false){
+            if (code == KeyEvent.VK_LEFT ){
                 if(!directionLast.contains("left")){
 					directionLast.add("left");
 				  }
                 
             }
-            if (code == KeyEvent.VK_DOWN && downPressed == false){
+            if (code == KeyEvent.VK_DOWN ){
                 if(!directionLast.contains("down")){
 					directionLast.add("down");
 				  }
             }
-            if (code == KeyEvent.VK_RIGHT && rightPressed == false){
+            if (code == KeyEvent.VK_RIGHT ){
                 if(!directionLast.contains("right")){
 					directionLast.add("right");
 				  }
