@@ -279,11 +279,17 @@ public class Player extends Entity{
     	}
     		
     	
-    	else if(!keyH.directionLast.isEmpty() || keyH.debug  || keyH.spacePressed ) {
-
-				if(!keyH.directionLast.isEmpty()){
-					direction = keyH.directionLast.get(keyH.directionLast.size()-1);
-				}
+    	else if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.debug  || keyH.spacePressed ) {
+             
+                if(keyH.lastDirection[0] == 1){ // new movement
+                    direction = "up";
+                }else if(keyH.lastDirection[1] == 1){
+                    direction = "down";
+                }else if(keyH.lastDirection[2] == 1){
+                    direction = "left";
+                }else if(keyH.lastDirection[3] == 1){
+                    direction = "right";
+                }
     		 	//Check Tile Collision
     		 	collisionOn = false;
     		 	gp.cCheck.checkTile(this);
