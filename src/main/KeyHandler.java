@@ -196,8 +196,10 @@ public class KeyHandler implements KeyListener{
 					directionLast.add("down");
 				  }
             }
-            if (code == KeyEvent.VK_RIGHT ){
+            if (code == KeyEvent.VK_RIGHT 
+			){
                 if(!directionLast.contains("right")){
+					
 					directionLast.add("right");
 				  }
             }
