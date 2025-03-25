@@ -565,12 +565,7 @@ public class UI {
 	}
 	public void drawInventory(Entity entity, boolean cursor) {
 		
-		int frameX = 0;
-		int frameY = 0;
-		int frameWidth = 0;
-		int frameHeight = 0;
-		int slotCol = 0;
-		int slotRow = 0;
+		int frameX, frameY, frameWidth, frameHeight, slotCol, slotRow;
 		
 		if (entity == gp.player) {
 			frameX = gp.tileSize *12;

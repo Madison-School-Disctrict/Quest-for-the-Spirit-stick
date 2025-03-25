@@ -65,7 +65,7 @@ public class EventHandler{
 		}
 		
 		if(canTouchEvent  == true) {		
-		if (hit(0,27,16,"right") == true && !gp.keyH.getImortalmodeON()) {
+		if (hit(0,27,16,"right") == true && !gp.keyH.imortalModeOn) {
 			damagePit(hit(0,27,16,"right"),0,26,16,gp.dialogueState);
 		}
 			for(int i = 21; i < 26; i++ ) {

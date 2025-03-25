@@ -170,10 +170,6 @@ public class KeyHandler implements KeyListener{
             gp.gameState = gp.playState;
          }
      }
-    
-    public boolean getImortalmodeON(){
-            return imortalModeOn;
-    }
 
 
     
