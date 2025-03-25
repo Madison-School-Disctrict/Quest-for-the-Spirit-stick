@@ -110,7 +110,6 @@ private static final long serialVersionUID = 1L;
   public final int tradeState = 8;
   public final int sleepState = 9;
   public final int mapState = 10;
-  public final int cutsceneState = 11;
   
   //Other 
   public boolean bossBattleOn = false;

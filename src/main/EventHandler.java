@@ -164,7 +164,6 @@ public class EventHandler{
 	}
 	
 	public void speak(Entity entity) {
-		
 		if(gp.keyH.enterPressed == true){
 			gp.gameState = gp.dialogueState;
 			gp.player.attackCanceled = true;
@@ -176,7 +175,7 @@ public class EventHandler{
 	public void Boss() {
 		
 		if(!gp.bossBattleOn && !Progress.skeletonBossDefeated) {
-			gp.gameState = gp.cutsceneState;
+			gp.gameState = gp.dialogueState;
 			gp.csManager.sceneNum = gp.csManager.skeletonLord;
 		}
 		
