@@ -1,0 +1,12 @@
+Game state map for keyhandler
+
+List of game States
+1. titleState -- tilte screen 
+2. playState  -- playing the game
+3. pauseState -- paused
+4. dialogueState  -- any dialogue
+5. characterState  -- player stats and equipment screen
+6. optionsState  -- sound settings quiting game etc.
+7. gameOverState -- retry or quit
+8. tradeState  -- in merchant wcreen
+9. mapState  -- diplay map
