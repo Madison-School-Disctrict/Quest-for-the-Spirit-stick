@@ -65,7 +65,7 @@ public class EventHandler{
 		}
 		
 		if(canTouchEvent  == true) {		
-		if (hit(0,27,16,"right") == true && !gp.keyH.getImortalmodeON()) {
+		if (hit(0,27,16,"right") == true  && !PlayState.imortalModeOn){
 			damagePit(hit(0,27,16,"right"),0,26,16,gp.dialogueState);
 		}
 			for(int i = 21; i < 26; i++ ) {
@@ -142,7 +142,7 @@ public class EventHandler{
 	}
 	
 	public void healingPool(int gameState) {
-		if( gp.keyH.spacePressed == true) {
+		if( PlayState.spacePressed == true) {
 			gp.gameState = gameState;
 			gp.player.attackCanceled = true;
 			gp.playSE(2);
@@ -165,11 +165,11 @@ public class EventHandler{
 	
 	public void speak(Entity entity) {
 		
-		if(gp.keyH.enterPressed == true){
+		if(PlayState.enterPressed == true){
 			gp.gameState = gp.dialogueState;
 			gp.player.attackCanceled = true;
 			entity.speak(); 
-			gp.keyH.enterPressed = false;
+			PlayState.enterPressed = false;
 			}
 		}
 	

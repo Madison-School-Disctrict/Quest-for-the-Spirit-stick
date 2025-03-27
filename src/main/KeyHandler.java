@@ -1,24 +1,12 @@
 package main;
 
-import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-
-//import entity.Bobcat;
 
 public class KeyHandler implements KeyListener{
 	GamePanel gp;
-	public boolean upPressed, downPressed, leftPressed, rightPressed, debug, axePlus, music = true, enterPressed, 
-			spacePressed, shotKeyPressed, bPressed;
-	// direction test
-	public int dPressed;
-    //Debug 
-    boolean showDebugText = false;
-    public boolean imortalModeOn = false; 
-	public ArrayList<String> directionLast = new ArrayList<>(4);
-
-
+	public boolean music = false, enterPressed, spacePressed, shotKeyPressed, bPressed;
+	
 
     public KeyHandler(GamePanel gp) {
     	this.gp= gp;
@@ -29,25 +17,24 @@ public class KeyHandler implements KeyListener{
     public void keyTyped(KeyEvent e){
         
     }  
+
+
     @Override
     public void keyPressed(KeyEvent e){
         int code = e.getKeyCode();
-       
         //Title State
         if(gp.gameState == gp.titleState) {
-        	titleState(code);
+			TitleState.titleState(code, gp);
         }
-        
         //playState
         else  if(gp.gameState == gp.playState) {
-	        playState(code);
+			PlayState.pKeyPressed(code, gp);			        
         }
-        
         //Pause State 
-        else if(gp.gameState == gp.pauseState) {
-            pauseState(code);
+        else if(gp.gameState == gp.pauseState) { 
+			PauseState.play(code, gp);
         }
-        // Dialogue State
+		// Dialogue State
         else if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) {
         	dialogueState(code);
         }
@@ -69,220 +56,15 @@ public class KeyHandler implements KeyListener{
         }
         
         
-    }   
-    public void titleState(int code) {
-     	if(gp.ui.titleScreenState == 0) {
-	        	if (code == KeyEvent.VK_DOWN){
-	        		gp.ui.commandNum++;
-	        		if(gp.ui.commandNum > 2) {
-	        			gp.ui.commandNum = 0;
-	        		}	
-	            }
-	        	 if (code == KeyEvent.VK_UP){
-	        		
-	        		 gp.ui.commandNum--;
-	         		if(gp.ui.commandNum < 0) {
-	         			gp.ui.commandNum = 2;
-	         		}
-
-	             }
-	        	 
-	        	 if(code == KeyEvent.VK_ENTER) {
-	        		 if(gp.ui.commandNum == 0) {
-	        			 gp.gameState = gp.playState;
-	        			 gp.playMusic(0);
-	        			 //to add characters screen uncomment the next line. and comment out the one above
-	        			// gp.ui.titleScreenState = 1;  
-	        			 //System.out.println(gp.ui.titleScreenState);
-	         		}
-	        		 if(gp.ui.commandNum == 1) {
-	        			 
-	        			 gp.saveLoad.load();
-	        			 gp.gameState = gp.playState;
-	        			 gp.playMusic(0);
-	          			
-	          		}
-	        		 if(gp.ui.commandNum == 2) {
-	        			 
-	           			System.exit(0);
-	           		}
-	             }
-	        }
-     
-     	else if(gp.ui.titleScreenState == 1) {
-         	if (code == KeyEvent.VK_DOWN){
-                
-         		gp.ui.commandNum++;
-         		if(gp.ui.commandNum > 3) {
-         			gp.ui.commandNum = 0;
-
-         		
-         		}
-         	}
-         	 if (code == KeyEvent.VK_UP){
-         		
-         		 gp.ui.commandNum--;
-          		if(gp.ui.commandNum < 0) {
-          			gp.ui.commandNum = 3;
-          		}
-
-                  
-              }
-         	 if(code == KeyEvent.VK_ENTER) {
-         		 if(gp.ui.commandNum == 0) {
-          			System.out.println("Add code here  fighter");
-          			gp.gameState = gp.playState;
-          			//fighter 
-          			if(music) {
-          			gp.playMusic(0);
-          			}
-          		}
-         		 if(gp.ui.commandNum == 1) {
-         			 System.out.println("Add code here theif");
-         			 gp.gameState = gp.playState;
-           			//Theif
-         			 if(music) {
-           			gp.playMusic(0);
-         			 }
-           		}
-         		 if(gp.ui.commandNum == 2) {
-         			 
-         			 System.out.println("Add code here sorcerer");
-         			 gp.gameState = gp.playState;
-           			//sorcerer
-         			 if(music) {
-           			gp.playMusic(0);
-         			 }
-            		}
-         		 if(gp.ui.commandNum == 3) {            			 
-             			gp.ui.titleScreenState = 0;
-             			gp.ui.commandNum = 0;
-             		}
-         		 
-              }
-         	
-     	
-     	
-     	}
-     
-     }
-    public void pauseState(int code) {
-    	 if(code == KeyEvent.VK_P) {
-         	gp.gameState = gp.playState;
-         }
-     }
-    
-    public boolean getImortalmodeON(){
-			return imortalModeOn;
-	}
+    }  // end of key pressed    
 
 
-	
-    public void playState(int code) {
-    	 	// key release about 509
-			if (code == KeyEvent.VK_UP){
-              if(!directionLast.contains("up")){
-				directionLast.add("up");
-			  }
-            }
-            if (code == KeyEvent.VK_LEFT ){
-                if(!directionLast.contains("left")){
-					directionLast.add("left");
-				  }
-                
-            }
-            if (code == KeyEvent.VK_DOWN ){
-                if(!directionLast.contains("down")){
-					directionLast.add("down");
-				  }
-            }
-            if (code == KeyEvent.VK_RIGHT 
-			){
-                if(!directionLast.contains("right")){
-					
-					directionLast.add("right");
-				  }
-            }
-
-			
-	        if(code == KeyEvent.VK_P) {
-	        	gp.gameState = gp.pauseState;
-	        }
-	        if(code == KeyEvent.VK_C) {
-	        	gp.gameState = gp.characterState; 
-	        }
-	        if(code == KeyEvent.VK_M) {
-	        	if(music == true) {
-	        		music = false;
-	        		gp.stopMusic();
-	        	}
-	        	else if(music == false) {
-	        		music = true;
-	        		gp.playMusic(0);
-	        	} 
-	        }
-                enterPressed = code == KeyEvent.VK_ENTER; // in place of if else statment 
-				/*
-				 * if(code == KeyEvent.VK_ENTER) {
-	        	enterPressed = true;
-	        `````} else {enterPressed = false; }
-				 */
-	        
-	        if(code == KeyEvent.VK_SPACE) {
-	        	spacePressed = true;
-	        }
-	        
-	        if(code == KeyEvent.VK_F) {
-	        	shotKeyPressed = true;
-	        	
-	        }
-	        
-	        if(code == KeyEvent.VK_ESCAPE) {
-	        	gp.ui.commandNum = 0;
-	        	
-	        	gp.gameState = gp.optionsState;
-	        	
-	        }
-	        
-	        if(code == KeyEvent.VK_M) {
-	        	gp.gameState = gp.mapState;
-	        	
-	        }
-	        
-	        if(code == KeyEvent.VK_X) {
-                    gp.map.miniMapOn = gp.map.miniMapOn == false;
-	        }
-	        if(code == KeyEvent.VK_B) {
-	        	bPressed = true;
-	        }
-	        
-	        if(code == KeyEvent.VK_Z) {
-	        	if(Bobcat.follow) {
-	        	Bobcat.follow = false;
-	        	} else if(!Bobcat.follow) {
-	        		Bobcat.follow = true;
-	        	}
-	        }
-	        
-	         //DEBUG and imortal mode
-	        if(code == KeyEvent.VK_T) {
-	        	if(showDebugText == false) {
-	        		showDebugText = true;
-	        		imortalModeOn = true;
-	        	}
-	        	else if (showDebugText == true) {
-	        		showDebugText = false;
-	        		imortalModeOn = false;
-	        	}
-	        }
-	        
-//	        
-     }
     public void dialogueState(int code) {
     	 if (code == KeyEvent.VK_ENTER) {
      		enterPressed = true;
      	}
      }
+
     public void characterState(int code) {
     	 if(code == KeyEvent.VK_C) {
      		gp.gameState = gp.playState;
@@ -510,39 +292,6 @@ public class KeyHandler implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
-          
-		if (code == KeyEvent.VK_UP){
-            directionLast.remove("up");
-        }
-        if (code == KeyEvent.VK_LEFT){
-            directionLast.remove("left");
-        }
-        if (code == KeyEvent.VK_DOWN){
-            directionLast.remove("down");
-        }
-        if (code == KeyEvent.VK_RIGHT){
-            directionLast.remove("right");
-        }
-
-
-		
-
-
-        if(code == KeyEvent.VK_F) {
-        	shotKeyPressed = false;	
-        	
-        }
-        if(code == KeyEvent.VK_SPACE) {
-        	spacePressed = false;
-        }
-        if(code == KeyEvent.VK_B) {
-        	bPressed = false;
-        }
-        
-//        if(code == KeyEvent.VK_Z) {
-//        	Bobcat.follow = true;
-//        }
-        
-        
+		PlayState.pKeyReleased(code, gp);        
     }
 }

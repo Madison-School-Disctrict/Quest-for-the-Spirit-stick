@@ -274,7 +274,7 @@ private static final long serialVersionUID = 1L;
   public void drawToTempScreen() {
 	  //DEbug
       long drawStart = 0;
-      if(keyH.showDebugText == true) {    	  
+      if(PlayState.showDebugText == true) {    	  
     	  drawStart = System.nanoTime();
       }
       
@@ -375,7 +375,7 @@ private static final long serialVersionUID = 1L;
       }
       
      //Debug
-     if(keyH.showDebugText == true) {
+     if(PlayState.showDebugText == true) {
 	     long drawEnd = System.nanoTime();
 	     long passed = drawEnd - drawStart;
 	     g2.setFont(new Font("Arial",Font.PLAIN,20));
