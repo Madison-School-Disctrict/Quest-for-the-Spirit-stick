@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import main.GamePanel;
 import main.KeyHandler;
-import main.PlayState;
 import object.ObjAxe;
 import object.ObjFireBall;
 import object.ObjFireBallBlue;
@@ -33,7 +32,6 @@ public class Player extends Entity{
     	super(gp);
         
         this.keyH = keyH;
-        //imortal = PlayState.imortalModeOn;
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2- (gp.tileSize/2);
         
@@ -274,16 +272,16 @@ public class Player extends Entity{
  		else if(attacking) { 
     		attacking();
     	}
-    	else if(PlayState.bPressed) {
+    	else if(gp.keyH.bPressed) {
     		guarding = true;
     		guardCounter++;
     	}
     		
     	
-    	else if(!PlayState.directionLast.isEmpty() || PlayState.debug  || PlayState.spacePressed ) {
-			System.out.println(PlayState.directionLast);
-				if(!PlayState.directionLast.isEmpty()){
-					direction = PlayState.directionLast.get(PlayState.directionLast.size()-1);
+    	else if(!gp.keyH.directionLast.isEmpty() || gp.keyH.debug  || gp.keyH.spacePressed ) {
+			//System.out.println(gp.keyH.directionLast);
+				if(!gp.keyH.directionLast.isEmpty()){
+					direction = gp.keyH.directionLast.get(gp.keyH.directionLast.size()-1);
 				}
     		 	//Check Tile Collision
     		 	collisionOn = false;
@@ -309,7 +307,7 @@ public class Player extends Entity{
     		 	
     		 	//IF colliosn is false, player can move
 				//commmenting out the conditions allows for no collisions on tiles, monsters and objects.
-    		 	if(collisionOn == false && PlayState.spacePressed == false ) {
+    		 	if(collisionOn == false && gp.keyH.spacePressed == false ) {
     		 		switch(direction) {
     		 		case "up": worldY -= speed; break;
     		 		case "down": worldY += speed; break;
@@ -319,14 +317,14 @@ public class Player extends Entity{
     		 		}
     		 	}
     		 
-    		 	if(PlayState.spacePressed && !attackCanceled) {
+    		 	if(gp.keyH.spacePressed && !attackCanceled) {
     		 		gp.playSE(7);
     		 		attacking = true;
     		 		spriteCounter = 0;
     		 	}
     		 	
     		 	attackCanceled = false;
-    		 	PlayState.spacePressed = false;
+    		 	gp.keyH.spacePressed = false;
     		 	guarding = false;
     		 	guardCounter = 0;
     		 	
@@ -352,7 +350,7 @@ public class Player extends Entity{
     	  	
     	///this is outSide the if statement
     	if(this.projectile != null) {
-    	if(PlayState.shotKeyPressed == true  && !projectile.alive
+    	if(gp.keyH.shotKeyPressed == true  && !projectile.alive
     			&& shotAvailableCounter == 100 && projectile.haveResource(this) == true && hasFireBall) {
     		// Set Default Coordinates.  Direction and user
     		projectile.set(worldX, worldY, direction, true, this);
@@ -392,7 +390,7 @@ public class Player extends Entity{
 			mana = maxMana;
 		}
        
-       if(!PlayState.imortalModeOn){
+       if(!gp.keyH.imortalModeOn){
 	       if(life <= 0) {
 	    	   gp.gameState = gp.gameOverState;
 	    	   gp.ui.message.clear();
@@ -431,7 +429,7 @@ public class Player extends Entity{
     		}
     		
     		else if( gp.obj[gp.currentMap][i].type == type_obstacle){
-    			if (PlayState.spacePressed) {
+    			if (gp.keyH.spacePressed) {
     				attackCanceled = true;
     				gp.obj[gp.currentMap][i].interact();
     			}
@@ -458,7 +456,7 @@ public class Player extends Entity{
     public void interactNPC(int i) {
     	
     	if(i != 999) {
-	    	if(PlayState.spacePressed == true) {
+	    	if(gp.keyH.spacePressed == true) {
 		    		attackCanceled = true;
 			        gp.npc[gp.currentMap][i].speak();
 		    }	
@@ -467,7 +465,7 @@ public class Player extends Entity{
     	}
     } 
 	public boolean getImoralmode(){
-		return PlayState.imortalModeOn;
+		return gp.keyH.imortalModeOn;
 	}   
     public void contactMonster(int i) {
 	   if (i != 999) {
@@ -478,12 +476,12 @@ public class Player extends Entity{
 				  if(damage < 1) {
 					  damage = 1;
 				  }
-				  if(!PlayState.imortalModeOn){
+				  if(!gp.keyH.imortalModeOn){
 			   		life -= damage;
 			   		invincible = true;
 			  		transparent = true;
-					//System.out.println("Imortal mode:  " + PlayState.imortalModeOn);
-				  }//else {System.out.println("The Imortal mode:  " + PlayState.imortalModeOn);}
+					
+				  }
 		   }
 	   }
    }   

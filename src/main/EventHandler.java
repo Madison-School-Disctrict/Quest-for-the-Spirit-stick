@@ -65,8 +65,8 @@ public class EventHandler{
 		}
 		
 		if(canTouchEvent  == true) {		
-		if (hit(0,27,16,"right") == true  && !PlayState.imortalModeOn){
-			damagePit(hit(0,27,16,"right"),0,26,16,gp.dialogueState);
+		if (hit(0,26,16,"left") == true  && !gp.keyH.imortalModeOn){
+			damagePit(hit(0,26,16,"left"),0,26,16,gp.dialogueState);
 		}
 			for(int i = 21; i < 26; i++ ) {
 				if(hit(0,i,12,"up") == true) {healingPool(gp.dialogueState);}
@@ -80,7 +80,8 @@ public class EventHandler{
 			teleport(hit(0,12,9,"any"),2,9,41,gp.dungeon);  // to dungeon 
 			//From rigby map to dungeon
 			//teleport(hit(0,16,39,"any"),2,9,41,gp.dungeon);  // to dungeon 
-			//teleport(hit(0,26,16,"any"),4,31,80,gp.dungeon);  // to thunder
+			teleport(hit(0,25,16,"right"),5,17,8,gp.dungeon);  // to pit transfer
+			teleport(hit(5,16,7,"any"),0,27,16,gp.outside); // pit transfer
 			teleport(hit(2,9,41,"any"),0,12,9, gp.outside);  // to outside
 			teleport(hit(2,8,7,"any"),3,26,41,gp.dungeon);  // to the dungoen floor 2
 			teleport(hit(3,26,41,"any"),2,8,7,gp.dungeon); //  back to dungoen floor 1
@@ -142,7 +143,7 @@ public class EventHandler{
 	}
 	
 	public void healingPool(int gameState) {
-		if( PlayState.spacePressed == true) {
+		if( gp.keyH.spacePressed == true) {
 			gp.gameState = gameState;
 			gp.player.attackCanceled = true;
 			gp.playSE(2);
@@ -165,11 +166,11 @@ public class EventHandler{
 	
 	public void speak(Entity entity) {
 		
-		if(PlayState.enterPressed == true){
+		if(gp.keyH.enterPressed == true){
 			gp.gameState = gp.dialogueState;
 			gp.player.attackCanceled = true;
 			entity.speak(); 
-			PlayState.enterPressed = false;
+			gp.keyH.enterPressed = false;
 			}
 		}
 	

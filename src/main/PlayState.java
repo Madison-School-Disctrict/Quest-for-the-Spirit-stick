@@ -12,7 +12,7 @@ public class PlayState {
     public static boolean showDebugText = false;
     public static boolean imortalModeOn = false; 
 	public static ArrayList<String> directionLast = new ArrayList<>(4);
-    
+    private static boolean minMapOn = false;
     
     public static void pKeyPressed(int code, GamePanel gp) {
         //System.out.println(code + " " + directionLast);
@@ -38,8 +38,8 @@ public class PlayState {
 				  }
             }
 	        if(code == KeyEvent.VK_P) {
-                System.out.println("Pause");
-	        	PauseState.play(code, gp);
+                //System.out.println("Pause From PlayState");
+	        	PauseState.pKeyPressed(code, gp);
 	        }
 	        if(code == KeyEvent.VK_C) {
 	        	gp.gameState = gp.characterState; 
@@ -73,12 +73,15 @@ public class PlayState {
 	        }
 	        
 	        if(code == KeyEvent.VK_M) {
-	        	gp.gameState = gp.mapState;
+	        	MapState.mapState(code, gp);
 	        	
 	        }
 	        
 	        if(code == KeyEvent.VK_X) {
-                gp.map.miniMapOn = gp.map.miniMapOn == false;
+				if(!minMapOn){
+                	gp.map.miniMapOn = gp.map.miniMapOn == false;
+					minMapOn = true;
+				}
 	        }
 	        if(code == KeyEvent.VK_B) {
 	        	bPressed = true;
@@ -94,7 +97,7 @@ public class PlayState {
 	        
 	         //DEBUG and imortal mode
 	        if(code == KeyEvent.VK_T) {
-                System.out.println(imortalModeOn + "  " + showDebugText);
+               // System.out.println(imortalModeOn + "  " + showDebugText);
 	        	if(showDebugText == false) {
 	        		showDebugText = true;
 	        		imortalModeOn = true;
@@ -103,7 +106,7 @@ public class PlayState {
 	        		showDebugText = false;
 	        		imortalModeOn = false;
 	        	}
-                System.out.println(imortalModeOn + "  " + showDebugText);
+               // System.out.println(imortalModeOn + "  " + showDebugText);
 	        }        
         }
 
@@ -130,5 +133,13 @@ public class PlayState {
         if(code == KeyEvent.VK_B) {
         	bPressed = false;
         }
+		if(code == KeyEvent.VK_P) { 
+			//System.out.println("Pause button Released");
+			PauseState.pKeyReleased(code, gp);
+        }
+
+		if(code == KeyEvent.VK_X) {
+			minMapOn = false;
+		}
     }
 }

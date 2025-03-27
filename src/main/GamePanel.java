@@ -1,5 +1,10 @@
 package main;
 
+import Environment.EnvironmentManager;
+import ai.PathFinder;
+import data.SaveLoad;
+import entity.Entity;
+import entity.Player;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,17 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
 import javax.swing.JPanel;
-import Environment.EnvironmentManager;
-
-
-import ai.PathFinder;
-import data.SaveLoad;
-//import Environment.EnvironmentManager;
-//import ai.PathFinder;
-import entity.Entity;
-import entity.Player;
 import tile.Map;
 import tile.TileManager;
 import tileInteractive.InteractiveTile;
@@ -274,7 +269,7 @@ private static final long serialVersionUID = 1L;
   public void drawToTempScreen() {
 	  //DEbug
       long drawStart = 0;
-      if(PlayState.showDebugText == true) {    	  
+      if(keyH.showDebugText == true) {    	  
     	  drawStart = System.nanoTime();
       }
       
@@ -375,7 +370,7 @@ private static final long serialVersionUID = 1L;
       }
       
      //Debug
-     if(PlayState.showDebugText == true) {
+     if(keyH.showDebugText == true) {
 	     long drawEnd = System.nanoTime();
 	     long passed = drawEnd - drawStart;
 	     g2.setFont(new Font("Arial",Font.PLAIN,20));

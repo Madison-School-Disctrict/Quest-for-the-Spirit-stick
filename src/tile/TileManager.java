@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.UtilityTool;
@@ -76,7 +75,7 @@ import main.UtilityTool;
 		loadMap("/map/dungeon01.txt",2);
 		loadMap("/map/dungeon02.txt",3);
 		loadMap("/map/thunder.txt",4);
-		loadMap("map/rigby3.txt",5);
+		loadMap("map/rigby1.txt",5);
 	}
 	public void setTile(int num, boolean pass) {
 		tile[num].collision = pass;

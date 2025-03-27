@@ -24,7 +24,7 @@ public class ObjTent extends Entity {
 		gp.player.life = gp.player.maxLife;
 		gp.player.mana = gp.player.maxMana;
 		gp.player.getSleepingImage(down1);
-		return false;  /* If you want to be able to use the Tent over and over again set to false  
+		return true;  /* If you want to be able to use the Tent over and over again set to false  
 						If you want to be able to only use it once the set true.
 		*/
 	}
