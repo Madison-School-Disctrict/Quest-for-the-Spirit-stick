@@ -94,7 +94,7 @@ import main.UtilityTool;
 			}
 			
 			
-			if(!projectilePass.get(i).equals(null) && projectilePass.get(i).equals("true")) {
+			if(projectilePass.get(i).equals("true")) {
 				projectileCollision = true;
 			} else {
 				projectileCollision = false;

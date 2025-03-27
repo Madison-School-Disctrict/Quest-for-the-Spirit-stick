@@ -65,10 +65,8 @@ public class KeyHandler implements KeyListener{
             tradeState(code);
         } // map State
             else if (gp.gameState == gp.mapState) {
-            mapState(code);
+            MapState.mapState(code, gp);
         }
-        
-        
     }   
     public void titleState(int code) {
         if(gp.ui.titleScreenState == 0) {
