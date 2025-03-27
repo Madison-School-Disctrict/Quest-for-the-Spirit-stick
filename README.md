@@ -67,7 +67,6 @@ No new features have been added yet this year.
 -   Add multiple save slots
 -   Hide "Load Game" until you have first created a "New Game". Also move "Load Game" above "New Game" in the menu
 -   Finish implementing the projectile collision in TileManager
--   Remove extra tiledata files
 
 ## Contributors
 
