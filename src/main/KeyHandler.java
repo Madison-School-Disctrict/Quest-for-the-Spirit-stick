@@ -13,16 +13,12 @@ public class KeyHandler implements KeyListener{
     public boolean showDebugText = false;
     public boolean imortalModeOn = false; 
 	public ArrayList<String> directionLast = new ArrayList<>(4);
-
     public KeyHandler(GamePanel gp) {
     	this.gp= gp;
     }
-
     @Override
-    public void keyTyped(KeyEvent e){
-        
+    public void keyTyped(KeyEvent e){    
     }  
-
     @Override
     public void keyPressed(KeyEvent e){
         int code = e.getKeyCode();
@@ -63,7 +59,7 @@ public class KeyHandler implements KeyListener{
         	MapState.mapState(code, gp);
         }       
     }  // end of key pressed    
-    
+
     @Override
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
