@@ -3,6 +3,7 @@ package main;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import state.*;
 
 //import entity.Bobcat;
 
@@ -44,7 +45,7 @@ public class KeyHandler implements KeyListener{
         
         //Pause State 
         else if(gp.gameState == gp.pauseState) {
-            pauseState(code);
+            PauseState.pauseState(code, gp);
         }
         // Dialogue State
         else if(gp.gameState == gp.dialogueState) {
@@ -165,12 +166,6 @@ public class KeyHandler implements KeyListener{
         }
      
      }
-    public void pauseState(int code) {
-         if(code == KeyEvent.VK_P) {
-            gp.gameState = gp.playState;
-         }
-     }
-
 
     
     public void playState(int code) {
