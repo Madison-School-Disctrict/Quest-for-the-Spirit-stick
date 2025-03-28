@@ -1,5 +1,7 @@
-package main;
+package States;
 import java.awt.event.KeyEvent;
+
+import main.GamePanel;
 public class MapState {
     private static boolean mapOn = false;
     public static void mapState(int code, GamePanel gp) {

@@ -128,6 +128,17 @@ private static final long serialVersionUID = 1L;
   }
   
   //Methods
+  public SaveLoad getSaveLoad() {
+      return saveLoad;
+  }
+  
+  public Sound getMusic(){
+        return music;
+  }
+    public Sound getSound(){
+            return sound;
+    }
+
   public void setUpGame() {
 	  aSetter.setObject();
 	  aSetter.setNPC();

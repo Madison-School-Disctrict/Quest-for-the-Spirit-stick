@@ -1,5 +1,7 @@
 package main;
 
+import States.MapState;
+import States.PauseState;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

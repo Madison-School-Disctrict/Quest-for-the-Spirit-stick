@@ -1,5 +1,7 @@
-package main;
+package States;
 import java.awt.event.KeyEvent;
+
+import main.GamePanel;
 public class GameOverState {
     public static void gameOverState(int code, GamePanel gp) {
         if(code == KeyEvent.VK_UP) {

@@ -1,5 +1,7 @@
-package main;
+package States;
 import java.awt.event.KeyEvent;
+import main.GamePanel;
+import main.PlayerInventory;
 public class CharacterState {
     public static void cKeyPressed(int code, GamePanel gp){
         if(code == KeyEvent.VK_C) {

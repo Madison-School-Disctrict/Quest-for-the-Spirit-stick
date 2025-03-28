@@ -1,8 +1,7 @@
 package tileInteractive;
 
-import java.awt.Color;
-
 import entity.Entity;
+import java.awt.Color;
 import main.GamePanel;
 
 public class ITDrayTree extends InteractiveTile{
@@ -15,7 +14,7 @@ public class ITDrayTree extends InteractiveTile{
 		this.worldY = gp.tileSize * row;
 		down1 = setup("/interactive_tiles/drytree", gp.tileSize, gp.tileSize);
 		destructible = true;
-		life = 3;
+		life = 1;
 				
 	}
 	public boolean isCorrectItem(Entity entity) {

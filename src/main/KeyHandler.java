@@ -1,5 +1,13 @@
 package main;
 
+import States.CharacterState;
+import States.DialogueState;
+import States.GameOverState;
+import States.MapState;
+import States.OptionState;
+import States.PauseState;
+import States.TitleState;
+import States.TradeState;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 package main;
 
 import java.net.URL;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -76,6 +75,14 @@ public class Sound {
 				case 5: volume = 6f;  break;
 			}
 			fc.setValue(volume);
+	}
+	
+	public int getVolumeScale() {
+		return volumeScale;
+	}
+	public void setVolumeScale(int volumeScale) {
+		this.volumeScale = volumeScale;
+		//checkVolume();
 	}
 }
 

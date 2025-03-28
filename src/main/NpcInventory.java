@@ -1,8 +1,10 @@
 package main;
+import States.TradeState;
 import java.awt.event.KeyEvent;
 public class NpcInventory {
     public static void npcInventory(int code, GamePanel gp) {
         if (code == KeyEvent.VK_UP){
+            TradeState.enterPressed = false;
             if(gp.ui.npcSlotRow > 0) {
                 gp.ui.npcSlotRow--;
                 gp.playSE(9);	
@@ -11,7 +13,8 @@ public class NpcInventory {
             }
         }
         if (code == KeyEvent.VK_LEFT){
-            if(gp.ui.npcSlotCol > 0) {
+            TradeState.enterPressed = false;
+            if(gp.ui.npcSlotCol > 0) {  
                 gp.ui.npcSlotCol--;
                 gp.playSE(9);
             }else {
@@ -19,6 +22,7 @@ public class NpcInventory {
             }
         }
         if (code == KeyEvent.VK_DOWN){
+            TradeState.enterPressed = false;
             if(gp.ui.npcSlotRow < 3) {
                 gp.ui.npcSlotRow++;
                 gp.playSE(9);
@@ -27,6 +31,7 @@ public class NpcInventory {
             } 
         }
         if (code == KeyEvent.VK_RIGHT){
+            TradeState.enterPressed = false;
             if(gp.ui.npcSlotCol < 4) {
                 gp.ui.npcSlotCol++;
                 gp.playSE(9);

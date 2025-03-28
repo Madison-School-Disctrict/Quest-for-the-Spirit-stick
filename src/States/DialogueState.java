@@ -1,5 +1,7 @@
-package main;
-import java.awt.event.KeyEvent;;
+package States;
+import java.awt.event.KeyEvent;
+
+import main.GamePanel;;
 public class DialogueState {
     public static boolean enterPressed;
     public static void dkeyPressed(int code, GamePanel gp){
