@@ -15,6 +15,7 @@ public class ObjKey extends Entity{
 		down1 = setup("/objects/key", gp.tileSize, gp.tileSize);
 		description = "(" + name + ")" + "\nThis key can open a \n door."; 	
 		price = 25;
+		setDialogue();
 	}
 	public void setDialogue() {
 		dialogues[0][0] = "You use the " + name + " and open the door";

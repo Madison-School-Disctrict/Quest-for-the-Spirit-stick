@@ -67,6 +67,7 @@ public class PlayState {
 	    }
 	        
 	    if(code == KeyEvent.VK_X) {
+			System.out.println("X pressed" + " " + minMapOn);
 			if(!minMapOn){
                 gp.setMiniMapOn(gp.getMiniMapOn() == false);
 				minMapOn = true;
@@ -119,15 +120,13 @@ public class PlayState {
         	bPressed = false;
         }
 		if(code == KeyEvent.VK_P) {
-			if(code == KeyEvent.VK_P) {
-				PauseState.pKeyReleased(code, gp);
-        	}
-			if(code == KeyEvent.VK_C) {
-				CharacterState.cKeyReleased(code, gp);
-			}
-			if(code == KeyEvent.VK_X) {
-				minMapOn = false;
-			}
+			PauseState.pKeyReleased(code, gp);
     	}
+		if(code == KeyEvent.VK_C) {
+			CharacterState.cKeyReleased(code, gp);
+		}
+		if(code == KeyEvent.VK_X) {
+			minMapOn = false;
+		}
 	}
 }
