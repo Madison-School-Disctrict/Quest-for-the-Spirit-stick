@@ -5,7 +5,7 @@ import java.awt.Color;
 import main.GamePanel;
 
 public class ITDrayTree extends InteractiveTile{
-	GamePanel gp;
+	//GamePanel gp;
 
 	public ITDrayTree(GamePanel gp, int col, int row) {
 		super(gp,  col, row);
@@ -17,6 +17,7 @@ public class ITDrayTree extends InteractiveTile{
 		life = 1;
 				
 	}
+	@Override
 	public boolean isCorrectItem(Entity entity) {
 		boolean isCorrectItem = false;
 		if(entity.currentWeapon.type == type_axe) {

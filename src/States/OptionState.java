@@ -10,17 +10,40 @@ public class OptionState {
     static Sound music = new Sound(); 
     
     static Sound sound = new Sound();
+    private static boolean optionsOn = false;
     
+    public static void optionsKeyPressed(int code, GamePanel gp) {
+        if(code == KeyEvent.VK_ESCAPE) {
+            if (gp.gameState == gp.playState && !optionsOn) {
+                gp.gameState = gp.optionsState;
+                gp.ui.commandNum = 0;
+                optionsOn = true;
+            }
+            else if (gp.gameState == gp.optionsState && !optionsOn) {
+                gp.gameState = gp.playState;
+                gp.ui.commandNum = 0;
+                optionsOn = true;
+            }   
+        }
+    }
+
+    public static void optionsKeyReleased(int code, GamePanel gp) {
+        if(code == KeyEvent.VK_ESCAPE) {
+            optionsOn = false;
+        }
+    }
+  
     public static void optionsState(int code,GamePanel gp) {
         music = gp.getMusic();
 
         sound = gp.getSound();
 
-        if(code == KeyEvent.VK_ESCAPE) {
+        if(code == KeyEvent.VK_ESCAPE && !optionsOn) {
             gp.ui.commandNum = 0;
             gp.ui.setsubState(0);
             gp.gameState = gp.playState;
             enterPressed = false;
+            optionsOn = true;
         }
         if(code == KeyEvent.VK_ENTER) {
             enterPressed = true;
@@ -81,4 +104,6 @@ public class OptionState {
              }
          }
     }
+
+
 }

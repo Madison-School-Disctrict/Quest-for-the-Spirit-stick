@@ -9,6 +9,7 @@ public class ObjSwordNormal extends Entity{
 		super(gp);
 		type = type_sword;
 		name = objName;
+		stackable = true;
 		down1 = setup("/objects/sword_normal", gp.tileSize,gp.tileSize);
 		attackValue = 1;
 		attackArea.width = 36;

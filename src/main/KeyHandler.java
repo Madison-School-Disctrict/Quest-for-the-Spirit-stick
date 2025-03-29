@@ -6,6 +6,7 @@ import States.GameOverState;
 import States.MapState;
 import States.OptionState;
 import States.PauseState;
+import States.PlayState;
 import States.TitleState;
 import States.TradeState;
 import java.awt.event.KeyEvent;
@@ -76,7 +77,10 @@ public class KeyHandler implements KeyListener{
 		setkeys();	 
 		if(code == KeyEvent.VK_M){
 			MapState.mapStateRelease(code, gp);
-		}       
+		}   
+		if(code == KeyEvent.VK_ESCAPE) {
+			OptionState.optionsKeyReleased(code, gp);
+		}
     }
 	public void setkeys() {
 		if(gp.gameState == gp.playState) {	

@@ -1,10 +1,9 @@
-package main;
+package States;
 
-import States.MapState;
-import States.PauseState;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import main.GamePanel;
 
 public class PlayState {
     public static boolean debug, axePlus, music = true, enterPressed, spacePressed, shotKeyPressed, bPressed;
@@ -15,9 +14,7 @@ public class PlayState {
     public static boolean imortalModeOn = false; 
 	public static ArrayList<String> directionLast = new ArrayList<>(4);
     private static boolean minMapOn = false;
-    
     public static void pKeyPressed(int code, GamePanel gp) {
-        //System.out.println(code + " " + directionLast);
 			if (code == KeyEvent.VK_UP){
               if(!directionLast.contains("up")){
 				directionLast.add("up");
@@ -40,11 +37,10 @@ public class PlayState {
 				  }
             }
 	        if(code == KeyEvent.VK_P) {
-                //System.out.println("Pause From PlayState");
 	        	PauseState.pKeyPressed(code, gp);
 	        }
 	        if(code == KeyEvent.VK_C) {
-	        	gp.gameState = gp.characterState; 
+	        	CharacterState.cKeyPressed(code, gp); 
 	        }
 	        if(code == KeyEvent.VK_M) {
 	        	if(music == true) {
@@ -65,15 +61,10 @@ public class PlayState {
 	        if(code == KeyEvent.VK_F) {
 	        	shotKeyPressed = true;
 	        	
-	        }
-	        
+	        }	        
 	        if(code == KeyEvent.VK_ESCAPE) {
-	        	gp.ui.commandNum = 0;
-	        	
-	        	gp.gameState = gp.optionsState;
-	        	
+	        	OptionState.optionsKeyPressed(code, gp);
 	        }
-	        
 	        if(code == KeyEvent.VK_M) {
 	        	MapState.mapState(code, gp);
 	        	
@@ -81,7 +72,7 @@ public class PlayState {
 	        
 	        if(code == KeyEvent.VK_X) {
 				if(!minMapOn){
-                	gp.map.miniMapOn = gp.map.miniMapOn == false;
+                	gp.setMiniMapOn(gp.getMiniMapOn() == false);
 					minMapOn = true;
 				}
 	        }
@@ -99,7 +90,6 @@ public class PlayState {
 	        
 	         //DEBUG and imortal mode
 	        if(code == KeyEvent.VK_T) {
-               // System.out.println(imortalModeOn + "  " + showDebugText);
 	        	if(showDebugText == false) {
 	        		showDebugText = true;
 	        		imortalModeOn = true;
@@ -108,7 +98,6 @@ public class PlayState {
 	        		showDebugText = false;
 	        		imortalModeOn = false;
 	        	}
-               // System.out.println(imortalModeOn + "  " + showDebugText);
 	        }        
         }
 
@@ -135,10 +124,12 @@ public class PlayState {
         if(code == KeyEvent.VK_B) {
         	bPressed = false;
         }
-		if(code == KeyEvent.VK_P) { 
-			//System.out.println("Pause button Released");
+		if(code == KeyEvent.VK_P) {
 			PauseState.pKeyReleased(code, gp);
         }
+		if(code == KeyEvent.VK_C) {
+			CharacterState.cKeyReleased(code, gp);
+		}
 
 		if(code == KeyEvent.VK_X) {
 			minMapOn = false;
