@@ -37,6 +37,7 @@ public class KeyHandler implements KeyListener{
         }
         //playState
         else  if(gp.gameState == gp.playState) {
+			enterPressed = false;
 			PlayState.pKeyPressed(code, gp);
 			setkeys();			        
         }
@@ -52,6 +53,7 @@ public class KeyHandler implements KeyListener{
         //Character State 
         else if (gp.gameState == gp.characterState) {
         	CharacterState.cKeyPressed(code, gp);
+			
         } //Option State 
         else if (gp.gameState == gp.optionsState) {
         	OptionState.optionsState(code, gp);

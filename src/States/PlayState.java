@@ -37,6 +37,7 @@ public class PlayState {
 				  }
             }
 	        if(code == KeyEvent.VK_P) {
+				
 	        	PauseState.pKeyPressed(code, gp);
 	        }
 	        if(code == KeyEvent.VK_C) {
