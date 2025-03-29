@@ -31,44 +31,41 @@ public class KeyHandler implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e){
         int code = e.getKeyCode();
-        //Title State
-        if(gp.gameState == gp.titleState) {
-			TitleState.titleState(code, gp);
+        switch (gp.gameState) {
+            case 0 -> //Title State
+                TitleState.titleState(code, gp);
+            case 1 -> {//Play State
+                enterPressed = false;
+                PlayState.pKeyPressed(code, gp);
+                setkeys();
+            }
+            case 2 -> //Pause State
+                PauseState.pKeyPressed(code, gp);
+            case 3 -> {//Dialogue State
+                DialogueState.dkeyPressed(code, gp);
+                enterPressed = DialogueState.enterPressed;
+            }
+            case 4 -> //character State
+                CharacterState.cKeyPressed(code, gp);
+            case 5 -> {//Option State
+                OptionState.optionsState(code, gp);
+                enterPressed = OptionState.enterPressed;
+            }
+            case 6 -> //Game Over State
+                GameOverState.gameOverState(code, gp);
+            case 8 -> {// Trade State
+                TradeState.tradeState(code, gp);
+                enterPressed = TradeState.enterPressed;
+            }
+            case 10 -> // map State
+                MapState.mapState(code, gp);
+			case 11 -> { // cutscene State
+                DialogueState.dkeyPressed(code, gp);
+            	enterPressed = DialogueState.enterPressed;
+            }
+            default -> {
+            }
         }
-        //playState
-        else  if(gp.gameState == gp.playState) {
-			enterPressed = false;
-			PlayState.pKeyPressed(code, gp);
-			setkeys();			        
-        }
-        //Pause State 
-        else if(gp.gameState == gp.pauseState) { 
-			PauseState.pKeyPressed(code, gp);
-        }
-		// Dialogue State
-        else if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) {
-        	DialogueState.dkeyPressed(code, gp);
-			enterPressed = DialogueState.enterPressed;
-        }
-        //Character State 
-        else if (gp.gameState == gp.characterState) {
-        	CharacterState.cKeyPressed(code, gp);
-			
-        } //Option State 
-        else if (gp.gameState == gp.optionsState) {
-        	OptionState.optionsState(code, gp);
-			enterPressed = OptionState.enterPressed;
-        }  //Game Over State 
-        else if (gp.gameState == gp.gameOverState) {
-        	GameOverState.gameOverState(code, gp);
-        } // Trade State
-        	else if (gp.gameState == gp.tradeState) {
-        	TradeState.tradeState(code, gp);
-			enterPressed = TradeState.enterPressed;
-        } // map State
-        	else if (gp.gameState == gp.mapState) {
-        	MapState.mapState(code, gp);
-        }       
     }  // end of key pressed    
 
     @Override
@@ -86,6 +83,14 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_C) {
 			CharacterState.cKeyReleased(code, gp);	
 		}
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = false;
+			TradeState.enterPressed = false;
+			DialogueState.enterPressed = false;
+			PlayState.enterPressed = false;
+		}
+
+
     }
 	public void setkeys() {
 		if(gp.gameState == gp.playState) {	

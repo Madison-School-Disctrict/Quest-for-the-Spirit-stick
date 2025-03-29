@@ -31,6 +31,9 @@ public class OptionState {
         if(code == KeyEvent.VK_ESCAPE) {
             optionsOn = false;
         }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = false;
+        }
     }
   
     public static void optionsState(int code,GamePanel gp) {
