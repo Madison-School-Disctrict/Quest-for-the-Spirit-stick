@@ -1,5 +1,14 @@
 package main;
 
+import States.CharacterState;
+import States.DialogueState;
+import States.GameOverState;
+import States.MapState;
+import States.OptionState;
+import States.PauseState;
+import States.PlayState;
+import States.TitleState;
+import States.TradeState;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -68,7 +77,13 @@ public class KeyHandler implements KeyListener{
 		setkeys();	 
 		if(code == KeyEvent.VK_M){
 			MapState.mapStateRelease(code, gp);
-		}       
+		}   
+		if(code == KeyEvent.VK_ESCAPE) {
+			OptionState.optionsKeyReleased(code, gp);
+		}
+		if(code == KeyEvent.VK_C) {
+			CharacterState.cKeyReleased(code, gp);	
+		}
     }
 	public void setkeys() {
 		if(gp.gameState == gp.playState) {	

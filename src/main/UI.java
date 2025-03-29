@@ -71,6 +71,14 @@ public class UI {
 	}	
 	
 	// Methods
+	public int getsubState() {
+		return subState;
+	}
+	public void setsubState(int subState) {
+		this.subState = subState;
+	}
+	
+
 	public void setGameFinished(boolean end) {
 		gameFinished = end;
 	}

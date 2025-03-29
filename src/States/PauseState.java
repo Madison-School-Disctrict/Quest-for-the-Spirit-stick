@@ -1,5 +1,6 @@
-package main;
+package States;
 import java.awt.event.KeyEvent;
+import main.GamePanel;
 
 public class PauseState{
     public static boolean puased = false;

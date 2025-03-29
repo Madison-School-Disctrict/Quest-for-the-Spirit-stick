@@ -8,6 +8,7 @@ public class ObjShieldBlue extends Entity{
 	 public ObjShieldBlue(GamePanel gp) {
 		super(gp);
 		type = type_shield;
+		stackable = true;
 		name = objName;
 		down1 =setup("/objects/shield_blue",gp.tileSize,gp.tileSize);
 		defenseValue = 2;

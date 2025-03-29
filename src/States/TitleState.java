@@ -1,6 +1,9 @@
-package main;
+package States;
 
 import java.awt.event.KeyEvent;
+
+import main.GamePanel;
+
 
 public class TitleState {
     
@@ -29,7 +32,7 @@ public class TitleState {
                     }
                     if(gp.ui.commandNum == 1) {
                         
-                        gp.saveLoad.load();
+                        gp.getSaveLoad().load();
                         gp.gameState = gp.playState;
                         gp.playMusic(0);
                          
