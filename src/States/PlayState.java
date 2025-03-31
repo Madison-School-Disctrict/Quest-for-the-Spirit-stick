@@ -14,6 +14,7 @@ public class PlayState {
     public static boolean imortalModeOn = false; 
 	public static ArrayList<String> directionLast = new ArrayList<>(4);
     private static boolean minMapOn = false;
+	private static boolean tPressed = false;
     public static void pKeyPressed(int code, GamePanel gp) {
 			if (code == KeyEvent.VK_UP){
               if(!directionLast.contains("up")){
@@ -90,12 +91,14 @@ public class PlayState {
 	        }
 	        
 	         //DEBUG and imortal mode
-	        if(code == KeyEvent.VK_T) {
+	        if(code == KeyEvent.VK_T && !tPressed) {
+	        	tPressed = true;
 	        	if(showDebugText == false) {
 	        		showDebugText = true;
 	        		imortalModeOn = true;
 	        	}
 	        	else if (showDebugText == true) {
+					tPressed = true;
 	        		showDebugText = false;
 	        		imortalModeOn = false;
 	        	}
@@ -131,9 +134,11 @@ public class PlayState {
 		if(code == KeyEvent.VK_C) {
 			CharacterState.cKeyReleased(code, gp);
 		}
-
 		if(code == KeyEvent.VK_X) {
 			minMapOn = false;
+		}
+		if(code == KeyEvent.VK_T){	
+			tPressed = false;
 		}
     }
 }

@@ -80,8 +80,8 @@ public class EventHandler{
 			teleport(hit(0,12,9,"any"),2,9,41,gp.dungeon);  // to dungeon 
 			//From rigby map to dungeon
 			//teleport(hit(0,16,39,"any"),2,9,41,gp.dungeon);  // to dungeon 
-			teleport(hit(0,25,16,"right"),5,17,8,gp.dungeon);  // to pit transfer
-			teleport(hit(5,16,7,"any"),0,27,16,gp.outside); // pit transfer
+			teleport(hit(0,25,16,"right"),4,17,8,gp.outside);  // to pit transfer
+			teleport(hit(4,16,7,"any"),0,27,16,gp.outside); // pit transfer
 			teleport(hit(2,9,41,"any"),0,12,9, gp.outside);  // to outside
 			teleport(hit(2,8,7,"any"),3,26,41,gp.dungeon);  // to the dungoen floor 2
 			teleport(hit(3,26,41,"any"),2,8,7,gp.dungeon); //  back to dungoen floor 1
@@ -118,6 +118,8 @@ public class EventHandler{
 	}
 	
 	public void teleport(boolean on, int map, int col, int row, int area) {
+		
+		
 		if(on) {
 		gp.gameState = gp.transitionState;
 		gp.nextArea = area;
@@ -126,7 +128,7 @@ public class EventHandler{
 		tempRow = row;
 		canTouchEvent = false;
 		if(area == gp.dungeon) {
-		gp.playSE(13);
+			gp.playSE(13);
 		}
 		}
 	}

@@ -54,9 +54,9 @@ public class Player extends Entity{
 //    	//STarting location of worldmap
     	worldX = gp.tileSize*23;
     	worldY = gp.tileSize*21;
-//    	//STarting location of thunder
-//    	worldX = gp.tileSize*31;
-//    	worldY = gp.tileSize*80;
+   	//STarting location of thunder
+   	// worldX = gp.tileSize*31;
+   	// worldY = gp.tileSize*80;
     	
     	//Stating location for rigby 1 map
 //    	worldX = gp.tileSize*35;
@@ -279,7 +279,7 @@ public class Player extends Entity{
     		
     	
     	else if(!gp.keyH.directionLast.isEmpty() || gp.keyH.debug  || gp.keyH.spacePressed ) {
-			//System.out.println(gp.keyH.directionLast);
+			
 				if(!gp.keyH.directionLast.isEmpty()){
 					direction = gp.keyH.directionLast.get(gp.keyH.directionLast.size()-1);
 				}

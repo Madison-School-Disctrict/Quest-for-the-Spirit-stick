@@ -62,7 +62,6 @@ import main.UtilityTool;
 			gp.maxWorldCol = maxTile.length;
 			gp.maxWorldRow = maxTile.length;
 			mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
-			
 			br.close();
 			
 		}catch(IOException e) {
