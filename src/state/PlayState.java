@@ -1,4 +1,4 @@
-package States;
+package state;
 
 import entity.Bobcat;
 import java.awt.event.KeyEvent;

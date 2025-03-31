@@ -1,6 +1,6 @@
 package main;
-import States.TradeState;
 import java.awt.event.KeyEvent;
+import state.TradeState;
 
 public class PlayerInventory {
 

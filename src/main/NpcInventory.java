@@ -1,6 +1,6 @@
 package main;
-import States.TradeState;
 import java.awt.event.KeyEvent;
+import state.TradeState;
 public class NpcInventory {
     public static void npcInventory(int code, GamePanel gp) {
         if (code == KeyEvent.VK_UP){
