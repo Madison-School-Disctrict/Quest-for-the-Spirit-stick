@@ -80,8 +80,8 @@ public class EventHandler{
 			teleport(hit(0,12,9,"any"),2,9,41,gp.dungeon);  // to dungeon 
 			//From rigby map to dungeon
 			//teleport(hit(0,16,39,"any"),2,9,41,gp.dungeon);  // to dungeon 
-			teleport(hit(0,25,16,"right"),4,17,8,gp.outside);  // to pit transfer
-			teleport(hit(4,16,7,"any"),0,27,16,gp.outside); // pit transfer
+			teleport(hit(0,25,16,"right"),6,29,14,gp.outside);  // to pit transfer
+			teleport(hit(6,24,11,"any"),0,27,16,gp.outside); // pit transfer
 			teleport(hit(2,9,41,"any"),0,12,9, gp.outside);  // to outside
 			teleport(hit(2,8,7,"any"),3,26,41,gp.dungeon);  // to the dungoen floor 2
 			teleport(hit(3,26,41,"any"),2,8,7,gp.dungeon); //  back to dungoen floor 1

@@ -235,3 +235,15 @@ false
 78.png
 true
 false
+79.png
+true
+false
+80.png
+true
+false
+081.png
+true
+false
+082.png
+true
+false
