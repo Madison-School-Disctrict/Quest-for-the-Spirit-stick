@@ -14,7 +14,6 @@ public class NPCOldMAn extends Entity{
 		dialogueSet = -1;
 		getImage();
 		setDialogue();
-		
 	}
     public void getImage(){
         
@@ -46,6 +45,7 @@ public class NPCOldMAn extends Entity{
 		dialogues[3][1] = "You can learn some powerful magic \nin the house to the north west ";
     	
     }
+	@Override
     public void setAction() {
     	
     	if(onPath) {
@@ -82,7 +82,9 @@ public class NPCOldMAn extends Entity{
 	    	}
     	}
     }
-   public void speak() {
+
+	@Override
+	public void speak() {
 	   
 	   //Do this charageter specific stuff
 	   facePlayer();
