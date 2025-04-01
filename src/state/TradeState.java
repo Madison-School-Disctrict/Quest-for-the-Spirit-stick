@@ -1,12 +1,13 @@
 package state;
+
 import java.awt.event.KeyEvent;
 import main.GamePanel;
 import main.NpcInventory;
 import main.PlayerInventory;
+
 public class TradeState { 
     public static boolean enterPressed = false;
     public static void tradeState(int code, GamePanel gp) {
-    	
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }

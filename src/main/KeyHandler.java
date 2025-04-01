@@ -3,21 +3,11 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import state.CharacterState;
-import state.DialogueState;
-import state.GameOverState;
-import state.MapState;
-import state.OptionState;
-import state.PauseState;
-import state.PlayState;
-import state.TitleState;
-import state.TradeState;
+import state.*;
 
 public class KeyHandler implements KeyListener{
 	GamePanel gp;
 	public boolean debug, axePlus, music = true, enterPressed, spacePressed, shotKeyPressed, bPressed;
-	// direction test
-	public int dPressed;
     //Debug
     public boolean showDebugText = false;
     public boolean imortalModeOn = false; 
@@ -103,7 +93,6 @@ public class KeyHandler implements KeyListener{
 			music = PlayState.music;
 			debug = PlayState.debug;
 			axePlus = PlayState.axePlus;
-			dPressed = PlayState.dPressed;
 			directionLast = PlayState.directionLast;
 		}
 	}
