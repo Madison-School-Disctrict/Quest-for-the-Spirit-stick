@@ -186,7 +186,7 @@ public class EventHandler {
     public void Boss() {
 
         if (!gp.bossBattleOn && !Progress.skeletonBossDefeated) {
-            gp.gameState = gp.dialogueState;
+            gp.gameState = gp.cutSceneState;
             gp.csManager.sceneNum = gp.csManager.skeletonLord;
         }
 

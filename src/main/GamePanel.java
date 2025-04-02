@@ -53,10 +53,6 @@ private static final long serialVersionUID = 1L;
   Graphics2D g2;
   public boolean fullScreenOn = false;
   
-  
-  
-  
-  
   //FPS
   //FrameRate()
   
@@ -96,7 +92,7 @@ private static final long serialVersionUID = 1L;
   public int gameState;
   public final int titleState = 0;
   public final int playState = 1;
-  public final int pauseState =2;
+  public final int pauseState = 2;
   public final int dialogueState = 3;
   public final int characterState = 4;
   public final int optionsState = 5;
@@ -105,6 +101,7 @@ private static final long serialVersionUID = 1L;
   public final int tradeState = 8;
   public final int sleepState = 9;
   public final int mapState = 10;
+  public final int cutSceneState = 11;
   
   //Other 
   public boolean bossBattleOn = false;
