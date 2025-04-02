@@ -5,21 +5,25 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import state.*;
 
-public class KeyHandler implements KeyListener{
-	GamePanel gp;
-	public boolean debug, axePlus, music = true, enterPressed, spacePressed, shotKeyPressed, bPressed;
+public class KeyHandler implements KeyListener {
+
+    GamePanel gp;
+    public boolean debug, axePlus, music = true, enterPressed, spacePressed, shotKeyPressed, bPressed;
     //Debug
     public boolean showDebugText = false;
-    public boolean imortalModeOn = false; 
-	public ArrayList<String> directionLast = new ArrayList<>(4);
+    public boolean imortalModeOn = false;
+    public ArrayList<String> directionLast = new ArrayList<>(4);
+
     public KeyHandler(GamePanel gp) {
-    	this.gp= gp;
+        this.gp = gp;
     }
+
     @Override
-    public void keyTyped(KeyEvent e){    
-    }  
+    public void keyTyped(KeyEvent e) {
+    }
+
     @Override
-    public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         switch (gp.gameState) {
             case 0 -> //Title State
@@ -49,9 +53,9 @@ public class KeyHandler implements KeyListener{
             }
             case 10 -> // map State
                 MapState.mapState(code, gp);
-			case 11 -> { // cutscene State
+            case 11 -> { // cutscene State
                 DialogueState.dkeyPressed(code, gp);
-            	enterPressed = DialogueState.enterPressed;
+                enterPressed = DialogueState.enterPressed;
             }
             default -> {
             }
@@ -59,41 +63,41 @@ public class KeyHandler implements KeyListener{
     }  // end of key pressed    
 
     @Override
-    public void keyReleased(KeyEvent e){
+    public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-		
-		PlayState.pKeyReleased(code, gp);
-		setkeys();	 
-		if(code == KeyEvent.VK_M){
-			MapState.mapStateRelease(code, gp);
-		}   
-		if(code == KeyEvent.VK_ESCAPE) {
-			OptionState.optionsKeyReleased(code, gp);
-		}
-		if(code == KeyEvent.VK_C) {
-			CharacterState.cKeyReleased(code, gp);	
-		}
-		if(code == KeyEvent.VK_ENTER) {
-			enterPressed = false;
-			TradeState.enterPressed = false;
-			DialogueState.enterPressed = false;
-			PlayState.enterPressed = false;
-		}
 
+        PlayState.pKeyReleased(code, gp);
+        setkeys();
+        if (code == KeyEvent.VK_M) {
+            MapState.mapStateRelease(code, gp);
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
+            OptionState.optionsKeyReleased(code, gp);
+        }
+        if (code == KeyEvent.VK_C) {
+            CharacterState.cKeyReleased(code, gp);
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = false;
+            TradeState.enterPressed = false;
+            DialogueState.enterPressed = false;
+            PlayState.enterPressed = false;
+        }
 
     }
-	public void setkeys() {
-		if(gp.gameState == gp.playState) {	
-			spacePressed = PlayState.spacePressed;
-			enterPressed = PlayState.enterPressed;
-			shotKeyPressed = PlayState.shotKeyPressed;
-			bPressed = PlayState.bPressed;
-			imortalModeOn = PlayState.imortalModeOn;
-			showDebugText = PlayState.showDebugText;
-			music = PlayState.music;
-			debug = PlayState.debug;
-			axePlus = PlayState.axePlus;
-			directionLast = PlayState.directionLast;
-		}
-	}
+
+    public void setkeys() {
+        if (gp.gameState == gp.playState) {
+            spacePressed = PlayState.spacePressed;
+            enterPressed = PlayState.enterPressed;
+            shotKeyPressed = PlayState.shotKeyPressed;
+            bPressed = PlayState.bPressed;
+            imortalModeOn = PlayState.imortalModeOn;
+            showDebugText = PlayState.showDebugText;
+            music = PlayState.music;
+            debug = PlayState.debug;
+            axePlus = PlayState.axePlus;
+            directionLast = PlayState.directionLast;
+        }
+    }
 }

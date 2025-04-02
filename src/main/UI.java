@@ -912,7 +912,7 @@ public class UI {
         g2.drawString("P", textX, textY);
         textY += gp.tileSize;
         g2.drawString("ESC", textX, textY);
-		textY += gp.tileSize;
+        textY += gp.tileSize;
 
         //back
         textX = frameX + gp.tileSize;
