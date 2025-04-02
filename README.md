@@ -68,7 +68,6 @@ No new features have been added yet this year.
 - Add keybinds menu
 - Support for WASD movement in addition to arrow keys
 - Do not allow projectiles and other objects to move through doorways, trees, and other objects.
-- Pause button can be held down
 - Add multiple save slots
 - Hide "Load Game" until you have first created a "New Game". Also move "Load Game" above "New Game" in the menu
 - Finish implementing the projectile collision in TileManager
