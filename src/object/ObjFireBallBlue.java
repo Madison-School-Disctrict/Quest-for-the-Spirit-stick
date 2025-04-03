@@ -1,8 +1,8 @@
 package object;
 
-import java.awt.Color;
 import entity.Entity;
 import entity.Projectile;
+import java.awt.Color;
 import main.GamePanel;
 
 public class ObjFireBallBlue extends Projectile{
@@ -16,7 +16,14 @@ public class ObjFireBallBlue extends Projectile{
 		speed = 7;
 		maxLife = 100;
 		life = maxLife;
-		attack = 5;
+		//attack = 70;
+		if (level < 5) {
+			attack = 70;
+		} else if(level < 10){
+			attack = 15 * level;
+		} else { 
+			attack = 225;
+		}
 		useCost = 2;
 		alive = false;
 		getImage();

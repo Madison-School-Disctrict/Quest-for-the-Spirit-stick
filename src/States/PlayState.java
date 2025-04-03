@@ -3,6 +3,7 @@ package States;
 import entity.Bobcat;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import main.EventHandler;
 import main.GamePanel;
 
 public class PlayState {
@@ -44,16 +45,16 @@ public class PlayState {
 	        if(code == KeyEvent.VK_C) {
 	        	CharacterState.cKeyPressed(code, gp); 
 	        }
-	        if(code == KeyEvent.VK_M) {
-	        	if(music == true) {
-	        		music = false;
-	        		gp.stopMusic();
-	        	}
-	        	else if(music == false) {
-	        		music = true;
-	        		gp.playMusic(0);
-	        	} 
-	        }
+	        // if(code == KeyEvent.VK_M) {
+	        // 	if(music == true) {
+	        // 		music = false;
+	        // 		gp.stopMusic();
+	        // 	}
+	        // 	else if(music == false) {
+	        // 		music = true;
+	        // 		gp.playMusic(0);
+	        // 	} 
+	        // }
                 enterPressed = code == KeyEvent.VK_ENTER; 
 	        
 	        if(code == KeyEvent.VK_SPACE) {
@@ -68,6 +69,7 @@ public class PlayState {
 	        	OptionState.optionsKeyPressed(code, gp);
 	        }
 	        if(code == KeyEvent.VK_M) {
+				music = false;
 	        	MapState.mapState(code, gp);
 	        	
 	        }
@@ -96,11 +98,14 @@ public class PlayState {
 	        	if(showDebugText == false) {
 	        		showDebugText = true;
 	        		imortalModeOn = true;
+					EventHandler.setBossIsDead(true);
+
 	        	}
 	        	else if (showDebugText == true) {
 					tPressed = true;
 	        		showDebugText = false;
 	        		imortalModeOn = false;
+					EventHandler.setBossIsDead(false);
 	        	}
 	        }        
         }

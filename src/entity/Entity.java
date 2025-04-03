@@ -187,6 +187,8 @@ public class Entity {
 		 int goalRow= (target.worldY + target.solidArea.y)/gp.tileSize;
 		 return goalRow;
 	 }
+
+
 	 public void resetCounters() {
 		 
 		 spriteCounter = 0;
@@ -546,7 +548,7 @@ public class Entity {
 			  
 			  if(gp.player.guarding && gp.player.direction.equals(canGuardDirection)) {
 				 // check parry 
-				  if(gp.player.guardCounter < 10000) {//increase the number to make parry easier.
+				  if(gp.player.guardCounter < 10000) {//increase the number to make parry easier. 
 					  damage = 0;
 					  gp.playSE(16);
 					  setKnockBack(this, gp.player,knockBackPower);

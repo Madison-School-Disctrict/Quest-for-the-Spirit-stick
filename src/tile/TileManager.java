@@ -25,7 +25,7 @@ import main.UtilityTool;
 	//public String currentMap = "/map/worldmap.txt";
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		String initialTileData = "/map/tiledata3.txt";
+		String initialTileData = "/map/tiledata.txt";
 		
 		//Read Tile Data file
 		InputStream is = getClass().getResourceAsStream(initialTileData);
@@ -37,11 +37,7 @@ import main.UtilityTool;
 			while((line = br.readLine()) != null) {
 				fileNames.add(line);
 				collisionStatus.add(br.readLine());
-				if(initialTileData.equals("/map/tiledata3.txt")) {
 				projectilePass.add(br.readLine());
-				}else {
-					projectilePass.add(null);
-				}
 				
 			}
 			br.close();
@@ -76,6 +72,7 @@ import main.UtilityTool;
 		loadMap("/map/thunder.txt",4);
 		loadMap("map/rigby1.txt",5);
 		loadMap("/map/pit.txt",6);
+		loadMap("tunnelMap.txt",7);
 	}
 	public void setTile(int num, boolean pass) {
 		tile[num].collision = pass;

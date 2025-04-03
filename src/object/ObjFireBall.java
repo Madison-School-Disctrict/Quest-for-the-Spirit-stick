@@ -1,9 +1,8 @@
 package object;
 
-import java.awt.Color;
-
 import entity.Entity;
 import entity.Projectile;
+import java.awt.Color;
 import main.GamePanel;
 
 public class ObjFireBall extends Projectile{
@@ -18,11 +17,11 @@ public class ObjFireBall extends Projectile{
 		maxLife = 80;
 		life = maxLife;
 		if (level < 5) {
-		attack = 1;
+		attack = 20;
 		} else if(level < 10){
-			attack = level - 3;
+			attack = 5 * level;
 		} else { 
-			attack = 7;
+			attack = 65;
 		}
 		useCost = 1;
 		alive = false;

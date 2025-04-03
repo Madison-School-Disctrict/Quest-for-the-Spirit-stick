@@ -9,9 +9,10 @@ public class EventHandler{
 	Entity eventMaster;
 	
 	int previousEventX, previousEventY;
-	boolean canTouchEvent = true;
+	boolean canTouchEvent = true, inpit = true;
+	public boolean boss1Dead = false;
+	public static boolean bossDead1 = false;
 	int tempMap, tempCol, tempRow;
-	
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
 		eventMaster = new Entity(gp);
@@ -55,6 +56,10 @@ public class EventHandler{
 		
 				
 	}
+	public static void setBossIsDead(boolean on){
+		bossDead1 = on;
+		System.err.println(bossDead1);
+	}
 	public void checkEvent() {//event Happens
 		//Check the player is more than one tile away from last event. 
 		int xDistance = Math.abs(gp.player.worldX -  previousEventX);
@@ -65,14 +70,17 @@ public class EventHandler{
 		}
 		
 		if(canTouchEvent  == true) {		
-		if (hit(0,26,16,"left") == true  && !gp.keyH.imortalModeOn){
-			damagePit(hit(0,26,16,"left"),0,26,16,gp.dialogueState);
+		if (hit(6,29,14,"any") && !gp.keyH.imortalModeOn && inpit){	
+			damagePit(hit(6,29,14,"any"),6,29,14,gp.dialogueState);		
 		}
 			for(int i = 21; i < 26; i++ ) {
 				if(hit(0,i,12,"up") == true) {healingPool(gp.dialogueState);}
 			}
-
-			teleport(hit(0,20,7,"any"),0 ,34 , 8,gp.outside);// move to different part of the map
+			if(!boss1Dead && !bossDead1){
+				teleport(hit(0,20,7,"any"),0 ,34 , 7,gp.outside);// move to different part of the map
+			}else{
+				teleport(hit(0,63,18,"any"),0 ,20 , 7,gp.outside);				
+			}
 			teleport(hit(0,10,39,"up"),1,12,12,gp.indoor); // to merchant shack
 			teleport(hit(1,12,13,"any"),0,10,40, gp.outside);  // move back to outside
 			if(hit(1,12,9,"up")) {speak(gp.npc[1][0]);}// talk with merchant
@@ -80,11 +88,25 @@ public class EventHandler{
 			teleport(hit(0,12,9,"any"),2,9,41,gp.dungeon);  // to dungeon 
 			//From rigby map to dungeon
 			//teleport(hit(0,16,39,"any"),2,9,41,gp.dungeon);  // to dungeon 
-			teleport(hit(0,25,16,"right"),6,29,14,gp.outside);  // to pit transfer
-			teleport(hit(6,24,11,"any"),0,27,16,gp.outside); // pit transfer
-			teleport(hit(2,9,41,"any"),0,12,9, gp.outside);  // to outside
+			teleport(hit(0,26,16,"right"),6,29,14,99);  // to pit transfer
+			teleport(hit(6,24,15,"down"),0,27,16,gp.outside); // pit transfer
+			if(!boss1Dead && !bossDead1){
+				teleport(hit(2,9,41,"any"),0,12,9, gp.outside);  // to outside
+			}else {
+				teleport(hit(2,9,41,"any"),0 ,58 , 10,gp.outside);// move to different part of the map
+				teleport(hit(0,80,39,"any"),0,80,89,gp.outside);
+				teleport(hit(0,85,75,"any"),0,40,78,gp.outside);
+				teleport(hit(0,12,59,"any"),7,43,80,gp.outside);
+				teleport(hit(7,43,80,"any"),0,12,59,gp.outside);
+				teleport(hit(7,16,25,"any"),1,10,7,gp.outside);
+				teleport(hit(7,67,26,"any"),0,79,26,gp.outside);
+			}
 			teleport(hit(2,8,7,"any"),3,26,41,gp.dungeon);  // to the dungoen floor 2
 			teleport(hit(3,26,41,"any"),2,8,7,gp.dungeon); //  back to dungoen floor 1
+			teleport(hit(0,80,39,"left"),0,80,89,gp.outside);
+			teleport(hit(0,85,75,"left"),0,40,78,gp.outside);
+			teleport(hit(0,12,59,"left"),1,10,7,gp.indoor);
+
 			if(hit(3,25,27,"any")) {Boss(); }
 		}
 	}
@@ -118,8 +140,6 @@ public class EventHandler{
 	}
 	
 	public void teleport(boolean on, int map, int col, int row, int area) {
-		
-		
 		if(on) {
 		gp.gameState = gp.transitionState;
 		gp.nextArea = area;
@@ -127,10 +147,16 @@ public class EventHandler{
 		tempCol = col;
 		tempRow = row;
 		canTouchEvent = false;
+		if(area == 99){
+			canTouchEvent = true;
+			inpit = true;
+		}
 		if(area == gp.dungeon) {
 			gp.playSE(13);
 		}
+		System.out.println("Teleporting to map: " + map + " col: " + col + " row: " + row);
 		}
+		
 	}
 	
 	public void damagePit(boolean on, int map, int col, int row,int gameState) {
@@ -141,7 +167,7 @@ public class EventHandler{
 		gp.player.life -= gp.player.life/2;
 		//teleport(on,map ,col , row,gp.outside);
 		canTouchEvent = false;
-		
+		inpit = false;
 	}
 	
 	public void healingPool(int gameState) {
@@ -161,7 +187,7 @@ public class EventHandler{
 			 * 
 			 */
 			// if you want to save progress every time you drink from the pool then uncomment the code below. 
-			gp.saveLoad.save();  
+			//gp.saveLoad.save();  
 		}
 		
 	}
@@ -181,6 +207,7 @@ public class EventHandler{
 		if(!gp.bossBattleOn && !Progress.skeletonBossDefeated) {
 			gp.gameState = gp.cutsceneState;
 			gp.csManager.sceneNum = gp.csManager.skeletonLord;
+			boss1Dead = true;
 		}
 		
 	}

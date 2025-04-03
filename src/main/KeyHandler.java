@@ -57,8 +57,9 @@ public class KeyHandler implements KeyListener{
                 TradeState.tradeState(code, gp);
                 enterPressed = TradeState.enterPressed;
             }
-            case 10 -> // map State
+            case 10 -> {// map State
                 MapState.mapState(code, gp);
+            }
 			case 11 -> { // cutscene State
                 DialogueState.dkeyPressed(code, gp);
             	enterPressed = DialogueState.enterPressed;
@@ -88,6 +89,7 @@ public class KeyHandler implements KeyListener{
 			TradeState.enterPressed = false;
 			DialogueState.enterPressed = false;
 			PlayState.enterPressed = false;
+            OptionState.enterPressed = false;
 		}
 
 
