@@ -1,9 +1,12 @@
 # Quest For The Spirit Stick - Madison C.S. Project
-This is a multi-year project created by Madison High School students.  
-Below is a list of the changes and improvements made each year.
+**This is a multi-year, collaborative project created by Madison High School Computer Science students.**  
+
+**The project is a fantasy adventure game written in java to explore skills like java programming, game design, code management, teamwork, and planning.**  
+
+**Below is a list of all changes and contributions made to the project each school year.**  
 
 
-## 2024-2025 Updates
+## 2024-2025
 ### New Features
 No new features have been added yet this year.
 
@@ -55,34 +58,25 @@ No new features have been added yet this year.
 	- **Change:** Published this codebase to GitHub for easy access and control by all future contributers
 	- **Done by:** Rik, Matthew
 
-2. **GameState Class Seperation**
+2. **README.md Created**
+	- **Change:** Created a new README.md designed to be easy to extend to future years and track contributions
+	- **Done by:** Matthew
+
+3. **GameState Class Seperation**
 	- **Change:** Moved each gameState handling from KeyHandler.java to their own seperate file in the state folder
 	- **Done by:** Rik, Matthew
 
-3. **Codebase Cleanup Work**
+4. **Codebase Cleanup Work**
 	- **Change:** Formatted, removed, and made small changes to a number of files to improve readability
 	- **Done by:** Matthew
 
-
-## Potential Additions, Improvements, and Bugs
-- Add keybinds menu
-- Support for WASD movement in addition to arrow keys
-- Do not allow projectiles and other objects to move through doorways, trees, and other objects.
-- Add multiple save slots
-- Hide "Load Game" until you have first created a "New Game". Also move "Load Game" above "New Game" in the menu
-- Finish implementing the projectile collision in TileManager
-- Split KeyHandler.java into multiple state files
-- Remove collision for the player while in debug mode
-
-## Contributors
-This is a list of students who have contributed to the project each year.
-
-### 2024-2025
+### Contributors
 - Rik
 - Bryan
 - Gavin
 - Matthew
 
-### Pre 2024-2025
+
+## Pre 2024
 This project was published to GitHub in the 2024-2025 school year.  
 Special thanks to everyone who worked on this project prior to 2024.
