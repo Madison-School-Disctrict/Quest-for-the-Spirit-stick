@@ -286,14 +286,14 @@ public class AssetSetter {
 		} 
 		else if (gp.player.level < 6) {
 			gp.monster[mapNum][i] = new MonRedSlime(gp);
-			gp.monster[mapNum][i].worldX = gp.tileSize*10;
-			gp.monster[mapNum][i].worldY = gp.tileSize*39;
+			gp.monster[mapNum][i].worldX = gp.tileSize*29;
+			gp.monster[mapNum][i].worldY = gp.tileSize*32;
 
 			i++;
 			
 			gp.monster[mapNum][i] = new MonRedSlime(gp);
-			gp.monster[mapNum][i].worldX = gp.tileSize*10;
-			gp.monster[mapNum][i].worldY = gp.tileSize*41;
+			gp.monster[mapNum][i].worldX = gp.tileSize*29;
+			gp.monster[mapNum][i].worldY = gp.tileSize*31;
 
 			i++;
 			

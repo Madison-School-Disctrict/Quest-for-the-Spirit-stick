@@ -20,6 +20,11 @@ public class CollisionCheck {
 		
 		int tileNum1, tileNum2;
 		
+		if(States.PlayState.imortalModeOn && entity == gp.player) {
+			entity.collisionOn = false;
+			return;
+		}
+		
 		//use a temporal direction when it's being knockedback
 		String direction = entity.direction;
 		if(entity.knockBack) {
