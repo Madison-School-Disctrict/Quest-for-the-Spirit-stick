@@ -26,12 +26,40 @@ public class KeyHandler implements KeyListener{
     	this.gp= gp;
     }
     @Override
-    public void keyTyped(KeyEvent e){ 
-        // TODO Auto-generated method stub
-        if (gp.gameState == 0){
-            TitleState.keyTypedTitle(e, gp);
-        }   
-    }  
+    public void keyTyped(KeyEvent e) {
+        char c = e.getKeyChar();
+        if (c == KeyEvent.VK_TAB || c == '\t' || c == 9) {
+            e.consume(); // prevent default behavior
+            // switch focus logic...
+        }
+    if (gp.gameState == gp.titleState) {
+        //char c = e.getKeyChar();
+        TitleState.keyTypedTitle(e, gp);
+    }
+}
+
+private boolean isSymbol(char c) {
+    return "!@#$%^&*()_+-=[]{}|;':,.<>/?".indexOf(c) != -1;
+}
+
+
+
+
+
+    // public void keyTyped(KeyEvent e){ 
+    //     if (gp.gameState == 0){
+    //         TitleState.keyTypedTitle(e, gp);
+    //     }   
+
+        
+    // } 
+
+
+
+
+
+  
+    
     @Override
     public void keyPressed(KeyEvent e){
         int code = e.getKeyCode();

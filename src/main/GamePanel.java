@@ -1,6 +1,7 @@
 package main;
 
 import Environment.EnvironmentManager;
+import States.TitleState;
 import ai.PathFinder;
 import data.SaveLoad;
 import data.UserManager;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import tile.Map;
 import tile.TileManager;
 import tileInteractive.InteractiveTile;
@@ -66,6 +68,8 @@ private static final long serialVersionUID = 1L;
   //System
   public TileManager tileM = new TileManager(this);
   public KeyHandler keyH = new KeyHandler(this);
+  public MouseHandler mouseH = new MouseHandler(this);
+  UserManager userManager = new UserManager(this);
   Sound sound = new Sound();
   Sound music = new Sound();
   public CollisionCheck cCheck = new CollisionCheck(this);
@@ -118,7 +122,12 @@ private static final long serialVersionUID = 1L;
   public final int dungeon = 52;
   public int nextArea;
   public String usernameInput = "";
-	public String usernameMessage = "";
+  public String passwordInput = "";
+  public String confirmPasswordInput = "";
+  public String loginMessage = "";
+  public boolean passwordFocused = false;
+  public InputFocus inputFocus = InputFocus.USERNAME;
+
   //constructor
   public GamePanel(){
       this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -126,7 +135,10 @@ private static final long serialVersionUID = 1L;
       this.setDoubleBuffered(true);
       this.addKeyListener(keyH);
       this.setFocusable(true);
-      
+      this.addMouseListener(mouseH);
+      this.setFocusable(true);
+      this.requestFocusInWindow(); 
+      this.setFocusTraversalKeysEnabled(false);
   }
   
   //Methods
@@ -146,6 +158,31 @@ private static final long serialVersionUID = 1L;
   public void setMiniMapOn(boolean miniMapOn) {
     map.setMiniMapOn(miniMapOn);
   }
+
+public enum InputFocus {
+    USERNAME, PASSWORD, CONFIRM_PASSWORD
+}
+
+
+public void setInputFocus(InputFocus focus) {
+    this.inputFocus = focus;
+    if (null != focus) switch (focus) {
+        case USERNAME -> passwordFocused = false;
+        case PASSWORD -> passwordFocused = true;
+        case CONFIRM_PASSWORD -> passwordFocused = true;
+        default -> {
+        }
+    }
+   }
+
+   
+   public void setWorldX(int x) {
+		player.worldX = x;
+	}
+	public void setWorldY(int y) {
+		player.worldY = y;
+	}
+
 
   public void setUpGame() {
 	  aSetter.setObject();
@@ -463,34 +500,85 @@ private static final long serialVersionUID = 1L;
   }
 
 
-  public void validateAndStart(String username) {
-    UserManager userManager = new UserManager();
+public void handleLogin() {   
 
-    if (username.isEmpty()) {
-        usernameMessage = "Username cannot be empty.";
-    } else if (username.contains(" ")) {
-        usernameMessage = "Username cannot contain spaces.";
+    if (!userManager.userExists(usernameInput)) {
+        loginMessage = "User not found. Click 'Create Account'.";
+    } else if (!userManager.validateUser(usernameInput, passwordInput)) {
+        loginMessage = "Incorrect password.";
     } else {
-        if (!userManager.getUsers().contains(username)) {
-            System.out.println("User does not exist." + username + " to create a new user.");
-            gameState = titleState;
-            ui.titleScreenState = 2;
-            // Uncomment the following line to add the user to the UserManager
-           // userManager.addUser(username);
-           // usernameMessage = "User created: " + username;
-        } else {
-            usernameMessage = "Welcome back, " + username + "!";
-            SaveLoad saveLoad = new SaveLoad(this);
-            saveLoad.load(username);
-            gameState = playState;
-        }
+        loginMessage = "Login successful!";
 
-        
-        //gameState = playState;
-        
+        ui.titleScreenState  = 2;
     }
 }
 
+public void handleCreateAccount() {
+    if (usernameInput.isEmpty()) {
+        loginMessage = "Username cannot be empty.";
+    } else if (passwordInput.isEmpty()) {
+        loginMessage = "Password cannot be empty.";
+    } else if (!passwordInput.equals(confirmPasswordInput)) {
+        loginMessage = "Passwords do not match.";
+    } else if (userManager.userExists(usernameInput)) {
+        loginMessage = "Username already exists.";
+    } else {
+        userManager.createUser(usernameInput, passwordInput);
+        loginMessage = "Account created successfully!";
+        ui.titleScreenState  = 3;
+    }
+}
+public void handleForgotPassword() {
+    if (usernameInput.isEmpty()) {
+        loginMessage = "Username cannot be empty.";
+    } else if (!userManager.userExists(usernameInput)) {
+        loginMessage = "User not found.";
+    } else {
+        // Logic to reset password (e.g., send email)
+        loginMessage = "Password reset link sent to your email.";
+    }
+}
+public void handleLogout() {
+    usernameInput = "";
+    passwordInput = "";
+    confirmPasswordInput = "";
+    loginMessage = "";
+    ui.titleScreenState  = 0;
+}
+
+// ******************************************************************
+ 
+
+// public void validateAndStart(String username) {
+//     UserManager userManager = new UserManager();
+
+//     if (username.isEmpty()) {
+//         //usernameMessage = "Username cannot be empty.";
+//     } else if (username.contains(" ")) {
+//         //usernameMessage = "Username cannot contain spaces.";
+//     } else {
+//         if (!userManager.getUsers().contains(username)) {
+//             System.out.println("User does not exist." + username + " to create a new user.");
+//             gameState = titleState;
+//             ui.titleScreenState = 2;
+//             // Uncomment the following line to add the user to the UserManager
+//            // userManager.addUser(username);
+//            // usernameMessage = "User created: " + username;
+//         } else {
+//             usernameMessage = "Welcome back, " + username + "!";
+//             SaveLoad saveLoad = new SaveLoad(this);
+//             saveLoad.load(username);
+//             gameState = playState;
+//         }
+
+        
+//         //gameState = playState;
+        
+//     }
+//   }
+
+
+// ******************************************************************
 
 
 

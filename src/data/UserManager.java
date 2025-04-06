@@ -1,53 +1,51 @@
 package data;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.HashMap;
+import main.GamePanel;
 
 public class UserManager {
-    private final String userFile = "src/data/users.dat";
-    private ArrayList<String> users;
+    private final String USER_FILE = "users.dat";
+    private HashMap<String, String> users;
+    GamePanel gp;
 
-    public UserManager() {
+    public UserManager(GamePanel gp) {
+        this.gp = gp;
         loadUsers();
     }
 
-    public void loadUsers() {
-        try {
-            File file = new File(userFile);
-            if (!file.exists()) {
-                users = new ArrayList<>();
-                saveUsers(); // Create empty file
-            } else {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-                users = (ArrayList<String>) ois.readObject();
-                ois.close();
-            }
+    @SuppressWarnings("unchecked")
+    private void loadUsers() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USER_FILE))) {
+            users = (HashMap<String, String>) ois.readObject();
         } catch (Exception e) {
-            users = new ArrayList<>();
-            System.out.println("Error loading users.");
+            users = new HashMap<>();
         }
     }
 
-    public void saveUsers() {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(userFile));
+    private void saveUsers() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USER_FILE))) {
             oos.writeObject(users);
-            oos.close();
-        } catch (Exception e) {
-            System.out.println("Error saving users.");
+            System.out.println("Users saved successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public ArrayList<String> getUsers() {
-        return users;
+    public boolean userExists(String username) {
+        return users.containsKey(username);
     }
 
-    public boolean addUser(String username) {
-        if (!users.contains(username)) {
-            users.add(username);
-            saveUsers();
-            return true;
-        }
-        return false; // Username already exists
+    public boolean validateUser(String username, String password) {
+        return users.containsKey(username) && users.get(username).equals(password);
+    }
+
+    public boolean createUser(String username, String password) {
+        System.out.println(gp.usernameInput + " " + gp.passwordInput);
+        if (users.containsKey(username)) return false;
+        users.put(username, password);
+        System.out.println(username + ": " + users.get(username) + " " + password + ": " + users.get(password));
+        saveUsers();
+        return true;
     }
 }

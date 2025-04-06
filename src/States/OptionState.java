@@ -63,9 +63,7 @@ public class OptionState {
              gp.ui.commandNum++;
              gp.playSE(9);
              if(gp.ui.commandNum > maxCommandNum) {
-                 gp.ui.commandNum = 0;
-
-             
+                 gp.ui.commandNum = 0;             
              }
          }
           if (code == KeyEvent.VK_UP){

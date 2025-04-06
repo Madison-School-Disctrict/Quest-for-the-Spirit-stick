@@ -50,17 +50,7 @@ public class Player extends Entity{
              
     }
     public void setDefaultValues(){ 	
-    	//Need to edit player starting location with each map 
-//    	//STarting location of worldmap
-    	worldX = gp.tileSize*23;
-    	worldY = gp.tileSize*21;
-   	//STarting location of thunder
-   	// worldX = gp.tileSize*31;
-   	// worldY = gp.tileSize*80;
-    	
-    	//Stating location for rigby 1 map
-//    	worldX = gp.tileSize*35;
-//        worldY = gp.tileSize*95; 
+    	setDefualtPositions();
     	defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
@@ -89,6 +79,7 @@ public class Player extends Entity{
         setItems();
         setDialogue();
     }
+	
     public void setDefualtPositions() {
     	
     	gp.currentMap = 0;

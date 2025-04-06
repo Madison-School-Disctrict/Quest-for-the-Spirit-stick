@@ -162,4 +162,15 @@ public class SaveLoad {
 		
 	
 	}
+
+	public void deleteSave(String username) {
+		File file = new File("save_" + username + ".dat");
+		if (file.exists()) {
+			if (file.delete()) {
+				System.out.println("Save data for " + username + " deleted.");
+			} else {
+				System.out.println("Failed to delete save data for " + username + ".");
+			}
+		}
+	}
 }
