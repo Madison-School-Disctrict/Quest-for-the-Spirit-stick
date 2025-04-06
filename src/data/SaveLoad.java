@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import main.GamePanel;
 
 public class SaveLoad {
@@ -15,9 +14,10 @@ public class SaveLoad {
 		
 	}
 	
-	public void save() {
+	public void save(String name) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
+			String fileName = "src/data/saves/" + name + "_save.dat";
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(fileName)));
 			DataStorage ds = new DataStorage();
 			ds.level = gp.player.level;
 			ds.maxLife = gp.player.maxLife;
@@ -29,6 +29,13 @@ public class SaveLoad {
 			ds.exp = gp.player.exp;
 			ds.nextLevelExp = gp.player.nextLevelExp;
 			ds.coin = gp.player.coin;	
+
+			//Player location
+			ds.currentMap = gp.currentMap;
+			ds.currentWorldX = gp.player.worldX;
+			ds.currentWorldY = gp.player.worldY;
+			
+			
 			
 			//Player Inventory
 			for(int i = 0 ; i < gp.player.inventory.size(); i++) {
@@ -68,14 +75,17 @@ public class SaveLoad {
 			
 			//Write the DataStorage object to the oos
 			oos.writeObject(ds);
+			oos.close();
+			System.out.println("Save Complete!");
 		}  catch (Exception e) {
 			System.out.println("Save Exception!");
+			e.printStackTrace();
 		}
 	}
-	public void load() {
-				
+	public void load(String name) {
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
+			String fileName = "src/data/saves/" + name + "_save.dat";
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(fileName)));
 			//Read the DataStorage object
 			DataStorage ds = (DataStorage)ois.readObject();
 			
@@ -89,6 +99,11 @@ public class SaveLoad {
 			gp.player.exp = ds.exp;
 			gp.player.nextLevelExp = ds.nextLevelExp;
 			gp.player.coin = ds.coin;
+
+			//Player location
+			gp.currentMap = ds.currentMap;
+			gp.player.worldX = ds.currentWorldX;
+			gp.player.worldY = ds.currentWorldY;
 			
 			//Player Inventory
 			gp.player.inventory.clear();
@@ -126,9 +141,21 @@ public class SaveLoad {
 						}
 					}
 				}
-			}			
+			}	
+			ois.close();
+			System.out.println("Load Complete!");
+		}catch (NullPointerException e) {
+			System.out.println("Load Exception.  It did not load correctly");
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			System.out.println("Load Exception.  It did not load correctly");
+			e.printStackTrace();
+		}catch (java.io.EOFException e) {
+			System.out.println("Load Exception.  It did not load correctly");
+			e.printStackTrace();		
 		}catch(Exception e) {
 			System.out.println("Load Exception.  It did not load correctly");
+			e.printStackTrace();
 			
 		}
 		

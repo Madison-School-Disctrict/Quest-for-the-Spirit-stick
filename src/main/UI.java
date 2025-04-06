@@ -40,6 +40,7 @@ public class UI {
 	int charIndex = 0;
 	String combinedText = "";
 	
+	
 	//Constructor
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -358,47 +359,53 @@ public class UI {
 		}
 		
 		}
+		
+		
+		
 		else if(titleScreenState == 1) {
+			g2.setColor(new Color(0,0,0));
+			g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 			// story or character 
 			g2.setColor(Color.white);
 			g2.setFont(g2.getFont().deriveFont(42F));
 			
-			String text = "Select your Class";
+			String text = "Enter your Username";
 			int x= getXforCenteredText(text);
 			int y = gp.tileSize*3;
 			g2.drawString(text, x,y);
+
+
+			g2.setFont(new Font("Arial", Font.BOLD, 36));
+    		g2.drawString("Enter Username:", 100, 200);
+
+    		g2.setFont(new Font("Arial", Font.PLAIN, 28));
+    		g2.drawString(gp.usernameInput + "_", 100, 250); // shows blinking cursor
+
+    		g2.setFont(new Font("Arial", Font.PLAIN, 20));
+    		g2.drawString(gp.usernameMessage, 100, 300);
 			
-			text = "Fighter";
-			x= getXforCenteredText(text);
-			y += gp.tileSize*3;
-			g2.drawString(text, x,y);
-			if(commandNum==0) {
-				g2.drawString(">", x-gp.tileSize, y);
-			}
+		}
+		else if(titleScreenState == 2) {
+			g2.setColor(new Color(0,0,0));
+			g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+			// story or character 
+			g2.setColor(Color.white);
+			g2.setFont(g2.getFont().deriveFont(42F));
 			
-			text = "Thiet";
-			x= getXforCenteredText(text);
-			y += gp.tileSize;
+			String text = "Enter your Username";
+			int x= getXforCenteredText(text);
+			int y = gp.tileSize*3;
 			g2.drawString(text, x,y);
-			if(commandNum==1) {
-				g2.drawString(">", x-gp.tileSize, y);
-			}
-			
-			text = "Sorcerer";
-			x= getXforCenteredText(text);
-			y += gp.tileSize;
-			g2.drawString(text, x,y);
-			if(commandNum==2) {
-				g2.drawString(">", x-gp.tileSize, y);
-			}
-			
-			text = "Back";
-			x= getXforCenteredText(text);
-			y += gp.tileSize*2;
-			g2.drawString(text, x,y);
-			if(commandNum==3) {
-				g2.drawString(">", x-gp.tileSize, y);
-			}
+
+
+			g2.setFont(new Font("Arial", Font.BOLD, 36));
+    		g2.drawString("Enter Username:", 100, 200);
+
+    		g2.setFont(new Font("Arial", Font.PLAIN, 28));
+    		g2.drawString(gp.usernameInput + "_", 100, 250); // shows blinking cursor
+
+    		g2.setFont(new Font("Arial", Font.PLAIN, 20));
+    		g2.drawString(gp.usernameMessage, 100, 300);
 			
 		}
 		
@@ -808,7 +815,7 @@ public class UI {
 		if(commandNum == 4 ) {
 			g2.drawString(">", textX-25, textY);
 			if(gp.keyH.enterPressed) {
-				gp.saveLoad.save();
+				gp.saveLoad.save("rikeylee");
 				//g2.drawString("Progress Saved", textX+gp.tileSize, textY);
 				//gp.gameState = gp.playState;
 				subState = 4;

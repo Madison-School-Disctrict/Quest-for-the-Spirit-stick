@@ -96,16 +96,19 @@ public class EventHandler{
 				teleport(hit(2,9,41,"any"),0 ,58 , 10,gp.outside);// move to different part of the map
 				teleport(hit(0,80,39,"any"),0,80,89,gp.outside);
 				teleport(hit(0,85,75,"any"),0,40,78,gp.outside);
-				teleport(hit(0,12,59,"any"),7,43,80,gp.outside);
+				teleport(hit(0,12,59,"any"),7,42,84,gp.outside);
 				teleport(hit(7,43,80,"any"),0,12,59,gp.outside);
 				teleport(hit(7,16,25,"any"),1,10,7,gp.outside);
 				teleport(hit(7,67,26,"any"),0,79,26,gp.outside);
+				teleport(hit(7,13,15,"any"),1,10,7,gp.indoor);
+				teleport(hit(7,84,10,"any"),0,79,26,gp.indoor);
+				teleport(hit(7,84,45,"any"),0,81,77,gp.indoor);
 			}
 			teleport(hit(2,8,7,"any"),3,26,41,gp.dungeon);  // to the dungoen floor 2
 			teleport(hit(3,26,41,"any"),2,8,7,gp.dungeon); //  back to dungoen floor 1
 			teleport(hit(0,80,39,"left"),0,80,89,gp.outside);
 			teleport(hit(0,85,75,"left"),0,40,78,gp.outside);
-			teleport(hit(0,12,59,"left"),1,10,7,gp.indoor);
+			//teleport(hit(0,12,59,"left"),1,10,7,gp.indoor);
 
 			if(hit(3,25,27,"any")) {Boss(); }
 		}

@@ -54,8 +54,8 @@ public class OptionState {
         
         int maxCommandNum = 0;
         switch(gp.ui.getsubState()) {
-        case 0: maxCommandNum = 6;break;
-        case 3: maxCommandNum = 1; break;
+        case 0 -> maxCommandNum = 6;
+        case 3 -> maxCommandNum = 1;
         }
         
         if (code == KeyEvent.VK_DOWN){

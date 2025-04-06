@@ -26,7 +26,11 @@ public class KeyHandler implements KeyListener{
     	this.gp= gp;
     }
     @Override
-    public void keyTyped(KeyEvent e){    
+    public void keyTyped(KeyEvent e){ 
+        // TODO Auto-generated method stub
+        if (gp.gameState == 0){
+            TitleState.keyTypedTitle(e, gp);
+        }   
     }  
     @Override
     public void keyPressed(KeyEvent e){

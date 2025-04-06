@@ -11,9 +11,13 @@ import javax.swing.JFrame;
 
 public class Main {
 	public static JFrame window;
+    private String username;
     public static void main(String[] args){
        // Player canvas = new Player(); 
     	//window = new JFrame();
+        
+        //SwingUtilities.invokeLater(() -> new UserMenu());
+        
         window = new JFrame("Madison HighSchool Annual CS Project 2021 -- The end of time");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This is a test
         window.setResizable(false);

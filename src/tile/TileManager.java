@@ -72,7 +72,7 @@ import main.UtilityTool;
 		loadMap("/map/thunder.txt",4);
 		loadMap("map/rigby1.txt",5);
 		loadMap("/map/pit.txt",6);
-		loadMap("tunnelMap.txt",7);
+		loadMap("/map/tunnelMap.txt",7);
 	}
 	public void setTile(int num, boolean pass) {
 		tile[num].collision = pass;

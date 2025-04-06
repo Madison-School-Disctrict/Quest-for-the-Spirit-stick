@@ -3,6 +3,7 @@ package main;
 import Environment.EnvironmentManager;
 import ai.PathFinder;
 import data.SaveLoad;
+import data.UserManager;
 import entity.Entity;
 import entity.Player;
 import java.awt.Color;
@@ -116,7 +117,8 @@ private static final long serialVersionUID = 1L;
   public final int indoor = 51;
   public final int dungeon = 52;
   public int nextArea;
-  
+  public String usernameInput = "";
+	public String usernameMessage = "";
   //constructor
   public GamePanel(){
       this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -170,7 +172,7 @@ private static final long serialVersionUID = 1L;
 	  currentArea = outside;
 	  removeTempEntity();
 	  bossBattleOn = false;
-	  player.setDefualtPositions();
+	  //player.setDefualtPositions();
 	  player.restoreStatus();
 	  player.resetCounters();
 	  aSetter.setNPC();
@@ -459,4 +461,38 @@ private static final long serialVersionUID = 1L;
 		  }
 	  }
   }
+
+
+  public void validateAndStart(String username) {
+    UserManager userManager = new UserManager();
+
+    if (username.isEmpty()) {
+        usernameMessage = "Username cannot be empty.";
+    } else if (username.contains(" ")) {
+        usernameMessage = "Username cannot contain spaces.";
+    } else {
+        if (!userManager.getUsers().contains(username)) {
+            System.out.println("User does not exist." + username + " to create a new user.");
+            gameState = titleState;
+            ui.titleScreenState = 2;
+            // Uncomment the following line to add the user to the UserManager
+           // userManager.addUser(username);
+           // usernameMessage = "User created: " + username;
+        } else {
+            usernameMessage = "Welcome back, " + username + "!";
+            SaveLoad saveLoad = new SaveLoad(this);
+            saveLoad.load(username);
+            gameState = playState;
+        }
+
+        
+        //gameState = playState;
+        
+    }
+}
+
+
+
+
+
 }
