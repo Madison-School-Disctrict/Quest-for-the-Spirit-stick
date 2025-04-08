@@ -40,7 +40,9 @@ private static final long serialVersionUID = 1L;
   public final int maxScreenRow = 12; 
   public final int screenWidth = tileSize * maxScreenCol;//960 pixels
   public final int screenHeight = tileSize * maxScreenRow;//576 pixels
-  
+  //Debug mouse settings
+  public int mouseX, mouseY;
+  public boolean mouseDebugEnabled = true; // Optional toggle
   
   //World Settings
   public int maxWorldCol;  
@@ -52,6 +54,8 @@ private static final long serialVersionUID = 1L;
   //for Full Screen
   int screenWidth2 = screenWidth;
   int screenHeight2 = screenHeight;
+  public int screenWidth3 = getWidth();
+  public int screenHeight3 = getHeight();
   BufferedImage tempScreen;
   Graphics2D g2;
   public boolean fullScreenOn = false;
@@ -256,6 +260,7 @@ public void setInputFocus(InputFocus focus) {
           drawToScreen(); // draws to Screen
           delta--;
           }
+          
       }
       
       

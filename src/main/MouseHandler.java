@@ -11,14 +11,6 @@ public class MouseHandler implements MouseListener {
 
     public MouseHandler(GamePanel gp) {
         this.gp = gp;
-        //JFrame frame = new JFrame("Mouse Handler Example");
-       // label = new JLabel("Click me!");
-       // label.addMouseListener(this);
-        
-        // frame.add(label);
-        // frame.setSize(300, 200);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setVisible(true);
     }
     
     public void mouseClicked(MouseEvent e) {
@@ -28,41 +20,49 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
     
-        gp.addMouseListener(this);
+
+
+
+
+
+       // gp.addMouseListener(this);
     if (gp.gameState == gp.titleState) {
         int x = e.getX();
         int y = e.getY();
+        
+        int scaledX = (int)((double) x / gp.getWidth() * gp.screenWidth);
+        int scaledY = (int)((double) y / gp.getHeight() * gp.screenHeight);
+
+        gp.mouseX = scaledX;
+        gp.mouseY = scaledY;
+
+        // Handle clicks
+        //checkButtonClick(scaledX, scaledY);
+        
         if (gp.ui.titleScreenState == 0) {
-            if (x >= gp.ui.button1x && x <= gp.ui.button1x + 150 && y >= gp.ui.button1y && y <= gp.ui.button1y + 40) {
-                System.out.println("Mouse clicked in button 1");
+            if (scaledX >= gp.ui.button1x  && scaledX <= gp.ui.button1x + gp.tileSize*4 && scaledY >= gp.ui.button1y && scaledY <= gp.ui.button1y + gp.tileSize) {
                 gp.handleLogin();
             }
-            if (x >= gp.ui.button2x && x <= gp.ui.button2x + 150 && y >= gp.ui.button2y && y <= gp.ui.button2y + 40) {
-                System.out.println("Mouse clicked in button 2");
-                gp.ui.titleScreenState = 1;
+            if (scaledX >= gp.ui.button2x && scaledX <= gp.ui.button2x + gp.tileSize*4 && scaledY >= gp.ui.button2y && scaledY <= gp.ui.button2y + gp.tileSize) {
                 gp.usernameInput = "";
                 gp.passwordInput = "";
                 gp.confirmPasswordInput = "";
                 gp.loginMessage = "";
+                gp.ui.titleScreenState = 1;
             }
         } else if (gp.ui.titleScreenState == 1) {
-            // System.out.println("Mouse clicked in title screen state 1" + x + " " + y);
-            // System.out.println(gp.ui.button1x + " " + gp.ui.button1y + " " + gp.ui.button2x + " " + gp.ui.button2y);
+            
     
             
-            if (x >= gp.ui.button1x && x <= gp.ui.button1x + 150 && y >= gp.ui.button1y && y <= gp.ui.button1y +40) {
-                gp.handleCreateAccount();
-                
+            if (scaledX >= gp.ui.button1x && scaledX <= gp.ui.button1x + gp.tileSize*4 && scaledY >= gp.ui.button1y && scaledY <= gp.ui.button1y + gp.tileSize) {
+                gp.handleCreateAccount();  
             }
-            if (x >= gp.ui.button2x && x <= gp.ui.button2x + 150 && y >= gp.ui.button2y && y <= gp.ui.button2y +40) {
-                System.out.println("Mouse clicked in button 2");
-               // gp.ui.titleScreenState = 0;
-                
+            if (scaledX >= gp.ui.button2x && scaledX <= gp.ui.button2x + gp.tileSize*4 && scaledY >= gp.ui.button2y && scaledY <= gp.ui.button2y + gp.tileSize) {
                 gp.usernameInput = "";
                 gp.passwordInput = "";
                 gp.confirmPasswordInput = "";
                 gp.loginMessage = "";
-
+                gp.ui.titleScreenState = 0;
             }
             
         }

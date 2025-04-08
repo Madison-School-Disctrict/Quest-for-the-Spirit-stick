@@ -6,17 +6,14 @@ import main.GamePanel.InputFocus;
 
 
 public class TitleState {
+    private static boolean isShiftDown = false;
     public static void keyTypedTitle(KeyEvent e, GamePanel gp) {
-        
+        isShiftDown = e.isShiftDown();    
         if (gp.gameState == gp.titleState) {
             char c = e.getKeyChar();
             
-            if (c == KeyEvent.VK_TAB || c == '\t' || c == 9) {
-                e.consume(); // prevent default behavior
-                // switch focus logic...
-            }
 
-            if (Character.isLetterOrDigit(c) || Character.isWhitespace(c) || isSymbol(c)) {
+            if ( (Character.isLetterOrDigit(c) || Character.isWhitespace(c) || isSymbol(c)) && c != KeyEvent.VK_ENTER && c != KeyEvent.VK_TAB) {
                 switch (gp.inputFocus) {
                     case USERNAME -> gp.usernameInput += c;
                     case PASSWORD -> gp.passwordInput += c;
@@ -40,15 +37,8 @@ public class TitleState {
                         }
                     }
                 }
-            } //else if (c == KeyEvent.VK_ENTER) {
-            //     // Cycle input focus with tab
-            //     switch (gp.inputFocus) {
-            //         case USERNAME -> gp.inputFocus = InputFocus.PASSWORD;
-            //         case PASSWORD -> gp.inputFocus = gp.ui.titleScreenState == 1
-            //                 ? InputFocus.CONFIRM_PASSWORD : InputFocus.USERNAME;
-            //         case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
-            //     }
-            // }
+            
+            }
         }
     }
 
@@ -61,41 +51,23 @@ public class TitleState {
 
     
     public static void titleState(int code, GamePanel gp) {
-       
-        //Debug
-        // System.out.println("Key pressed: " + code);
+        
         switch (gp.ui.titleScreenState) {
             case 0 -> {
-                System.out.println("TitleState: " + gp.ui.titleScreenState);
-                if (code == KeyEvent.VK_ENTER) {
-                    //Debug
-                    // System.out.println("Enter pressed");
-                    // System.out.println("TitleState: " + gp.ui.titleScreenState);
+                //System.out.println("TitleState: " + gp.ui.titleScreenState);
+                if (code == KeyEvent.VK_TAB) {
                     
-                    // Cycle input focus with Enter
-                    switch (gp.inputFocus) {
-                        case USERNAME -> gp.inputFocus = InputFocus.PASSWORD;
-                        case PASSWORD -> gp.inputFocus = gp.ui.titleScreenState == 1
-                                ? InputFocus.CONFIRM_PASSWORD : InputFocus.USERNAME;
-                        case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
-                    }
+                    // Cycle input focus with Tab
+                    tabSCroll(gp, isShiftDown);
                 }
             }
             case 1 -> {
-                System.out.println("TitleState: " + gp.ui.titleScreenState);
-                if (code == KeyEvent.VK_ENTER) {
-                    //Debug
-                    // System.out.println("Enter pressed");
-                    // System.out.println("TitleState: " + gp.ui.titleScreenState);
-                    
+               
+                if (code == KeyEvent.VK_TAB) {                  
                     // Cycle input focus with Enter
-                    switch (gp.inputFocus) {
-                        case USERNAME -> gp.inputFocus = InputFocus.PASSWORD;
-                        case PASSWORD -> gp.inputFocus = gp.ui.titleScreenState == 1
-                                ? InputFocus.CONFIRM_PASSWORD : InputFocus.USERNAME;
-                        case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
-                    }
+                    tabSCroll(gp, isShiftDown);
                 }
+
             }
             case 2 -> {
                 if (code == KeyEvent.VK_DOWN){
@@ -165,11 +137,43 @@ public class TitleState {
             }
         }
 
-           
+        
 
     
     }
 
+
+    private static void tabSCroll(GamePanel gp, boolean isShiftDown) {
+        //Debug
+        // System.out.println("Key pressed: " + code);
+        // System.out.println("Key pressed: " + KeyEvent.getKeyText(code));
+        // System.out.println("Tab pressed");
+        // System.out.println("TitleState: " + gp.ui.titleScreenState);
+        // System.out.println("InputFocus: " + gp.inputFocus);
+        // System.out.println("Username: " + gp.usernameInput);
+        // System.out.println("Password: " + gp.passwordInput);
+        // System.out.println("ConfirmPassword: " + gp.confirmPasswordInput);
+        // System.out.println("LoginMessage: " + gp.loginMessage);
+        
+        if (isShiftDown) {
+            // Shift + Tab = backwards
+            switch (gp.inputFocus) {
+                case USERNAME -> gp.inputFocus = gp.ui.titleScreenState == 1
+                        ? InputFocus.CONFIRM_PASSWORD : InputFocus.PASSWORD;
+                case PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
+                case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.PASSWORD;
+            }
+        } else {
+            switch (gp.inputFocus) {
+                case USERNAME -> gp.inputFocus = InputFocus.PASSWORD;
+                case PASSWORD -> gp.inputFocus = gp.ui.titleScreenState == 1
+                      ? InputFocus.CONFIRM_PASSWORD : InputFocus.USERNAME;
+                case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
+            }
+       //return;
+        }
+
+    }  
     
     
 }
