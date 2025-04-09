@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,7 +42,7 @@ private static final long serialVersionUID = 1L;
   public final int screenHeight = tileSize * maxScreenRow;//576 pixels
   //Debug mouse settings
   public int mouseX, mouseY;
-  public boolean mouseDebugEnabled = true; // Optional toggle
+  public boolean mouseDebugEnabled = false; // Optional toggle
   
   //World Settings
   public int maxWorldCol;  
@@ -165,20 +166,22 @@ private static final long serialVersionUID = 1L;
   }
 
 public enum InputFocus {
-    USERNAME, PASSWORD, CONFIRM_PASSWORD
+    USERNAME, PASSWORD, CONFIRM_PASSWORD, LOGIN_BUTTON, 
+    CREATE_BUTTON, BACK_BUTTON, DELETE_BUTTON,
+    FORGOT_PASSWORD_BUTTON, LOGOUT_BUTTON
 }
-
 
 public void setInputFocus(InputFocus focus) {
     this.inputFocus = focus;
-    if (null != focus) switch (focus) {
-        case USERNAME -> passwordFocused = false;
-        case PASSWORD -> passwordFocused = true;
-        case CONFIRM_PASSWORD -> passwordFocused = true;
-        default -> {
-        }
-    }
-   }
+    switch (inputFocus) {
+        case USERNAME -> inputFocus = InputFocus.PASSWORD;
+        case PASSWORD -> inputFocus = InputFocus.CONFIRM_PASSWORD;
+        case CONFIRM_PASSWORD -> inputFocus = InputFocus.CREATE_BUTTON;
+        case CREATE_BUTTON -> inputFocus = InputFocus.BACK_BUTTON;
+        case BACK_BUTTON -> inputFocus = InputFocus.USERNAME; // cycle back
+        default -> inputFocus = InputFocus.USERNAME; // default to username
+}
+}
 
    
    public void setWorldX(int x) {
@@ -551,6 +554,41 @@ public void handleCreateAccount() {
         ui.titleScreenState  = 3;
     }
 }
+
+
+
+public void handleDeleteAccount() {
+    if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
+
+        if (userManager.validateUser(usernameInput, passwordInput)){ 
+            File saveFile1 = new File("saves/" + usernameInput + "_save.dat");
+            boolean deleted1 =  saveFile1.exists() && saveFile1.delete();
+            
+            if (deleted1) {
+                userManager.deleteUser(usernameInput, passwordInput);
+                loginMessage = "Save data deleted for " + usernameInput + ".";
+            } else {
+                loginMessage = "No save data found for " + usernameInput + ".";
+            }
+        } else {
+            loginMessage = "Invalid username or password.";
+        } 
+    }else {
+        loginMessage = "Enter username and password to delete save data.";
+    }
+
+    // Clear inputs
+    usernameInput = "";
+    passwordInput = "";
+    confirmPasswordInput = "";
+}
+
+
+
+
+
+
+
 public void handleForgotPassword() {
     if (usernameInput.isEmpty()) {
         loginMessage = "Username cannot be empty.";
@@ -571,35 +609,6 @@ public void handleLogout() {
 
 // ******************************************************************
  
-
-// public void validateAndStart(String username) {
-//     UserManager userManager = new UserManager();
-
-//     if (username.isEmpty()) {
-//         //usernameMessage = "Username cannot be empty.";
-//     } else if (username.contains(" ")) {
-//         //usernameMessage = "Username cannot contain spaces.";
-//     } else {
-//         if (!userManager.getUsers().contains(username)) {
-//             System.out.println("User does not exist." + username + " to create a new user.");
-//             gameState = titleState;
-//             ui.titleScreenState = 2;
-//             // Uncomment the following line to add the user to the UserManager
-//            // userManager.addUser(username);
-//            // usernameMessage = "User created: " + username;
-//         } else {
-//             usernameMessage = "Welcome back, " + username + "!";
-//             SaveLoad saveLoad = new SaveLoad(this);
-//             saveLoad.load(username);
-//             gameState = playState;
-//         }
-
-        
-//         //gameState = playState;
-        
-//     }
-//   }
-
 
 // ******************************************************************
 

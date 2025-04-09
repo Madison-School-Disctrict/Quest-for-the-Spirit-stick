@@ -6,9 +6,9 @@ import main.GamePanel.InputFocus;
 
 
 public class TitleState {
-    private static boolean isShiftDown = false;
+    public static boolean isShiftDown = false;
     public static void keyTypedTitle(KeyEvent e, GamePanel gp) {
-        isShiftDown = e.isShiftDown();    
+            
         if (gp.gameState == gp.titleState) {
             char c = e.getKeyChar();
             
@@ -51,22 +51,27 @@ public class TitleState {
 
     
     public static void titleState(int code, GamePanel gp) {
-        
+        if(code == KeyEvent.VK_SHIFT) {
+            TitleState.isShiftDown = true;
+        }
+
+
         switch (gp.ui.titleScreenState) {
+
             case 0 -> {
                 //System.out.println("TitleState: " + gp.ui.titleScreenState);
-                if (code == KeyEvent.VK_TAB) {
-                    
-                    // Cycle input focus with Tab
-                    tabSCroll(gp, isShiftDown);
+                if (code == KeyEvent.VK_TAB || code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) {
+                    // Cycle input focus with Tab or Up/Down Arrow keys
+                    tabSCroll(gp, isShiftDown, code);    
                 }
             }
             case 1 -> {
                
-                if (code == KeyEvent.VK_TAB) {                  
+                if (code == KeyEvent.VK_TAB || code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN|| code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) {                  
                     // Cycle input focus with Enter
-                    tabSCroll(gp, isShiftDown);
+                    tabSCroll(gp, isShiftDown, code);
                 }
+                
 
             }
             case 2 -> {
@@ -138,40 +143,79 @@ public class TitleState {
         }
 
         
-
-    
-    }
-
-
-    private static void tabSCroll(GamePanel gp, boolean isShiftDown) {
-        //Debug
-        // System.out.println("Key pressed: " + code);
-        // System.out.println("Key pressed: " + KeyEvent.getKeyText(code));
-        // System.out.println("Tab pressed");
-        // System.out.println("TitleState: " + gp.ui.titleScreenState);
-        // System.out.println("InputFocus: " + gp.inputFocus);
-        // System.out.println("Username: " + gp.usernameInput);
-        // System.out.println("Password: " + gp.passwordInput);
-        // System.out.println("ConfirmPassword: " + gp.confirmPasswordInput);
-        // System.out.println("LoginMessage: " + gp.loginMessage);
-        
-        if (isShiftDown) {
-            // Shift + Tab = backwards
+        if (code == KeyEvent.VK_ENTER) {
+            
             switch (gp.inputFocus) {
-                case USERNAME -> gp.inputFocus = gp.ui.titleScreenState == 1
-                        ? InputFocus.CONFIRM_PASSWORD : InputFocus.PASSWORD;
-                case PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
-                case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.PASSWORD;
-            }
-        } else {
-            switch (gp.inputFocus) {
+                case LOGIN_BUTTON -> gp.handleLogin();
+                case CREATE_BUTTON ->{ 
+                    if(gp.ui.titleScreenState == 1){ 
+                        gp.handleCreateAccount();
+                    }else { 
+                        gp.inputFocus = InputFocus.USERNAME;
+                        gp.usernameInput = "";
+                        gp.passwordInput = "";
+                        gp.confirmPasswordInput = "";
+                        gp.loginMessage = "";
+                        gp.ui.titleScreenState = 1;}
+                }
+                case DELETE_BUTTON -> { 
+                    gp.handleDeleteAccount();
+                    gp.usernameInput = "";
+                    gp.passwordInput = "";
+                    gp.confirmPasswordInput = "";
+                    gp.loginMessage = "";
+                    gp.inputFocus = InputFocus.USERNAME;
+                }
+                case BACK_BUTTON -> { gp.ui.titleScreenState = 0;
+                    gp.inputFocus = InputFocus.USERNAME;
+                    gp.usernameInput = "";
+                    gp.passwordInput = "";
+                    gp.loginMessage = "";
+                    }
                 case USERNAME -> gp.inputFocus = InputFocus.PASSWORD;
                 case PASSWORD -> gp.inputFocus = gp.ui.titleScreenState == 1
                       ? InputFocus.CONFIRM_PASSWORD : InputFocus.USERNAME;
                 case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
             }
+        }
+
+    
+    }
+
+
+    private static void tabSCroll(GamePanel gp, boolean isShiftDown, int code) {
+        
+        if (isShiftDown || code == KeyEvent.VK_UP || code == KeyEvent.VK_LEFT) {
+            // Shift + Tab = backwards
+                switch (gp.inputFocus) {
+                    case USERNAME -> gp.inputFocus = gp.ui.titleScreenState == 1
+                            ? InputFocus.BACK_BUTTON : InputFocus.CREATE_BUTTON;
+                    case PASSWORD -> gp.inputFocus = InputFocus.USERNAME;
+                    case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.PASSWORD;
+                    case LOGIN_BUTTON -> gp.inputFocus = InputFocus.PASSWORD;
+                    case CREATE_BUTTON -> gp.inputFocus =  gp.ui.titleScreenState == 1
+                    ? InputFocus.CONFIRM_PASSWORD : InputFocus.LOGIN_BUTTON;
+                    case BACK_BUTTON -> gp.inputFocus = InputFocus.CREATE_BUTTON;
+                    case DELETE_BUTTON -> gp.inputFocus = InputFocus.BACK_BUTTON;
+                    default -> gp.inputFocus = InputFocus.USERNAME;
+                }
+        } else {
+            // Tab = forwards
+            switch (gp.inputFocus) {
+                case USERNAME -> gp.inputFocus = InputFocus.PASSWORD;
+                case PASSWORD -> gp.inputFocus = gp.ui.titleScreenState == 1
+                    ? InputFocus.CONFIRM_PASSWORD : InputFocus.LOGIN_BUTTON;
+                case CONFIRM_PASSWORD -> gp.inputFocus = InputFocus.CREATE_BUTTON;
+                case LOGIN_BUTTON -> gp.inputFocus = InputFocus.CREATE_BUTTON;
+                case CREATE_BUTTON -> gp.inputFocus =  gp.ui.titleScreenState == 1
+                    ? InputFocus.BACK_BUTTON : InputFocus.DELETE_BUTTON;
+                case BACK_BUTTON -> gp.inputFocus = InputFocus.DELETE_BUTTON;   
+                case DELETE_BUTTON -> gp.inputFocus = InputFocus.USERNAME;
+                default -> gp.inputFocus = InputFocus.USERNAME;  
+            }
        //return;
         }
+        
 
     }  
     

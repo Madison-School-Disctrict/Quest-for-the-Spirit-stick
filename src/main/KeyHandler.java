@@ -124,6 +124,9 @@ private boolean isSymbol(char c) {
             OptionState.enterPressed = false;
 		}
 
+        if(code == KeyEvent.VK_SHIFT) {
+            TitleState.isShiftDown = false;
+        }
 
     }
 	public void setkeys() {

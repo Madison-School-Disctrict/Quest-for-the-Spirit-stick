@@ -48,4 +48,24 @@ public class UserManager {
         saveUsers();
         return true;
     }
+
+
+
+    public boolean deleteUser(String username, String password) {
+        System.out.println(gp.usernameInput + " " + gp.passwordInput);
+        if (!users.containsKey(username)) return false;
+        //if (!users.get(username).equals(password)) return false;
+        if (users.containsKey(username)){
+            users.remove(username, password);
+        }
+        saveUsers();
+        return true;
+    }
+
+    public HashMap<String, String> getUsers() {
+        return users;
+    }
+    public void setUsers(HashMap<String, String> users) {
+        this.users = users;
+    }
 }

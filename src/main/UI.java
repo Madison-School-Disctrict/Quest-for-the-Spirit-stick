@@ -43,10 +43,7 @@ public class UI {
 	String combinedText = "";
 	
 	//Buttons 
-	public int button1x = 0;
-	public int button1y = 0;
-	public int button2x = 0;
-	public int button2y = 0;
+	public int button1x = 0, button1y = 0, button2x = 0, button2y = 0, button3x = 0, button3y = 0;
 
 	//Constructor
 	public UI(GamePanel gp) {
@@ -341,12 +338,22 @@ public class UI {
 
 						String cursor = "_";
 
+						if (gp.inputFocus == InputFocus.USERNAME) {
+							g2.setColor(Color.YELLOW);
+						} 
+							
+		
                         g2.setFont(new Font("Arial", Font.PLAIN, 24));
                         g2.drawString("Username: " + gp.usernameInput + (gp.inputFocus == InputFocus.USERNAME ? cursor : ""), 100, y);
 						y+= gp.tileSize;
+						g2.setColor(Color.white);
+						if (gp.inputFocus == InputFocus.PASSWORD) {
+							g2.setColor(Color.YELLOW);
+						}
+						//Password
                         g2.drawString("Password: " + "*".repeat(gp.passwordInput.length()) + (gp.inputFocus == InputFocus.PASSWORD ? cursor : ""), 100, y);
 						y+= gp.tileSize;
-
+						g2.setColor(Color.white);
 						//Loin button
 						text = "Login";
 						int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth()/4;
@@ -354,11 +361,16 @@ public class UI {
 						x = gp.tileSize;
 						button1x = x;
 						button1y = y;
+						if (gp.inputFocus == InputFocus.LOGIN_BUTTON) {
+							g2.setColor(Color.YELLOW);
+							g2.drawRect(button1x, button1y, gp.tileSize * 4, gp.tileSize);
+						}
                         g2.drawRect(button1x, button1y, gp.tileSize*4, gp.tileSize);
 						x += gp.tileSize*2 - 2 * length;
 						y += 3 * gp.tileSize/4;
                         g2.drawString(text, x, y);
 						
+						g2.setColor(Color.white);
 
 						//Create Account button
 						text = "Create Account";
@@ -368,6 +380,10 @@ public class UI {
                         
 						button2x = x;
 						button2y = y;
+						if (gp.inputFocus == InputFocus.CREATE_BUTTON) {
+							g2.setColor(Color.YELLOW);
+							g2.drawRect(button2x, button2y, gp.tileSize * 4, gp.tileSize);
+						}
 						g2.drawRect(button2x, button2y,  gp.tileSize*4,  gp.tileSize);
 						x += gp.tileSize*2 - 2 * length;
 						y +=  3 * gp.tileSize/4;
@@ -410,13 +426,26 @@ public class UI {
 						String cursor = "_";
 
 						g2.setFont(new Font("Arial", Font.PLAIN, 24));
+
+						if (gp.inputFocus == InputFocus.USERNAME) {
+							g2.setColor(Color.YELLOW);
+						} 
 						g2.drawString("Username: " + gp.usernameInput + (gp.inputFocus == InputFocus.USERNAME ? cursor : ""), x, y);
 						y+= gp.tileSize;
+						g2.setColor(Color.white);
+						if (gp.inputFocus == InputFocus.PASSWORD) {
+							g2.setColor(Color.YELLOW);
+						} 
 						g2.drawString("Password: " + "*".repeat(gp.passwordInput.length()) + (gp.inputFocus == InputFocus.PASSWORD ? cursor : ""), x,y);
 						y+= gp.tileSize;
+						g2.setColor(Color.white);
+						if (gp.inputFocus == InputFocus.CONFIRM_PASSWORD) {
+							g2.setColor(Color.YELLOW);
+						} 
 						g2.drawString("Confirm: " + "*".repeat(gp.confirmPasswordInput.length())+ (gp.inputFocus == InputFocus.CONFIRM_PASSWORD ? cursor : ""), x,y);
-						y+= gp.tileSize/2;
+						y+= gp.tileSize;
 
+						g2.setColor(Color.white);
 						x = gp.tileSize;
 						int width = 4*x;
 						int height = x;
@@ -427,12 +456,16 @@ public class UI {
 						int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth()/4;
 						button1x = x;
 						button1y = y;
-						
+						if (gp.inputFocus == InputFocus.CREATE_BUTTON) {
+							g2.setColor(Color.YELLOW);
+						}
 						g2.drawRect(button1x, button1y, width, height);
 						x += gp.tileSize*2-length;
 						y +=  height/2;
+						y += height/4;
 						g2.drawString(text, x, y);
 						
+						g2.setColor(Color.white);
 
 						x += gp.tileSize * 5;
 
@@ -440,22 +473,50 @@ public class UI {
 						text = "Back";
 						length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth()/4;
 						y -= height/2;
+						y -= height/4;
 						button2x = x;
 						button2y = y;
+						if (gp.inputFocus == InputFocus.BACK_BUTTON) {
+							g2.setColor(Color.YELLOW);
+						}
 						g2.drawRect(button2x, button2y, width, height);
 						
 						x += gp.tileSize*2-length;
 						y +=  height/2;
+						y += height/4;
 						g2.drawString("Back", x, y);
 						
+						g2.setColor(Color.white);
+
+
+
+						// "Delete Account" button
+						text = "Delete Account";
+						length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth() / 4;
+						x += 5 * gp.tileSize;
+						y -= height/2; // Add some space below existing buttons
+						y -= height/4;
+						if (gp.inputFocus == InputFocus.DELETE_BUTTON) {
+							g2.setColor(Color.YELLOW);	
+						}
+						g2.drawRect(x, y, width, height);
+						x += gp.tileSize - 2* length;
+						y += height/4;
+						g2.drawString(text, x + gp.tileSize * 2 - length, y + height / 2);
+						button3x = x;
+						button3y = y;
+						g2.setColor(Color.white);
+
 						y+= gp.tileSize*2;
 						g2.setFont(new Font("Arial", Font.PLAIN, 18));
 						g2.drawString(gp.loginMessage, 100, y);
+
 						if (gp.mouseDebugEnabled) {
 							g2.setColor(Color.RED);
 							g2.fillOval(gp.mouseX - 2, gp.mouseY - 2, 4, 4);
 							g2.drawRect(button1x, button1y, gp.tileSize * 4, gp.tileSize);
-    						g2.drawRect(button2x, button2y, gp.tileSize * 4, gp.tileSize);			
+    						g2.drawRect(button2x, button2y, gp.tileSize * 4, gp.tileSize);	
+    						g2.drawRect(button3x, button3y, gp.tileSize * 4, gp.tileSize);			
 						}
 					}
                 case 2 -> {
