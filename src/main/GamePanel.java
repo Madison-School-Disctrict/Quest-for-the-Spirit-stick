@@ -1,7 +1,6 @@
 package main;
 
 import Environment.EnvironmentManager;
-import States.TitleState;
 import ai.PathFinder;
 import data.SaveLoad;
 import data.UserManager;
@@ -19,10 +18,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import tile.Map;
 import tile.TileManager;
 import tileInteractive.InteractiveTile;
+import data.Progress;
 
 //import entity.Player;
 public class GamePanel extends JPanel implements Runnable{
@@ -118,6 +117,8 @@ private static final long serialVersionUID = 1L;
   
   //Other 
   public boolean bossBattleOn = false;
+  long lastAutoSaveTime = System.currentTimeMillis();
+  final long AUTO_SAVE_INTERVAL = 2 * 60 * 1000; // 2 minutes in milliseconds
 
   //Area
   public int currentArea ;
@@ -265,8 +266,23 @@ public void setInputFocus(InputFocus focus) {
       
       
   } 
+  
+
+
+  
+  
+
+
+
   public void update(){
 
+        //Auto Save
+        if (System.currentTimeMillis() - lastAutoSaveTime >= AUTO_SAVE_INTERVAL && gameState == playState && (!EventHandler.boss1Dead || Progress.skeletonBossDefeated)) {
+            saveLoad.save(usernameInput);
+            lastAutoSaveTime = System.currentTimeMillis();
+        }
+
+        
 	  if(gameState == playState) {
       player.update(); // updates the player
        for(int i = 0; i < npc[1].length; i++) { // NPC update
@@ -328,7 +344,8 @@ public void setInputFocus(InputFocus focus) {
 	
   } 
   public void drawToTempScreen() {
-	  //DEbug
+	  
+    //DEbug
       long drawStart = 0;
       if(keyH.showDebugText == true) {    	  
     	  drawStart = System.nanoTime();
@@ -377,7 +394,7 @@ public void setInputFocus(InputFocus focus) {
     	  }
       }
       
-    // /*   ************************************************************************************ 
+      // /*   ************************************************************************************ 
       
       
       for( int i = 0; i < projectile[1].length; i++ ) {
@@ -387,8 +404,8 @@ public void setInputFocus(InputFocus focus) {
       }
       
       
-     // ******************************************************************************************
- //     */
+       // ******************************************************************************************
+       //     */
       
       
       for( int i = 0; i < particleList.size(); i++ ) {
@@ -431,27 +448,28 @@ public void setInputFocus(InputFocus focus) {
       }
       
      //Debug
-     if(keyH.showDebugText == true) {
-	     long drawEnd = System.nanoTime();
-	     long passed = drawEnd - drawStart;
-	     g2.setFont(new Font("Arial",Font.PLAIN,20));
-	     g2.setColor(Color.white);
-	     int x = 10;
-	     int y = 150;
-	     int lineHeight = 20 ;
-	     g2.drawString("WorldX: " + player.worldX, x, y);  y += lineHeight;
-	     g2.drawString("WorldY: " + player.worldY, x, y);  y += lineHeight;
-	     g2.drawString("Col: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
-	     g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y);
-	     y += lineHeight;
-	     g2.drawString("Draw Time: " + passed, x,y);
-	     y += lineHeight;
-	     g2.drawString("Imortal Mode:", x, y);
-	     y += lineHeight;
-         g2.drawString("Life: " + player.life,x,y);
+        if(keyH.showDebugText == true) {
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+            g2.setFont(new Font("Arial",Font.PLAIN,20));
+            g2.setColor(Color.white);
+            int x = 10;
+            int y = 150;
+            int lineHeight = 20 ;
+            g2.drawString("WorldX: " + player.worldX, x, y);  y += lineHeight;
+            g2.drawString("WorldY: " + player.worldY, x, y);  y += lineHeight;
+            g2.drawString("Col: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
+            g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y);
+            y += lineHeight;
+            g2.drawString("Draw Time: " + passed, x,y);
+            y += lineHeight;
+            g2.drawString("Imortal Mode:", x, y);
+            y += lineHeight;
+            g2.drawString("Life: " + player.life,x,y);
+        }
      }
-     
-  }
+
+
   public void drawToScreen() {
 	  Graphics g = getGraphics();
 	  g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);

@@ -4,6 +4,7 @@ import data.Progress;
 import entity.Entity;
 import main.GamePanel;
 import object.ObjDoorIron;
+import main.EventHandler;
 
 public class MonSkeletonBoss extends Entity{
 	
@@ -18,7 +19,7 @@ public class MonSkeletonBoss extends Entity{
 		name = monName;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-		maxLife = 1500;
+		maxLife = 50;
 		life = maxLife;
 		attack = 250;
 		defense = 50;
@@ -119,6 +120,7 @@ public class MonSkeletonBoss extends Entity{
 	public void checkDrop() {
 		gp.bossBattleOn = false;
 		Progress.skeletonBossDefeated = true;
+		EventHandler.boss1Dead = false;
 		
 		//Restore previous music
 		gp.stopMusic();

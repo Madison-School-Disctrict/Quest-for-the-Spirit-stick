@@ -10,7 +10,7 @@ public class EventHandler{
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true, inpit = true;
-	public boolean boss1Dead = false;
+	public static boolean boss1Dead = false;
 	public static boolean bossDead1 = false;
 	int tempMap, tempCol, tempRow;
 	public EventHandler(GamePanel gp) {

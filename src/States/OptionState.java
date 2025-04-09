@@ -54,7 +54,7 @@ public class OptionState {
         
         int maxCommandNum = 0;
         switch(gp.ui.getsubState()) {
-        case 0 -> maxCommandNum = 6;
+        case 0 -> maxCommandNum = 5;
         case 3 -> maxCommandNum = 1;
         }
         

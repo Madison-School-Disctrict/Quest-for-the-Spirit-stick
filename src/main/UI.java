@@ -863,8 +863,7 @@ public class UI {
 		case 0: option_top(frameX, frameY); break;
 		case 1: options_fullScreenNotification(frameX,frameY);break;
 		case 2: options_control(frameX,frameY); break;
-		case 3: options_endGameConfirmation(frameX,frameY); break;
-		case 4: options_saveProgress(frameX,frameY); break;
+		case 3: options_saveProgress(frameX,frameY); break;
 		}
 		
 		gp.keyH.enterPressed = false;
@@ -929,30 +928,15 @@ public class UI {
 		
 		
 		
-		//******************************************************************************************
-		//Save Game 
-		textY += gp.tileSize;
-		g2.drawString("Save Progress", textX, textY);
-		if(commandNum == 4 ) {
-			g2.drawString(">", textX-25, textY);
-			if(gp.keyH.enterPressed) {
-				System.out.println(gp.usernameInput);
-				gp.saveLoad.save(gp.usernameInput);
-				//g2.drawString("Progress Saved", textX+gp.tileSize, textY);
-				//gp.gameState = gp.playState;
-				subState = 4;
-				commandNum = 0;
-			}
-		}
-		//*********************************************************************************************************
 		
 		
 		
 		
-		//End Game
+		
+		//Save Progress
 				textY += gp.tileSize;
-				g2.drawString("End Game", textX, textY );
-				if(commandNum == 5 ) {
+				g2.drawString("Save Progress", textX, textY );
+				if(commandNum == 4 ) {
 					g2.drawString(">", textX-25, textY);
 					if(gp.keyH.enterPressed) {
 						subState = 3;
@@ -966,7 +950,7 @@ public class UI {
 		//Back
 		textY += gp.tileSize;
 		g2.drawString("Back", textX, textY );
-		if(commandNum == 6 ) {
+		if(commandNum == 5 ) {
 			g2.drawString(">", textX-25, textY);
 			if(gp.keyH.enterPressed) {
 				gp.gameState = gp.playState;
@@ -1047,7 +1031,7 @@ public class UI {
 		g2.drawString("Shoot/Cast", textX, textY); textY += gp.tileSize;
 		g2.drawString("Character Screen", textX, textY); textY += gp.tileSize;
 		g2.drawString("Pause", textX, textY); textY += gp.tileSize;
-		g2.drawString("Options", textX, textY); textY += gp.tileSize;
+		g2.drawString("Options", textX, textY); 
 		
 		textX = frameX + gp.tileSize*4;
 		textY = frameY + gp.tileSize*2;
@@ -1060,7 +1044,7 @@ public class UI {
 		g2.drawString("F", textX, textY);textY += gp.tileSize;
 		g2.drawString("C", textX, textY);textY += gp.tileSize;
 		g2.drawString("P", textX, textY);textY += gp.tileSize;
-		g2.drawString("ESC", textX, textY);textY += gp.tileSize;
+		g2.drawString("ESC", textX, textY);
 		
 		//back
 		textX = frameX + gp.tileSize;
@@ -1076,94 +1060,55 @@ public class UI {
 		}
 		
 	}	
-	public void options_endGameConfirmation(int frameX, int frameY) {
+	public void options_saveProgress(int frameX, int frameY) {
 		int textX = frameX + gp.tileSize;
 		int textY = frameY + gp.tileSize * 3;
 		
-		currentDialogue = "Quit the Game \nand return to the \ntitle Screen?";
+		currentDialogue = "Save the game Progress";
 		for (String line: currentDialogue.split("\n")) {
 			g2.drawString(line,textX, textY);
 			textY+=40;
 		}
 		
-		//Yes
 		
-		String text = "Yes";
+		
+		//no
+		String text = "Save and Continue";
 		textX = getXforCenteredText(text);
-		textY += gp.tileSize;
+		textY += 40;
 		g2.drawString(text, textX, textY);
 		if(commandNum == 0) {
 			g2.drawString(">", textX-25, textY);
 			if(gp.keyH.enterPressed) {
+				System.out.println(gp.usernameInput);
+				gp.saveLoad.save(gp.usernameInput);
+				subState = 0;
+				gp.gameState = gp.playState;
+			}
+		}
+
+		//Save and Quit
+		
+		text = "Save and Quit";
+		textX = getXforCenteredText(text);
+		textY += gp.tileSize;
+		g2.drawString(text, textX, textY);
+		if(commandNum == 1) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed) {
+				//System.out.println(gp.usernameInput);
+				gp.saveLoad.save(gp.usernameInput);
 				subState = 0;
 				gp.gameState = gp.titleState;
 				gp.ui.titleScreenState = 2;
 				gp.stopMusic();
 				gp.resetGame(true);
-			}
-		}
-		
-		//no
-		text = "No";
-		textX = getXforCenteredText(text);
-		textY += 40;
-		g2.drawString(text, textX, textY);
-		if(commandNum == 1) {
-			g2.drawString(">", textX-25, textY);
-			if(gp.keyH.enterPressed) {
-				subState = 0;
-				commandNum = 4;
+				System.exit(0);
 			}
 		}
 		
 	}	
-	
-	
-	
-	
-	
-	
-	
-	public void options_saveProgress(int frameX, int frameY) {
-		
-		int textX = frameX + gp.tileSize;
-		int textY = frameY + gp.tileSize * 3;
-		
-		currentDialogue = "Your Progress \nhas been Saved ";
-		for (String line: currentDialogue.split("\n")) {
-			g2.drawString(line,textX, textY);
-			textY+=40;
-		}
-		
-		
-			//Back
-				
-				textY+=40;
-				g2.drawString("Return to Game", textX, textY);
-				if(commandNum == 0) {
-					g2.drawString(">", textX - 25, textY);
-					if(gp.keyH.enterPressed) {
-						commandNum = 0;
-						gp.gameState = gp.playState;
-						subState = 0; 
-					}
-				}
-		
-		
-		
-		//Back
-				
-				
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-	
+
 	public void drawTransition() {
 		counter++;
 		g2.setColor(new Color(0,0,0,counter*5));
