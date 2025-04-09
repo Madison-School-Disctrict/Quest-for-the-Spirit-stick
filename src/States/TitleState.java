@@ -159,12 +159,14 @@ public class TitleState {
                         gp.ui.titleScreenState = 1;}
                 }
                 case DELETE_BUTTON -> { 
+                    System.out.println("Delete Button Pressed");
                     gp.handleDeleteAccount();
                     gp.usernameInput = "";
                     gp.passwordInput = "";
                     gp.confirmPasswordInput = "";
                     gp.loginMessage = "";
                     gp.inputFocus = InputFocus.USERNAME;
+                    gp.ui.titleScreenState = 0;
                 }
                 case BACK_BUTTON -> { gp.ui.titleScreenState = 0;
                     gp.inputFocus = InputFocus.USERNAME;

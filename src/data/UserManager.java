@@ -53,12 +53,27 @@ public class UserManager {
 
     public boolean deleteUser(String username, String password) {
         System.out.println(gp.usernameInput + " " + gp.passwordInput);
-        if (!users.containsKey(username)) return false;
+        loadUsers();
+        if (users.isEmpty()) {
+            System.out.println("No users found. AUto Added test user" );
+            return false;
+        }
+        if (!users.containsKey(username)) {
+            System.out.println(username + ": " + users.get(username) + "Failed to removed" );
+            return false;
+        }
         //if (!users.get(username).equals(password)) return false;
         if (users.containsKey(username)){
             users.remove(username, password);
+            System.out.println(username + ": " + users.get(username) + " was removed" );
+            if (users.containsKey(username)){
+                System.out.println(username + ": " + users.get(username) + "Failed to removed" );
+                return false;
+            }
+
         }
         saveUsers();
+        System.out.println("It made it all the way through  the user was removed" );
         return true;
     }
 

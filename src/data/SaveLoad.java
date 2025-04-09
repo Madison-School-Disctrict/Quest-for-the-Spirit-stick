@@ -164,7 +164,8 @@ public class SaveLoad {
 	}
 
 	public void deleteSave(String username) {
-		File file = new File("save_" + username + ".dat");
+		load(gp.usernameInput);
+		File file = new File( "src/data/saves/" + username + "_save.dat");
 		if (file.exists()) {
 			if (file.delete()) {
 				System.out.println("Save data for " + username + " deleted.");
