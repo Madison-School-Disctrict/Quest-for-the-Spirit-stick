@@ -157,7 +157,7 @@ public class EventHandler{
 		if(area == gp.dungeon) {
 			gp.playSE(13);
 		}
-		System.out.println("Teleporting to map: " + map + " col: " + col + " row: " + row);
+		//System.out.println("Teleporting to map: " + map + " col: " + col + " row: " + row);
 		}
 		
 	}

@@ -560,40 +560,6 @@ public class UI {
                             g2.drawString(">",x-gp.tileSize,y);
                         }
                     }
-					case 3 ->{
-                        g2.setColor(new Color(0,0,0));
-                        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-                        g2.setFont(g2.getFont().deriveFont(Font.BOLD,60F));
-                        String text = "MHS \"Quest for the Spirit Stick\"";
-                        int x = getXforCenteredText(text);
-                        int y = gp.tileSize*3;
-                        //shadow color
-                        g2.setColor(Color.gray);
-                        g2.drawString(text,x+5,y+5);
-                        //main color
-                        g2.setColor(Color.white);
-                        g2.drawString(text,x,y);
-                        //player image
-                        x= gp.screenWidth/2 - gp.tileSize;
-                        y+= gp.tileSize*2;
-                        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2,gp.tileSize*2,null );
-                        //menu
-                        g2.setFont(g2.getFont().deriveFont(Font.BOLD,45F));
-                        text = "NEW GAME";
-                        x = getXforCenteredText(text);
-                        y+=gp.tileSize*3;
-                        g2.drawString(text, x, y);
-                        if(commandNum == 0) {
-                            g2.drawString(">",x-gp.tileSize,y);
-                        }
-                        text = "QUIT";
-                        x = getXforCenteredText(text);
-                        y+=gp.tileSize*1;
-                        g2.drawString(text, x, y);
-                        if(commandNum == 1) {
-                            g2.drawString(">",x-gp.tileSize,y);
-                        }
-                    }
                 default -> {
                 }
             }
@@ -1141,7 +1107,7 @@ public class UI {
 		if(commandNum == 0) {
 			g2.drawString(">", textX-25, textY);
 			if(gp.keyH.enterPressed) {
-				System.out.println(gp.usernameInput);
+				//System.out.println(gp.usernameInput);
 				gp.saveLoad.save(gp.usernameInput);
 				subState = 0;
 				gp.gameState = gp.playState;
@@ -1157,16 +1123,16 @@ public class UI {
 		if(commandNum == 1) {
 			g2.drawString(">", textX-25, textY);
 			if(gp.keyH.enterPressed) {
-				//System.out.println(gp.usernameInput);
 				gp.saveLoad.save(gp.usernameInput);
 				subState = 0;
 				gp.gameState = gp.titleState;
-				gp.ui.titleScreenState = 2;
 				gp.stopMusic();
 				gp.resetGame(true);
 				System.exit(0);
 			}
 		}
+
+
 		
 	}	
 

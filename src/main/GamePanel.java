@@ -2,6 +2,7 @@ package main;
 
 import Environment.EnvironmentManager;
 import ai.PathFinder;
+import data.Progress;
 import data.SaveLoad;
 import data.UserManager;
 import entity.Entity;
@@ -22,7 +23,6 @@ import javax.swing.JPanel;
 import tile.Map;
 import tile.TileManager;
 import tileInteractive.InteractiveTile;
-import data.Progress;
 
 //import entity.Player;
 public class GamePanel extends JPanel implements Runnable{
@@ -168,7 +168,10 @@ private static final long serialVersionUID = 1L;
 public enum InputFocus {
     USERNAME, PASSWORD, CONFIRM_PASSWORD, LOGIN_BUTTON, 
     CREATE_BUTTON, BACK_BUTTON, DELETE_BUTTON,
+    /* Potential future button to program maybe  
     FORGOT_PASSWORD_BUTTON, LOGOUT_BUTTON
+
+    */
 }
 
 public void setInputFocus(InputFocus focus) {
@@ -280,7 +283,8 @@ public void setInputFocus(InputFocus focus) {
   public void update(){
 
         //Auto Save
-        if (System.currentTimeMillis() - lastAutoSaveTime >= AUTO_SAVE_INTERVAL && gameState == playState && (!EventHandler.boss1Dead || Progress.skeletonBossDefeated)) {
+        if (System.currentTimeMillis() - lastAutoSaveTime >= AUTO_SAVE_INTERVAL && 
+            gameState == playState && (!EventHandler.boss1Dead || Progress.skeletonBossDefeated)) {
             saveLoad.save(usernameInput);
             lastAutoSaveTime = System.currentTimeMillis();
         }
@@ -446,7 +450,7 @@ public void setInputFocus(InputFocus focus) {
       csManager.draw(g2);
       
       //UI
-     ui.draw(g2);
+        ui.draw(g2);
      
       }
       
@@ -535,7 +539,12 @@ public void handleLogin() {
     } else {
         loginMessage = "Login successful!";
 
-        ui.titleScreenState  = 2;
+       // ui.titleScreenState  = 2;
+       getSaveLoad().load(usernameInput);
+       gameState = playState;
+       ui.commandNum = 0;
+       ui.titleScreenState = 1;
+       playMusic(0);
     }
 }
 
@@ -551,7 +560,9 @@ public void handleCreateAccount() {
     } else {
         userManager.createUser(usernameInput, passwordInput);
         loginMessage = "Account created successfully!";
-        ui.titleScreenState  = 3;
+        gameState = playState;
+        playMusic(0);
+        ui.titleScreenState  = 0;
     }
 }
 
@@ -567,7 +578,7 @@ public void handleDeleteAccount() {
             System.out.println("Delete Button Pressed");
             File saveFile1 = new File("src/data/saves/" + usernameInput + "_save.dat");
             boolean deleted1 =  saveFile1.exists() && saveFile1.delete();
-            System.out.println("Trying to delete: " + saveFile1.getAbsolutePath());
+            System.out.println("Trying to delete: " + saveFile1.getAbsolutePath() + " : " + deleted1);
             
             if (!deleted1) {
                 System.out.println("Delete Button Pressed it made it passed validator");

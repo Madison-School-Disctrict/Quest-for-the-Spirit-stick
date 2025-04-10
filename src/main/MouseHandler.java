@@ -2,6 +2,7 @@ package main;
 import data.UserManager;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import main.GamePanel.InputFocus;
 
 
 public class MouseHandler implements MouseListener {
@@ -52,10 +53,7 @@ public class MouseHandler implements MouseListener {
                 gp.ui.titleScreenState = 1;
             }
 
-            if (scaledX >= gp.ui.button3x && scaledX <= gp.ui.button3x + gp.tileSize * 4 && scaledY >= gp.ui.button3y && scaledY <= gp.ui.button3y + gp.tileSize) {
-                    System.out.println("Delete Account clicked");
-                   // gp.handleDeleteAccount(); // implement this method
-                }
+            
 
         } else if (gp.ui.titleScreenState == 1) {
             
@@ -73,7 +71,16 @@ public class MouseHandler implements MouseListener {
                 gp.ui.titleScreenState = 0;
             }
 
-            
+            if (scaledX >= gp.ui.button3x && scaledX <= gp.ui.button3x + gp.tileSize * 4 && scaledY >= gp.ui.button3y && scaledY <= gp.ui.button3y + gp.tileSize) {
+                //System.out.println("Delete Account clicked");
+                //gp.handleDeleteAccount();
+                gp.usernameInput = "";
+                gp.passwordInput = "";
+                gp.confirmPasswordInput = "";
+                gp.loginMessage = "";
+                gp.inputFocus = InputFocus.USERNAME;
+                gp.ui.titleScreenState = 0;
+            }
             
         }
     }

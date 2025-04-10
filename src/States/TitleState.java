@@ -96,7 +96,7 @@ public class TitleState {
                        
                     }
                     if(gp.ui.commandNum == 1) {
-                        System.out.println(gp.usernameInput);
+                        //System.out.println(gp.usernameInput);
                         gp.getSaveLoad().load(gp.usernameInput);
                         gp.gameState = gp.playState;
                         gp.ui.commandNum = 0;
@@ -159,7 +159,7 @@ public class TitleState {
                         gp.ui.titleScreenState = 1;}
                 }
                 case DELETE_BUTTON -> { 
-                    System.out.println("Delete Button Pressed");
+                    //System.out.println("Delete Button Pressed");
                     gp.handleDeleteAccount();
                     gp.usernameInput = "";
                     gp.passwordInput = "";
