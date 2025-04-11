@@ -166,7 +166,7 @@ public class TitleState {
                     gp.confirmPasswordInput = "";
                     gp.loginMessage = "";
                     gp.inputFocus = InputFocus.USERNAME;
-                    gp.ui.titleScreenState = 0;
+                    //gp.ui.titleScreenState = 0;
                 }
                 case BACK_BUTTON -> { gp.ui.titleScreenState = 0;
                     gp.inputFocus = InputFocus.USERNAME;

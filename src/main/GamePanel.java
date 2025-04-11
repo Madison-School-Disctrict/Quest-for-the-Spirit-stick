@@ -575,15 +575,15 @@ public void handleDeleteAccount() {
 
         if (userManager.validateUser(usernameInput, passwordInput)){ 
             
-            System.out.println("Delete Button Pressed");
+            //System.out.println("Delete Button Pressed");
             File saveFile1 = new File("src/data/saves/" + usernameInput + "_save.dat");
             boolean deleted1 =  saveFile1.exists() && saveFile1.delete();
-            System.out.println("Trying to delete: " + saveFile1.getAbsolutePath() + " : " + deleted1);
+            loginMessage = ("Trying to delete: " + saveFile1.getAbsolutePath() + " : " + deleted1);
             
             if (!deleted1) {
-                System.out.println("Delete Button Pressed it made it passed validator");
+                //System.out.println("Delete Button Pressed it made it passed validator");
                 userManager.deleteUser(usernameInput, passwordInput);
-                System.out.println("Save data deleted for " + usernameInput + ".");
+                //System.out.println("Save data deleted for " + usernameInput + ".");
             } else {
                 loginMessage = "No save data found for " + usernameInput + ".";
             }

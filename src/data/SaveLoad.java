@@ -168,9 +168,9 @@ public class SaveLoad {
 		File file = new File( "src/data/saves/" + username + "_save.dat");
 		if (file.exists()) {
 			if (file.delete()) {
-				System.out.println("Save data for " + username + " deleted.");
+				gp.loginMessage = ("Save data for " + username + " deleted.");
 			} else {
-				System.out.println("Failed to delete save data for " + username + ".");
+				gp.loginMessage = ("Failed to delete save data for " + username + ".");
 			}
 		}
 	}

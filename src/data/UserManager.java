@@ -26,7 +26,7 @@ public class UserManager {
     private void saveUsers() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USER_FILE))) {
             oos.writeObject(users);
-            System.out.println("Users saved successfully.");
+           // System.out.println("Users saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,10 +41,10 @@ public class UserManager {
     }
 
     public boolean createUser(String username, String password) {
-        System.out.println(gp.usernameInput + " " + gp.passwordInput);
+        //System.out.println(gp.usernameInput + " " + gp.passwordInput);
         if (users.containsKey(username)) return false;
         users.put(username, password);
-        System.out.println(username + ": " + users.get(username) + " " + password + ": " + users.get(password));
+        //System.out.println(username + ": " + users.get(username) + " " + password + ": " + users.get(password));
         saveUsers();
         return true;
     }
@@ -52,28 +52,28 @@ public class UserManager {
 
 
     public boolean deleteUser(String username, String password) {
-        System.out.println(gp.usernameInput + " " + gp.passwordInput);
+        //System.out.println(gp.usernameInput + " " + gp.passwordInput);
         loadUsers();
         if (users.isEmpty()) {
-            System.out.println("No users found. AUto Added test user" );
+            //System.out.println("No users found. AUto Added test user" );
             return false;
         }
         if (!users.containsKey(username)) {
-            System.out.println(username + ": " + users.get(username) + "Failed to removed" );
+            //System.out.println(username + ": " + users.get(username) + "Failed to removed" );
             return false;
         }
         //if (!users.get(username).equals(password)) return false;
         if (users.containsKey(username)){
             users.remove(username, password);
-            System.out.println(username + ": " + users.get(username) + " was removed" );
+            //System.out.println(username + ": " + users.get(username) + " was removed" );
             if (users.containsKey(username)){
-                System.out.println(username + ": " + users.get(username) + "Failed to removed" );
+                //System.out.println(username + ": " + users.get(username) + "Failed to removed" );
                 return false;
             }
 
         }
         saveUsers();
-        System.out.println("It made it all the way through  the user was removed" );
+        //System.out.println("It made it all the way through  the user was removed" );
         return true;
     }
 
