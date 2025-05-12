@@ -4,6 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import main.GamePanel;
 
 public class Map extends TileManager{
@@ -17,17 +18,7 @@ public class Map extends TileManager{
 		this.gp = gp;
 		createWorldMap();
 	}
-
-	//added be able to turn on and off the mini map form the playstate
-	public boolean getMiniMapOn() {
-		return miniMapOn;
-	}
-	public void setMiniMapOn(boolean miniMapOn) {
-		this.miniMapOn = miniMapOn;
-	}
-
-
-
+	
 	public void createWorldMap() {
 		worldMap  = new BufferedImage[gp.maxMap];
 		int worldMapWidth = gp.tileSize * gp.maxWorldCol;

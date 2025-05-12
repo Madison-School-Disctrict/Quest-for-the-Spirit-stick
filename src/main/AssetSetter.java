@@ -264,7 +264,7 @@ public class AssetSetter {
 			
 			gp.monster[mapNum][i] = new MonGreenSlime(gp);
 			gp.monster[mapNum][i].worldX = gp.tileSize*39;
-			gp.monster[mapNum][i].worldY = gp.tileSize*9;
+			gp.monster[mapNum][i].worldY = gp.tileSize*11;
 	
 			i++;
 			
@@ -394,46 +394,33 @@ public class AssetSetter {
 		int mapNum = 0;
 		
 		//mapNum++;
-		for(int i = 0; i < 45; i++) {
+		for(int i = 0; i < 35; i++) {
 			if(i < 9) {
 				gp.iTile[mapNum][i] = new ITDrayTree(gp, (i + 25), 12);
 			}
 			else if(i < 14) {
 				gp.iTile[mapNum][i] = new ITDrayTree(gp, (i + 12), 23);
 			}
-			else if(i < 18) {
-				gp.iTile[mapNum][i] = new ITDrayTree(gp, (i - 4), 41);
+			else if(i < 19) {
+				gp.iTile[mapNum][i] = new ITDrayTree(gp, (i - 5), 41);
 			}
 			else if(i < 24) {
 				gp.iTile[mapNum][i] = new ITDrayTree(gp, (i - 5), 40);
 			}
-			else if(i < 28) {
-				gp.iTile[mapNum][i] = new ITDrayTree(gp, 19, (41 - (i-24)));
+			else if(i < 29) {
+				gp.iTile[mapNum][i] = new ITDrayTree(gp, 19, (41 - (i-23)));
 			}
-			else if(i < 34) {
-				gp.iTile[mapNum][i] = new ITDrayTree(gp, 20, (38 + (i-30)));
+			else if(i < 31) {
+				gp.iTile[mapNum][i] = new ITDrayTree(gp, 20, (38 + (i-28)));
 			}
-			// else if (i < 40){
-			// 	gp.iTile[mapNum][i] = new ITDrayTree(gp, 21, i+2);  
-			// }
-			// else if (i < 45){
-			// 	gp.iTile[mapNum][i+5] = new ITDrayTree(gp, 22, i+2);
-			// } 
-			// else {
-			// 	gp.iTile[mapNum][i+10] = new ITDrayTree(gp, 23, i-3);
-			// }
-		
-			
 		}
-		// for(int i = 35; i < 39; i++){
-		// //  
-		// gp.iTile[mapNum][i] = new ITDrayTree(gp, 21, i+1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   gp.iTile[mapNum][i] = new ITDrayTree(gp, 10, 41);i++;
-		// gp.iTile[mapNum][i+5] = new ITDrayTree(gp, 22, i+2);
-		// gp.iTile[mapNum][i+10] = new ITDrayTree(gp, 23, i+2);
-		// }
+		int i = 35;
+		gp.iTile[mapNum][i] = new ITDrayTree(gp, 10, 41);i++;
+		gp.iTile[mapNum][i] = new ITDrayTree(gp, 13, 41);i++;
+		gp.iTile[mapNum][i] = new ITDrayTree(gp, 19, 38);i++;
 //		
 		mapNum = 2;
-		int i = 0;
+		i = 0;
 		gp.iTile[mapNum][i] = new ITDestructibleWall(gp, 18, 30 ); i++;
 		gp.iTile[mapNum][i] = new ITDestructibleWall(gp, 17, 31 ); i++;
 		gp.iTile[mapNum][i] = new ITDestructibleWall(gp, 17, 32 ); i++;

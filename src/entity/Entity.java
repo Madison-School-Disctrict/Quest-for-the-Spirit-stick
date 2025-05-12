@@ -8,7 +8,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
 import javax.imageio.ImageIO;
+
 import main.GamePanel;
 import main.UtilityTool;
 
@@ -564,14 +566,12 @@ public class Entity {
 				  }
 			  }
 			  // we can give damage	  
-			  if(!gp.player.getImoralmode()){
-				if(damage != 0 ) {
-					gp.player.transparent = true;
-					setKnockBack(gp.player,this,knockBackPower);
-				}
-			 	gp.player.life -= damage;
-			 	gp.player.invincible = true;
-			  }//else{System.out.println("imortal mode on:  " + gp.player.getImoralmode());}
+			  if(damage != 0 ) {
+				  gp.player.transparent = true;
+				  setKnockBack(gp.player,this,knockBackPower);
+			  }
+			 gp.player.life -= damage;
+			 gp.player.invincible = true;
 		 }
 	}
 	 public void setKnockBack(Entity target, Entity attacker, int knockBackPower) {

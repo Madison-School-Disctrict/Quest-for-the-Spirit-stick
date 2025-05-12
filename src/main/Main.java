@@ -14,8 +14,8 @@ public class Main {
     public static void main(String[] args){
        // Player canvas = new Player(); 
     	//window = new JFrame();
-        window = new JFrame("Madison HighSchool Annual CS Project 2021 -- The end of time");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This is a test
+        window = new JFrame("Madison HighSchool Annual CS Project 2021-2 -- The end of time");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         new Main().setIcon();
         //window.setTitle("Madison HighSchool Annual CS Project");

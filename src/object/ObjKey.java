@@ -13,9 +13,8 @@ public class ObjKey extends Entity{
 		name = objName;
 		stackable = true;
 		down1 = setup("/objects/key", gp.tileSize, gp.tileSize);
-		description = "(" + name + ")" + "\nThis key can open a \n door."; 	
+		description = "(" + name + ")" + "\nThis key can open a door."; 	
 		price = 25;
-		setDialogue();
 	}
 	public void setDialogue() {
 		dialogues[0][0] = "You use the " + name + " and open the door";

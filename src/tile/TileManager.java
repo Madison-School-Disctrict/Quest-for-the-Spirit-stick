@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.UtilityTool;
@@ -25,9 +26,10 @@ import main.UtilityTool;
 	//public String currentMap = "/map/worldmap.txt";
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
+		String initialTileData = "/map/tiledata3.txt";
 		
 		//Read Tile Data file
-		InputStream is = getClass().getResourceAsStream("/map/tiledata.txt");
+		InputStream is = getClass().getResourceAsStream(initialTileData);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		
 		//Getting Tile Name and Collision INFO From the file  
@@ -36,7 +38,12 @@ import main.UtilityTool;
 			while((line = br.readLine()) != null) {
 				fileNames.add(line);
 				collisionStatus.add(br.readLine());
+				if(initialTileData.equals("/map/tiledata3.txt")) {
 				projectilePass.add(br.readLine());
+				}else {
+					projectilePass.add(null);
+				}
+				
 			}
 			br.close();
 		} catch (IOException e) {
@@ -56,6 +63,7 @@ import main.UtilityTool;
 			gp.maxWorldCol = maxTile.length;
 			gp.maxWorldRow = maxTile.length;
 			mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
+			
 			br.close();
 			
 		}catch(IOException e) {
@@ -68,8 +76,7 @@ import main.UtilityTool;
 		loadMap("/map/dungeon01.txt",2);
 		loadMap("/map/dungeon02.txt",3);
 		loadMap("/map/thunder.txt",4);
-		loadMap("map/rigby1.txt",5);
-		loadMap("/map/pit.txt",6);
+		loadMap("map/rigby3.txt",5);
 	}
 	public void setTile(int num, boolean pass) {
 		tile[num].collision = pass;
@@ -94,7 +101,7 @@ import main.UtilityTool;
 			}
 			
 			
-			if(projectilePass.get(i).equals("true")) {
+			if(!projectilePass.get(i).equals(null) && projectilePass.get(i).equals("true")) {
 				projectileCollision = true;
 			} else {
 				projectileCollision = false;

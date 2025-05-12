@@ -18,12 +18,12 @@ public class MonSkeletonBoss extends Entity{
 		name = monName;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-		maxLife = 1500;
+		maxLife = 50;
 		life = maxLife;
-		attack = 250;
-		defense = 50;
-		exp = 350;
-		knockBackPower = 10;
+		attack = 10;
+		defense = 2;
+		exp = 50;
+		knockBackPower = 5;
 		sleep = true;	
 		int size = gp.tileSize * 5;
 		solidArea.x = 48;
