@@ -2,6 +2,7 @@ package monster;
 
 import data.Progress;
 import entity.Entity;
+import main.EventHandler;
 import main.GamePanel;
 import object.ObjDoorIron;
 
@@ -13,18 +14,20 @@ public class MonSkeletonBoss extends Entity{
 		super(gp);
 		this.gp = gp;
 		
+		upgreadePercent = 0.01;
 		type = type_monster;
 		boss = true;
 		name = monName;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-		maxLife = 1500;
+		maxLife = 450;
 		life = maxLife;
-		attack = 250;
-		defense = 50;
+		attack = 70;
+		defense = 85;
 		exp = 350;
 		knockBackPower = 10;
 		sleep = true;	
+		
 		int size = gp.tileSize * 5;
 		solidArea.x = 48;
 		solidArea.y = 48;
@@ -119,6 +122,7 @@ public class MonSkeletonBoss extends Entity{
 	public void checkDrop() {
 		gp.bossBattleOn = false;
 		Progress.skeletonBossDefeated = true;
+		EventHandler.boss1Dead = false;
 		
 		//Restore previous music
 		gp.stopMusic();

@@ -9,15 +9,16 @@ public class MonGreenSlime extends Monster{
 		super(gp);
 		this.gp = gp;
 		
+		upgreadePercent = .25;
 		type = type_monster;
 		name = "greenSlime";
-		defaultSpeed = 1;
+		defaultSpeed = 1 + (int)(0.01*upgreadePercent*gp.player.level);
 		speed = defaultSpeed;
-		maxLife = 10;
+		maxLife = 10 + 10 * (int)(upgreadePercent*gp.player.level);
 		life = maxLife;
-		attack = 5;
-		defense = 0;
-		exp = 2;
+		attack = 5 + (int)(upgreadePercent*gp.player.level);
+		defense = 0 + 2 * (int)(upgreadePercent*gp.player.level);
+		exp = 2 + 2*(int)(upgreadePercent*gp.player.level);
 		projectile = new ObjRock(gp);
 		
 		solidArea.x = 3;

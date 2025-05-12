@@ -6,6 +6,7 @@ import entity.NPCBigRock;
 import entity.NPCMerchant;
 import entity.NPCOldMAn;
 import monster.MonBat;
+import monster.MonBlueKnight;
 import monster.MonGreenSlime;
 import monster.MonOrc;
 import monster.MonPinkSlime;
@@ -41,7 +42,10 @@ public class AssetSetter {
 		int mapNum = 0;
 		int i = 0;
 
+
+		
 		//mapNum ++;
+		
 		gp.obj[mapNum][i] = new ObjCoinsBronze(gp);
 		gp.obj[mapNum][i].worldX = gp.tileSize * 22;
 		gp.obj[mapNum][i].worldY = gp.tileSize * 22;
@@ -213,7 +217,15 @@ public class AssetSetter {
 		int mapNum = 0;
 		int i = 0;
 		
-		//mapNum ++;
+		
+		gp.monster[mapNum][i] = new MonBlueKnight(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*79;
+		gp.monster[mapNum][i].worldY = gp.tileSize*39;
+		
+		i++;
+
+
+
 		gp.monster[mapNum][i] = new MonOrc(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*12;
 		gp.monster[mapNum][i].worldY = gp.tileSize*33;
@@ -286,14 +298,14 @@ public class AssetSetter {
 		} 
 		else if (gp.player.level < 6) {
 			gp.monster[mapNum][i] = new MonRedSlime(gp);
-			gp.monster[mapNum][i].worldX = gp.tileSize*10;
-			gp.monster[mapNum][i].worldY = gp.tileSize*39;
+			gp.monster[mapNum][i].worldX = gp.tileSize*29;
+			gp.monster[mapNum][i].worldY = gp.tileSize*32;
 
 			i++;
 			
 			gp.monster[mapNum][i] = new MonRedSlime(gp);
-			gp.monster[mapNum][i].worldX = gp.tileSize*10;
-			gp.monster[mapNum][i].worldY = gp.tileSize*41;
+			gp.monster[mapNum][i].worldX = gp.tileSize*29;
+			gp.monster[mapNum][i].worldY = gp.tileSize*31;
 
 			i++;
 			

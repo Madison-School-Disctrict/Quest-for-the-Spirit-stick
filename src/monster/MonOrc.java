@@ -10,16 +10,17 @@ public class MonOrc extends Entity {
 		super(gp);
 		this.gp = gp;
 		
+		upgreadePercent = 0.1;
 		type = type_monster;
 		name = "Orc";
-		defaultSpeed = 3;
+		defaultSpeed = 3 + (int)(upgreadePercent*gp.player.level);
 		speed = defaultSpeed;
-		maxLife = 10;
+		maxLife = 10 + (int)(upgreadePercent*gp.player.level);
 		life = maxLife;
-		attack = 8;
-		defense = 3;
-		exp = 20;
-		knockBackPower = 5;
+		attack = 8 + (int)(upgreadePercent*gp.player.level);
+		defense = 3 + (int)(upgreadePercent*gp.player.level);
+		exp = 20 + (int)(upgreadePercent*gp.player.level);
+		knockBackPower = 5 + (int)(upgreadePercent*gp.player.level);
 		
 		solidArea.x = 4;
 		solidArea.y =4;

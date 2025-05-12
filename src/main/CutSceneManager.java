@@ -1,7 +1,8 @@
 package main;
 
-import entity.PlayerDummy;
 import java.awt.Graphics2D;
+
+import entity.PlayerDummy;
 import monster.MonSkeletonBoss;
 import object.ObjDoorIron;
 
@@ -112,6 +113,5 @@ public class CutSceneManager {
 			gp.playMusic(22);
 		}
 		
-		gp.gameState = gp.dialogueState;
 	}
 }

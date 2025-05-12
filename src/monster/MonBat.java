@@ -8,16 +8,17 @@ public class MonBat extends Entity {
 	public MonBat(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
-		
+
+		upgreadePercent = 0.01; 
 		type = type_monster;
 		name = "Bat";
-		defaultSpeed = 4;
+		defaultSpeed = 4 + (int)(upgreadePercent*gp.player.level);
 		speed = defaultSpeed;
-		maxLife = 7;
+		maxLife = 7+(int)(upgreadePercent*gp.player.level);
 		life = maxLife;
-		attack = 7;
-		defense = 0;
-		exp = 2;
+		attack = 7 + (int)(upgreadePercent*gp.player.level);
+		defense = 0 + (int)(upgreadePercent*gp.player.level);
+		exp = 2 + (int)(upgreadePercent*gp.player.level);
 		
 		
 		solidArea.x = 3;

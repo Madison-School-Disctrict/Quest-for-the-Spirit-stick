@@ -1,9 +1,8 @@
 package tileInteractive;
 
+import entity.Entity;
 import java.awt.Color;
 import java.util.Random;
-
-import entity.Entity;
 import main.GamePanel;
 import object.ObjAxe;
 import object.ObjCoinsBronze;
@@ -20,7 +19,7 @@ public class ITDestructibleWall extends InteractiveTile{
 		this.worldY = gp.tileSize * row;
 		down1 = setup("/interactive_tiles/destructiblewall", gp.tileSize, gp.tileSize);
 		destructible = true;
-		life = 3;
+		life = 1;
 				
 	}
 	public boolean isCorrectItem(Entity entity) {

@@ -11,7 +11,7 @@ public class ObjCoinsGold extends Entity{
 		this.gp = gp;
 		type = type_pickupOnly;
 		name = objName;
-		value = 3;
+		value = 10;
 		down1 = setup("/objects/coin_gold", gp.tileSize, gp.tileSize);
 		
 	}

@@ -3,14 +3,15 @@ package monster;
 import entity.Entity;
 import java.util.Random;
 import main.GamePanel;
-import object.ObjAxe;
 import object.ObjCoinsBronze;
+import object.ObjCoinsGold;
+import object.ObjCoinsSilver;
 import object.ObjHeart;
 import object.ObjManaCrystal;
-import object.ObjPickaxe;
 
 	public class Monster extends Entity{
 		GamePanel gp;
+		
 		
 	 public Monster(GamePanel gp) {
 		super(gp);
@@ -44,13 +45,13 @@ import object.ObjPickaxe;
 				dropItem(new ObjManaCrystal(gp));
 			}
 			if(i >= 70 && i < 80) {
-				dropItem(new ObjPickaxe(gp));
+				dropItem(new ObjCoinsSilver(gp));
 			}
 			if(i >= 80 && i < 85) {
-				dropItem(new ObjAxe(gp));
+				dropItem(new ObjCoinsSilver(gp));
 			}
 			if(i >= 85 && i < 90) {
-				dropItem(new ObjAxe(gp));
+				dropItem(new ObjCoinsGold(gp));
 			}
 			if(i >= 90 && i < 100) {
 				dropItem(new ObjManaCrystal(gp));

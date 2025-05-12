@@ -9,15 +9,16 @@ public class MonPinkSlime extends Monster{
 		super(gp);
 		this.gp = gp;
 		
+		upgreadePercent = 0.5;
 		type = type_monster;
 		name = "Pink Slime";
-		defaultSpeed = 3;
+		defaultSpeed = 3 + (int)(0.05*upgreadePercent*gp.player.level);
 		speed = defaultSpeed;
-		maxLife = 45;
+		maxLife = 45 + 15 * (int)(upgreadePercent*gp.player.level);
 		life = maxLife;
-		attack = 20;
-		defense = 8;
-		exp = 15;
+		attack = 20 + 3 * (int)(upgreadePercent*gp.player.level);
+		defense = 8 + 3 * (int)(upgreadePercent*gp.player.level);
+		exp = 15 + 5*(int)(upgreadePercent*gp.player.level);
 		projectile = new ObjRock(gp);
 		
 		solidArea.x = 3;
