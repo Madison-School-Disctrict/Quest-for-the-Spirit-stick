@@ -6,7 +6,6 @@ import entity.NPCBigRock;
 import entity.NPCMerchant;
 import entity.NPCOldMAn;
 import monster.MonBat;
-import monster.MonBlueKnight;
 import monster.MonGreenSlime;
 import monster.MonOrc;
 import monster.MonPinkSlime;
@@ -218,7 +217,7 @@ public class AssetSetter {
 		int i = 0;
 		
 		
-		gp.monster[mapNum][i] = new MonBlueKnight(gp);
+		gp.monster[mapNum][i] = new MonOrc(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*79;
 		gp.monster[mapNum][i].worldY = gp.tileSize*39;
 		
