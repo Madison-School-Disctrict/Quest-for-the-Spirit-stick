@@ -318,26 +318,26 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            for (int i = 0; i < particleList.size(); i++) { // Particle update
-                if (particleList.get(i) != null) {
-                    if (particleList.get(i).alive) {
-                        particleList.get(i).update();
-                    }
-                    if (!particleList.get(i).alive) {
-                        particleList.remove(i);
-                    }
-                }
-
-            }
-            eManager.update();
-            for (int i = 0; i < iTile[1].length; i++) {
-                if (iTile[currentMap][i] != null) {
-                    iTile[currentMap][i].update();
+            for (int i = particleList.size() - 1; i >= 0; i--) { // Particle update
+                Entity particle = particleList.get(i);
+                if (particle != null && particle.alive) {
+                    particle.update();
+                } else {
+                    particleList.remove(i);
                 }
             }
 
         }
-        if (gameState == pauseState) {
+        eManager.update();
+        for (int i = 0; i < iTile[1].length; i++) {
+            if (iTile[currentMap][i] != null) {
+                iTile[currentMap][i].update();
+            }
+        }
+
+    }
+
+if (gameState == pauseState) {
             //nothing  Maybe add something latter
 
         }
