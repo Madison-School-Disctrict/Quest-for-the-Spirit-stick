@@ -6,9 +6,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import main.GamePanel;
 
-
 public class UserManager {
-    private final String USER_FILE = "users.dat";
+
+    private final String USER_FILE = "savedata/users.dat";
     private HashMap<String, String> users;
     GamePanel gp;
 
@@ -29,7 +29,7 @@ public class UserManager {
     private void saveUsers() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USER_FILE))) {
             oos.writeObject(users);
-           // System.out.println("Users saved successfully.");
+            // System.out.println("Users saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +40,9 @@ public class UserManager {
     }
 
     public boolean validateUser(String username, String password) {
-        if(!users.containsKey(username)) return false;
+        if (!users.containsKey(username)) {
+            return false;
+        }
 
         String hashedInput = hashPassword(password);
         String stored = users.get(username);
@@ -51,14 +53,14 @@ public class UserManager {
 
     public boolean createUser(String username, String password) {
         //System.out.println(gp.usernameInput + " " + gp.passwordInput);
-        if (users.containsKey(username)) return false;
+        if (users.containsKey(username)) {
+            return false;
+        }
         users.put(username, hashPassword(password));
         //System.out.println(username + ": " + users.get(username) + " " + password + ": " + users.get(password));
         saveUsers();
         return true;
     }
-
-
 
     public boolean deleteUser(String username, String password) {
         //System.out.println(gp.usernameInput + " " + gp.passwordInput);
@@ -72,10 +74,10 @@ public class UserManager {
             return false;
         }
         //if (!users.get(username).equals(password)) return false;
-        if (users.containsKey(username)){
+        if (users.containsKey(username)) {
             users.remove(username, hashPassword(password));
             //System.out.println(username + ": " + users.get(username) + " was removed" );
-            if (users.containsKey(username)){
+            if (users.containsKey(username)) {
                 //System.out.println(username + ": " + users.get(username) + "Failed to removed" );
                 return false;
             }
@@ -89,29 +91,23 @@ public class UserManager {
     public HashMap<String, String> getUsers() {
         return users;
     }
+
     public void setUsers(HashMap<String, String> users) {
         this.users = users;
     }
 
-
-
-
-
-
-
-
     public static String hashPassword(String password) {
-    try {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] hashedBytes = md.digest(password.getBytes());
-        StringBuilder sb = new StringBuilder();
-        for (byte b : hashedBytes) {
-            sb.append(String.format("%02x", b));
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
-        return sb.toString();
-    } catch (NoSuchAlgorithmException e) {
-        throw new RuntimeException(e);
     }
-}
-    
+
 }
