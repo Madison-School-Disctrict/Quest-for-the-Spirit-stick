@@ -323,17 +323,17 @@ public void setInputFocus(InputFocus focus) {
     	   }
        }
        
-       for(int i = 0; i < particleList.size(); i++) { // Particle update
-    	   if(particleList.get(i) != null) {
-    		   if(particleList.get(i).alive) {
-    			   particleList.get(i).update();
-    		   }
-    		   if(!particleList.get(i).alive) {
-    			   particleList.remove(i);
-        		   }
-    	   }
-    	   
-       }
+       for (int i = particleList.size() - 1; i >= 0; i--) {
+            Entity particle = particleList.get(i);
+            if (particle != null && particle.alive) {
+                particle.update();
+            } else {
+                particleList.remove(i);
+            }
+        }
+
+
+
        eManager.update();
        for(int i = 0; i < iTile[1].length; i++) {
     	   if(iTile[currentMap][i] != null) {

@@ -1,10 +1,11 @@
 package data;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import main.GamePanel;
 
 public class SaveLoad {
@@ -16,7 +17,7 @@ public class SaveLoad {
 	
 	public void save(String name) {
 		try {
-			String fileName = "src/data/saves/" + name + "_save.dat";
+			String fileName = getSavePath(name);
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(fileName)));
 			DataStorage ds = new DataStorage();
 			ds.level = gp.player.level;
@@ -84,8 +85,17 @@ public class SaveLoad {
 	}
 	public void load(String name) {
 		try {
-			String fileName = "src/data/saves/" + name + "_save.dat";
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(fileName)));
+			String fileName = getSavePath(name);
+			Path filePath = Paths.get(fileName);
+
+			if (!Files.exists(filePath)) {
+				System.out.println("Load failed: Save file does not exist.");
+				return;
+			}
+
+			ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(filePath));
+
+
 			//Read the DataStorage object
 			DataStorage ds = (DataStorage)ois.readObject();
 			
@@ -111,7 +121,7 @@ public class SaveLoad {
 				gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
 				gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
 
-		}
+			}
 			//Player Equipment
 			gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
 			gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
@@ -163,15 +173,60 @@ public class SaveLoad {
 	
 	}
 
+	// public void deleteSave(String username) {
+	// 	load(gp.usernameInput);
+	// 	File file = new File( "src/data/saves/" + username + "_save.dat");
+	// 	if (file.exists()) {
+	// 		if (file.delete()) {
+	// 			gp.loginMessage = ("Save data for " + username + " deleted.");
+	// 		} else {
+	// 			gp.loginMessage = ("Failed to delete save data for " + username + ".");
+	// 		}
+	// 	}
+	// }
+
+
 	public void deleteSave(String username) {
-		load(gp.usernameInput);
-		File file = new File( "src/data/saves/" + username + "_save.dat");
-		if (file.exists()) {
-			if (file.delete()) {
-				gp.loginMessage = ("Save data for " + username + " deleted.");
+		String fileName = getSavePath(username);
+		Path path = Paths.get(fileName);
+
+		try {
+			if (Files.exists(path)) {
+				Files.delete(path);
+				gp.loginMessage = "Save data for " + username + " deleted.";
 			} else {
-				gp.loginMessage = ("Failed to delete save data for " + username + ".");
+				gp.loginMessage = "No save data found for " + username + ".";
 			}
+		} catch (Exception e) {
+			gp.loginMessage = "Failed to delete save data for " + username + ".";
+			e.printStackTrace();
 		}
 	}
+
+
+
+
+	public static String getSavePath(String name) {
+		Path dir = Paths.get(System.getProperty("user.home"), "MyGameSaves");
+		try {
+			Files.createDirectories(dir); // creates the directory if it doesn't exist
+		} catch (Exception e) {
+			System.out.println("Failed to create save directory.");
+			e.printStackTrace();
+		}
+		return dir.resolve(name + "_save.dat").toString();
+	}
+
+
+	public static boolean saveExists(String name) {
+		Path filePath = Paths.get(getSavePath(name));
+		return Files.exists(filePath);
+	}
+
+
 }
+
+
+
+
+
