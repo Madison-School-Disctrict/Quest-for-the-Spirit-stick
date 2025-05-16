@@ -66,7 +66,7 @@ No new features have been added yet this year.
 1. **Published to GitHub**
 
     - **Change:** Published this codebase to GitHub for easy access and control by all future contributers
-    - **Done by:** Rik, Matthew
+    - **Done by:** Matthew, Rik
 
 2. **README.md Created**
 
@@ -79,15 +79,25 @@ No new features have been added yet this year.
     - **Done by:** Rik, Matthew
 
 4. **Codebase Cleanup Work**
+
     - **Change:** Formatted, removed, and made small changes to a number of files to improve readability
+    - **Done by:** Matthew
+
+5. **Save Data Relocation**
+
+    - **Change:** Moved player saves to savedata folder for easier compiling
+    - **Done by:** Matthew
+
+6. **Jar File Creation**
+    - **Change:** Created "createjar.bat" batch script for easy jar creation
     - **Done by:** Matthew
 
 ### Contributors
 
 -   Rik
+-   Matthew
 -   Bryan
 -   Gavin
--   Matthew
 
 ## Pre 2024
 
