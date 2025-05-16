@@ -27,10 +27,7 @@ import tileInteractive.InteractiveTile;
 //import entity.Player;
 public class GamePanel extends JPanel implements Runnable {
 
-    /* eclipse told me I needed this. Serial Number
-	 * 
-	 * 
-     */
+    
     private static final long serialVersionUID = 1L;
 //screen settings
     final int originalTileSize = 16; // 16x16 tile
@@ -335,110 +332,121 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-    }
+    
 
-if (gameState == pauseState) {
+        if (gameState == pauseState) {
             //nothing  Maybe add something latter
 
         }
 
     }
 
-    public void drawToTempScreen() {
-
-        //DEbug
-        long drawStart = 0;
-        if (keyH.showDebugText == true) {
-            drawStart = System.nanoTime();
-        }
-
-        //Title Screen
-        if (gameState == titleState) {
-            ui.draw(g2);
-        } else if (gameState == mapState) {
-            map.drawFullMapScreen(g2);
-        } else {
-            //tile
-            tileM.draw(g2);
-
-            //interactive Tiles
-            for (int i = 0; i < iTile[1].length; i++) {
-                if (iTile[currentMap][i] != null) {
-                    iTile[currentMap][i].draw(g2);
-                }
-            }
-            //player
-
-            // Add entities to List 
-            //***********************
-            entityList.add(player);
-            for (int i = 0; i < npc[1].length; i++) {
-                if (npc[currentMap][i] != null) {
-                    entityList.add(npc[currentMap][i]);
-                }
-            }
-
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    entityList.add(obj[currentMap][i]);
-                }
-            }
-
-            for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != null) {
-                    entityList.add(monster[currentMap][i]);
-                }
-            }
-
-            // /*   ************************************************************************************ 
-            for (int i = 0; i < projectile[1].length; i++) {
-                if (projectile[currentMap][i] != null) {
-                    entityList.add(projectile[currentMap][i]);
-                }
-            }
-
-            // ******************************************************************************************
-            //     */
-            for (int i = 0; i < particleList.size(); i++) {
-                if (particleList.get(i) != null) {
-                    entityList.add(particleList.get(i));
-                }
-            }
-
-            //***********************
-            //SORT 
-            Collections.sort(entityList, new Comparator<Entity>() {
-
-                @Override
-                public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.worldY, e2.worldY);
-                    return result;
-                }
-            });
-
-            //Draw Enttities 
-            for (int i = 0; i < entityList.size(); i++) {
-                entityList.get(i).draw(g2);
-            }
-            // Empty List      
-            entityList.clear();
-
-            //Environment When we are in the dungeon we need to use the following.
-            eManager.draw(g2);
-
-            //Mini Map
-            map.drawMiniMap(g2);
-
-            //cutScene
-            csManager.draw(g2);
-
-            //UI
-            ui.draw(g2);
-
-        }
-
-        //Debug
-        if (keyH.showDebugText == true) {
+  public void drawToTempScreen() {
+	  
+    //DEbug
+      long drawStart = 0;
+      if(keyH.showDebugText == true) {    	  
+    	  drawStart = System.nanoTime();
+      }
+      
+      
+      //Title Screen
+      if(gameState == titleState) {
+    	  ui.draw(g2);
+      }
+      
+      else if(gameState == mapState){
+    	  map.drawFullMapScreen(g2);
+      }
+      else {
+      //tile
+      tileM.draw(g2);
+      
+      //interactive Tiles
+      for(int i = 0; i < iTile[1].length;i++) {
+    	  if(iTile[currentMap][i] != null) {
+    		  iTile[currentMap][i].draw(g2);
+    	  }
+      }
+      //player
+    
+      // Add entities to List 
+      //***********************
+      
+      entityList.add(player);
+      for(int i = 0; i < npc[1].length; i++ ) {
+    	  if(npc[currentMap][i] != null) {
+    		  entityList.add(npc[currentMap][i]);
+    	  }
+      }
+      
+      for( int i = 0; i < obj[1].length; i++ ) {
+    	  if(obj[currentMap][i] != null) {
+    		  entityList.add(obj[currentMap][i]);
+    	  }
+      }
+      
+      for( int i = 0; i < monster[1].length; i++ ) {
+    	  if(monster[currentMap][i] != null) {
+    		  entityList.add(monster[currentMap][i]);
+    	  }
+      }
+      
+      // /*   ************************************************************************************ 
+      
+      
+      for( int i = 0; i < projectile[1].length; i++ ) {
+    	  if(projectile[currentMap][i] != null) {
+    		  entityList.add(projectile[currentMap][i]);
+    	  }
+      }
+      
+      
+       // ******************************************************************************************
+       //     */
+      
+      
+      for( int i = 0; i < particleList.size(); i++ ) {
+    	  if(particleList.get(i) != null) {
+    		  entityList.add(particleList.get(i));
+    	  }
+      }
+      
+      //***********************
+      
+      //SORT 
+      Collections.sort(entityList, new Comparator<Entity>() {
+      
+      @Override
+      public int compare(Entity e1, Entity e2) {
+    	  int result = Integer.compare(e1.worldY, e2.worldY);
+    	  return result;
+      }
+      });
+      
+      //Draw Enttities 
+      for( int i = 0; i < entityList.size() ; i++ ) {
+    	  entityList.get(i).draw(g2);
+      }
+      // Empty List      
+      entityList.clear();
+      
+      //Environment When we are in the dungeon we need to use the following.
+      eManager.draw(g2);
+      
+      //Mini Map
+      map.drawMiniMap(g2);
+      
+      //cutScene
+      csManager.draw(g2);
+      
+      //UI
+        ui.draw(g2);
+     
+      }
+      
+     //Debug
+        if(keyH.showDebugText == true) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setFont(new Font("Arial", Font.PLAIN, 20));

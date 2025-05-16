@@ -6,6 +6,7 @@
 
 package main;
  
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -47,9 +48,14 @@ public class Main {
     } 
     
     public void setIcon() {
-    	ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/MadisonM.png"));
-    	window.setIconImage(icon.getImage());
-    	
+        URL iconURL = getClass().getClassLoader().getResource("player/MadisonM.png");
+        if (iconURL == null) {
+            System.out.println("ERROR: Icon image not found! Make sure 'player/MadisonM.png' is in the JAR root.");
+        } else {
+            ImageIcon icon = new ImageIcon(iconURL);
+            window.setIconImage(icon.getImage());
+        }
     }
+
     
 }

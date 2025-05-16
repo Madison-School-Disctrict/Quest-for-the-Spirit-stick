@@ -1,72 +1,70 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 
 public class Config {
-	GamePanel gp;
-	
-	public Config(GamePanel gp) {
-		this.gp = gp;
-	}
-	
-	public void saveConfig() {
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("config.txt"));
-			if(gp.fullScreenOn) {
-				bw.write("On");
-			}
-			if(!gp.fullScreenOn) {
-				bw.write("Off");
-			}
-			
-			bw.newLine();
-			
-			//Music Volume
-			bw.write(String.valueOf(gp.music.volumeScale));
-			bw.newLine();
-			
-			//SE volume
-			bw.write(String.valueOf(gp.sound.volumeScale));
-			bw.newLine();
-			
-			
-			
-			bw.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void loadConfig() {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("config.txt"));
-			String s = br.readLine();
-			
-			//Full Screen
-			if(s.equals("On")) {
-				gp.fullScreenOn =true;
-			} 
-			if(s.equals("Off")) {
-				gp.fullScreenOn = false;
-			}
-			
-			//Music Vol
-			
-			s = br.readLine();
-			gp.music.volumeScale = Integer.parseInt(s);
-			
-			//SE vol
-			s = br.readLine();
-			gp.sound.volumeScale = Integer.parseInt(s);
-			br.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    GamePanel gp;
+    private final Path configPath;
+
+    public Config(GamePanel gp) {
+        this.gp = gp;
+
+        // Create a config path in the user's home directory
+        String userHome = System.getProperty("user.home");
+        Path configDir = Paths.get(userHome, ".yourgame"); // Hidden directory on Unix
+        try {
+            Files.createDirectories(configDir); // Create if it doesn't exist
+        } catch (IOException e) {
+            e.printStackTrace(); // Consider better error handling for production
+        }
+        this.configPath = configDir.resolve("config.txt");
+    }
+
+    public void saveConfig() {
+        try (BufferedWriter bw = Files.newBufferedWriter(configPath, StandardCharsets.UTF_8)) {
+            bw.write(gp.fullScreenOn ? "On" : "Off");
+            bw.newLine();
+
+            bw.write(String.valueOf(gp.music.volumeScale));
+            bw.newLine();
+
+            bw.write(String.valueOf(gp.sound.volumeScale));
+            bw.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Replace with logging or user notification if needed
+        }
+    }
+
+    public void loadConfig() {
+        if (!Files.exists(configPath)) return;
+
+        try (BufferedReader br = Files.newBufferedReader(configPath, StandardCharsets.UTF_8)) {
+            String line;
+
+            // Full screen
+            if ((line = br.readLine()) != null) {
+                gp.fullScreenOn = line.equalsIgnoreCase("On");
+            }
+
+            // Music volume
+            if ((line = br.readLine()) != null) {
+                try {
+                    gp.music.volumeScale = Integer.parseInt(line);
+                } catch (NumberFormatException ignored) {}
+            }
+
+            // Sound effects volume
+            if ((line = br.readLine()) != null) {
+                try {
+                    gp.sound.volumeScale = Integer.parseInt(line);
+                } catch (NumberFormatException ignored) {}
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
